@@ -63,7 +63,9 @@ public class DataManager {
      */
     public boolean registraCentroVaccinale(CentroVaccinale c) throws SQLException {
         final String NUOVO_CV = "INSERT INTO ? VALUES (?,?);";
-        final String NUOVO_INDIRIZZO = "INSERT INTO ? VALUES (?,?,?,?,?,?);";
+        final String NUOVO_INDIRIZZO = "INSERT INTO " + SWVar.TAB_INDIRIZZI +
+                "(identificatore,localizzazione,civico,comune,provincia,centro_vaccinale)" +
+                " VALUES (?,?,?,?,?,?);";
         System.out.println(c);
         DBHandler handler = new DBHandler();
         Connection dbConn = handler.getConnection();
@@ -77,13 +79,12 @@ public class DataManager {
         //query per inserimento indirizzo
         PreparedStatement aggiungiIndirizzo = dbConn.prepareStatement(NUOVO_INDIRIZZO);
         Indirizzo i = c.getIndirizzo();
-        aggiungiIndirizzo.setString(1,SWVar.TAB_INDIRIZZI);
-        aggiungiIndirizzo.setString(2,c.getNome()); //nome del centro vaccinale
-        aggiungiIndirizzo.setString(3,i.identificatore().name());
-        aggiungiIndirizzo.setString(4,i.nome());
-        aggiungiIndirizzo.setShort(5,i.numCivico());
-        aggiungiIndirizzo.setString(6,i.provincia());
-        aggiungiIndirizzo.setString(7,i.ZIP());
+        aggiungiIndirizzo.setString(1,i.identificatore().name());
+        aggiungiIndirizzo.setString(2,i.localizzazione());
+        aggiungiIndirizzo.setShort(3,i.numCivico());
+        aggiungiIndirizzo.setString(4,i.comune());
+        aggiungiIndirizzo.setString(5,i.provincia());
+        aggiungiIndirizzo.setString(6,c.getNome()); //nome del centro vaccinale
 
         return handler.insert(aggiungiCV,aggiungiIndirizzo);
     }
@@ -192,7 +193,7 @@ public class DataManager {
      * @throws SQLException Se si verifica un errore durante la comunicazione con il database.
      */
     public List<CentroVaccinale> elencoCentriVaccinali(String searchString) throws SQLException {
-        final String GET_ELENCO_CV = "SELECT * FROM ? JOIN ? ON ? WHERE ? LIKE %?%;";
+        final String GET_ELENCO_CV = "SELECT * FROM ? JOIN ? ON ? WHERE ? LIKE '%" + searchString + "%'";
 
         DBHandler handler = new DBHandler();
         Connection conn = handler.getConnection();
@@ -202,7 +203,6 @@ public class DataManager {
         chiediLista.setString(2,SWVar.TAB_INDIRIZZI);
         chiediLista.setString(3,"nome = nomecentro");
         chiediLista.setString(4,"nome");
-        chiediLista.setString(5,searchString);
 
         ResultSet rs = handler.select(chiediLista);
 
@@ -242,7 +242,7 @@ public class DataManager {
      * @throws SQLException Se si verifica un errore durante la comunicazione con il database.
      */
     public List<CentroVaccinale> elencoCentriVaccinaliPerComune(String comune, String tipologia) throws SQLException {
-        final String GET_ELENCO_TIPOLOGIA = "SELECT * FROM ? JOIN ? ON ? WHERE ? LIKE %?% AND ?";
+        final String GET_ELENCO_TIPOLOGIA = "SELECT * FROM ? JOIN ? ON ? WHERE ? LIKE '%" + comune + "%' AND ?";
 
         DBHandler handler = new DBHandler();
         Connection conn = handler.getConnection();
@@ -252,8 +252,7 @@ public class DataManager {
         chiediLista.setString(2,SWVar.TAB_INDIRIZZI);
         chiediLista.setString(3,"nome = nomecentro");
         chiediLista.setString(4,"comune");
-        chiediLista.setString(5, comune);
-        chiediLista.setString(6, "tipologia = " + tipologia);
+        chiediLista.setString(5, "tipologia = " + tipologia);
 
 
         ResultSet rs = handler.select(chiediLista);
@@ -292,19 +291,19 @@ public class DataManager {
      * @throws SQLException
      */
     public boolean registraIndirizzo(Indirizzo indirizzo) throws SQLException {
-        final String NUOVO_INDIRIZZO = "INSERT INTO ? VALUES (?,?,?,?,?,?,?);";
+        final String NUOVO_INDIRIZZO = "INSERT INTO ?(identificatore, localizzazione, civico, provincia, centro_vaccinale) " +
+                "VALUES (?,?,?,?,?);";
 
         DBHandler handler = new DBHandler();
         Connection dbConn = handler.getConnection();
 
         PreparedStatement aggiungiIndirizzo = dbConn.prepareStatement(NUOVO_INDIRIZZO);
         aggiungiIndirizzo.setString(1, SWVar.TAB_INDIRIZZI);
-        aggiungiIndirizzo.setInt(2, indirizzo.id());
-        aggiungiIndirizzo.setString(3, indirizzo.identificatore().toString());
-        aggiungiIndirizzo.setString(4, indirizzo.nome());
-        aggiungiIndirizzo.setInt(5, indirizzo.numCivico());
-        aggiungiIndirizzo.setString(6, indirizzo.comune());
-        aggiungiIndirizzo.setString(7, indirizzo.provincia());
+        aggiungiIndirizzo.setString(2, indirizzo.identificatore().toString());
+        aggiungiIndirizzo.setString(3, indirizzo.localizzazione().toString());
+        aggiungiIndirizzo.setInt(4, indirizzo.numCivico());
+        aggiungiIndirizzo.setString(5, indirizzo.comune());
+        aggiungiIndirizzo.setString(6, indirizzo.provincia());
 
         return handler.insert(aggiungiIndirizzo);
     }

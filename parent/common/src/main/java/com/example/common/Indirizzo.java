@@ -2,7 +2,7 @@ package com.example.common;
 
 import java.io.Serializable;
 
-public record Indirizzo(int id, Identificatore identificatore, String nome, short numCivico, String comune, String provincia, String ZIP) implements Serializable {
+public record Indirizzo(int id, Identificatore identificatore, String localizzazione, short numCivico, String comune, String provincia, String ZIP) implements Serializable {
     private static final long serialVersionUID = 4L;
 
     public enum Identificatore implements Serializable {
@@ -29,13 +29,13 @@ public record Indirizzo(int id, Identificatore identificatore, String nome, shor
         }
     }
 
-    public Indirizzo(String ident, String nome, short numCivico, String comune, String provincia, String ZIP) {
-        this(0,Identificatore.parse(ident),nome,numCivico,comune,provincia,ZIP);
+    public Indirizzo(String ident, String localizzazione, short numCivico, String comune, String provincia, String ZIP) {
+        this(0,Identificatore.parse(ident),localizzazione,numCivico,comune,provincia,ZIP);
     }
 
     public String toString() {
         return identificatore.toString() + " " +
-                nome + " " +
+                localizzazione + " " +
                 numCivico + ", " +
                 comune + " (" + provincia + ") " +
                 ZIP;

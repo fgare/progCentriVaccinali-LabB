@@ -165,7 +165,7 @@ public class DBHandler {
                         " cognome VARCHAR(128), " +
                         " email VARCHAR(255), " +
                         " password VARCHAR(255), " +
-                        " username VARCHAR(255), " +
+                        " username VARCHAR(255) UNIQUE , " +
                         " PRIMARY KEY (CF) )" );
         {
             stmt.executeUpdate();
@@ -184,6 +184,7 @@ public class DBHandler {
                         " identificatore VARCHAR(10), " +
                         " localizzazione VARCHAR(255), " +
                         " civico NUMERIC(4), " +
+                        " comune VARCHAR(255)," +
                         " provincia CHAR(2), " +
                         " centro_vaccinale VARCHAR(255), " +
                         " FOREIGN KEY (centro_vaccinale) REFERENCES " + SWVar.TAB_CENTRIVACCINALI + "(nome) " +
