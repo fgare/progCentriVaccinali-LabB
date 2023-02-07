@@ -1,43 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.collections.ObservableList?>
-<?import java.util.List?>
-<?import javafx.scene.control.TableView?>
-<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #ffffff;"
-            xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.applicazionecittadini.GUI.ControllerVisualizzaCvPerNome">
-    <ImageView fx:id="logoApp" fitHeight="257.0" fitWidth="256.0" layoutX="72.0" pickOnBounds="true"
-               preserveRatio="true" AnchorPane.bottomAnchor="343.0" AnchorPane.leftAnchor="72.0"
-               AnchorPane.rightAnchor="472.0" AnchorPane.topAnchor="0.0">
-        <Image url="@IMM/logo.png"/>
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.applicazionecittadini.GUI.ControllerVisualizzaCvPerNome">
+    <ImageView fx:id="logoApp" fitHeight="257.0" fitWidth="256.0" layoutX="72.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="343.0" AnchorPane.leftAnchor="72.0" AnchorPane.rightAnchor="472.0" AnchorPane.topAnchor="0.0">
+        <Image url="@IMM/logo.png" />
     </ImageView>
-    <Button fx:id="btIndietro" layoutX="70.0" layoutY="544.0" mnemonicParsing="false" onAction="#tornaSceltaRicerca"
-            prefHeight="30.0" prefWidth="658.0" style="-fx-background-color: RED;" text="INDIETRO" textFill="WHITE">
+    <Button fx:id="btIndietro" layoutX="70.0" layoutY="544.0" mnemonicParsing="false" onAction="#tornaSceltaRicerca" prefHeight="30.0" prefWidth="658.0" style="-fx-background-color: RED;" text="INDIETRO" textFill="WHITE">
         <font>
-            <Font name="Georgia Pro" size="16.0"/>
+            <Font name="Georgia Pro" size="16.0" />
         </font>
     </Button>
-    <TableView fx:id="lvVisualizzaCV" layoutX="71.0" layoutY="231.0" prefHeight="256.0" prefWidth="658.0">
-    </TableView>
-    <TextField layoutX="384.0" layoutY="113.0" prefHeight="26.0" prefWidth="344.0"
-               promptText="nome centro vaccinale da cercare">
+    <TextField layoutX="384.0" layoutY="113.0" prefHeight="26.0" prefWidth="344.0" promptText="nome centro vaccinale da cercare">
         <font>
-            <Font name="Georgia Pro" size="16.0"/>
+            <Font name="Georgia Pro" size="16.0" />
         </font>
     </TextField>
-    <Button fx:id="btCercaCV" layoutX="70.0" layoutY="501.0" mnemonicParsing="false" onAction="#cercaCVperNome"
-            prefHeight="30.0" prefWidth="658.0" style="-fx-background-color: #598990;" text="CERCA IL CENTRO VACCINALE"
-            textFill="WHITE">
+    <Button fx:id="btCercaCV" layoutX="70.0" layoutY="501.0" mnemonicParsing="false" onAction="#cercaCVperNome" prefHeight="30.0" prefWidth="658.0" style="-fx-background-color: #598990;" text="CERCA IL CENTRO VACCINALE" textFill="WHITE">
         <font>
-            <Font name="Georgia Pro" size="16.0"/>
+            <Font name="Georgia Pro" size="16.0" />
         </font>
     </Button>
+   <TableView layoutX="72.0" layoutY="230.0" prefHeight="246.0" prefWidth="658.0" fx:id="tvVisualizzaCV">
+     <columns>
+       <TableColumn prefWidth="150.0" text="nome" />
+       <TableColumn prefWidth="375.0" text="indirizzo" />
+         <TableColumn prefWidth="150.0" text="tiplogia" />
+     </columns>
+   </TableView>
 </AnchorPane>
