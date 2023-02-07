@@ -5,7 +5,13 @@
 //Callegari Pietro 746568 VA
 package com.example.applicazioneServer.File;
 
+import com.example.applicazioneServer.DataManager;
 import com.example.applicazioneServer.SWVar;
+import com.example.applicazioneServer.ServerImpl;
+import com.example.common.CentroVaccinale;
+import com.example.common.Indirizzo;
+
+import java.rmi.RemoteException;
 import java.sql.*;
 
 /**
@@ -63,7 +69,7 @@ public class DBHandler {
      * @throws SQLException
      */
     //metodo che istanzia la connessione al databasecv (da usare con cautela)
-    private Connection connectDbCv() throws SQLException {
+    public Connection connectDbCv() throws SQLException {
         String dbCvUrl = JDBCurl + dbCV;
         conn = DriverManager.getConnection(dbCvUrl, user, password);
         System.out.println("Connesso al databaseCV");
@@ -288,19 +294,23 @@ public class DBHandler {
 
     public static void main(String[] args) {
         try {
-            DBHandler dbHandler = new DBHandler();
-            dbHandler.initDB();
-
-            Connection conn = dbHandler.getConnection();
-            PreparedStatement[] pst = new PreparedStatement[2];
-            System.out.println("connection > " + conn.toString());
-
-            pst[0] = conn.prepareStatement("INSERT INTO " + SWVar.TAB_CENTRIVACCINALI + " VALUES ('Ospedale di Gallarate','Ospedale')");
-            pst[1] = conn.prepareStatement("INSERT INTO " + SWVar.TAB_INDIRIZZI + "(identificatore,localizzazione,provincia) VALUES ('Via','milano','VA')");
-            dbHandler.insert(pst);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+            new ServerImpl().start();
+            try {
+                //DataManager.getInstance(); //inizializza il DB se non esiste
+                DataManager d = new DataManager();
+                DBHandler dbh = new DBHandler();
+                dbh.initDB();
+                dbh.connectDbCv();
+                Indirizzo.Identificatore id = Indirizzo.Identificatore.VIA;
+                Indirizzo i = new Indirizzo(id, "liberta",(short) 1,"Varese","VA", String.valueOf(21100));
+                CentroVaccinale.Tipologia tip = CentroVaccinale.Tipologia.HUB;
+                CentroVaccinale cv = new CentroVaccinale("San Ambrogio",i, tip);
+                d.registraCentroVaccinale(cv);
+            } catch(SQLException e) {
+                System.out.println("Impossibile creare il database");
+            }
+        } catch(RemoteException e) {
+            System.out.println("RemoteException - errore connessione del server");
         }
     }
 }

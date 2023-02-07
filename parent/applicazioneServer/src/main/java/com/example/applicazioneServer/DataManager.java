@@ -25,7 +25,7 @@ public class DataManager {
      * Variabile statica che rappresenta l'istanza unica della classe DataManager.
       *Utilizzata per garantire che vi sia una sola istanza della classe.
      */
-    private static DataManager instance = null;
+    public static DataManager instance = null;
 
     /**
      * Costruttore privato della classe DataManager.
@@ -33,7 +33,7 @@ public class DataManager {
      *
      * @throws SQLException in caso di errore durante la creazione del database
      */
-    private DataManager() throws SQLException {
+    public DataManager() throws SQLException {
         new DBHandler().initDB(); //crea il database nel caso non esistesse
     }
 
@@ -62,37 +62,28 @@ public class DataManager {
      * @throws SQLException
      */
     public boolean registraCentroVaccinale(CentroVaccinale c) throws SQLException {
-        final String NUOVO_CV = "INSERT INTO ? VALUES (?,?);";
-        final String NUOVO_INDIRIZZO = "INSERT INTO " + SWVar.TAB_INDIRIZZI +
-                "(identificatore,localizzazione,civico,comune,provincia,zip,centro_vaccinale)" +
-                " VALUES (?,?,?,?,?,?,?);";
-        System.out.println(c);
+        final String NUOVO_CV =
+                "INSERT INTO " + SWVar.TAB_CENTRIVACCINALI +
+                " VALUES('" + c.getNome() + "','" +
+                c.getTipologia().name() + "');";
 
+        Indirizzo i = c.getIndirizzo();
+        final String NUOVO_INDIRIZZO =
+                "INSERT INTO " + SWVar.TAB_INDIRIZZI +
+                "(identificatore,localizzazione,civico,comune,provincia,zip,centro_vaccinale)" +
+                " VALUES('" + i.identificatore() + "','" +
+                i.localizzazione() + "','" +
+                i.numCivico() + "','" +
+                i.comune() + "','" +
+                i.provincia() + "','" +
+                i.ZIP() + "','" +
+                c.getNome() + "');";
+        System.out.println(c);
         DBHandler handler = new DBHandler();
         Connection dbConn = handler.getConnection();
-
-        //prepara query per inserimento nuovo centro vaccinale
         PreparedStatement aggiungiCV = dbConn.prepareStatement(NUOVO_CV);
-        aggiungiCV.setString(1,SWVar.TAB_CENTRIVACCINALI);
-        aggiungiCV.setString(2,c.getNome());
-        aggiungiCV.setString(3,c.getTipologia().name());
-
-        //query per inserimento indirizzo
         PreparedStatement aggiungiIndirizzo = dbConn.prepareStatement(NUOVO_INDIRIZZO);
-        Indirizzo i = c.getIndirizzo();
-        aggiungiIndirizzo.setString(1,i.identificatore().name());
-        aggiungiIndirizzo.setString(2,i.localizzazione());
-        aggiungiIndirizzo.setShort(3,i.numCivico());
-        aggiungiIndirizzo.setString(4,i.comune());
-        aggiungiIndirizzo.setString(5,i.provincia());
-        aggiungiIndirizzo.setString(6,i.ZIP());
-        aggiungiIndirizzo.setString(7,c.getNome()); //nome del centro vaccinale
-
-        //return handler.insert(aggiungiCV,aggiungiIndirizzo);
-
-        String s = "INSERT INTO centro_vaccinale VALUES ('" + c.getNome() + "','" + c.getTipologia().name() + "');";
-        aggiungiCV = dbConn.prepareStatement(s);
-        return handler.insert(aggiungiCV);
+        return handler.insert(aggiungiCV,aggiungiIndirizzo);
     }
 
     /**
@@ -105,19 +96,17 @@ public class DataManager {
      * @throws SQLException
      */
     public boolean registraCittadino(Cittadino c) throws SQLException {
-        final String NUOVO_CITTADINO = "INSERT INTO ? VALUES (?,?,?,?,?,?);";
+        final String NUOVO_CITTADINO =
+                "INSERT INTO " + SWVar.TAB_CITTADINI + " VALUES('" + c.getNome() + "','" +
+                        c.getCognome() + "','" +
+                        c.getCf() + "','" +
+                        c.getEmail() + "','" +
+                        c.getPsw() + "','" +
+                        c.getCentroVaccinale() + "');";
 
         DBHandler handler = new DBHandler();
         Connection dbConn = handler.getConnection();
-
         PreparedStatement aggiungiPersona = dbConn.prepareStatement(NUOVO_CITTADINO);
-        aggiungiPersona.setString(1,SWVar.TAB_CITTADINI);
-        aggiungiPersona.setString(2,c.getNome());
-        aggiungiPersona.setString(3,c.getCognome());
-        aggiungiPersona.setString(4, c.getCf());
-        aggiungiPersona.setString(5,c.getEmail());
-        aggiungiPersona.setString(6,c.getPsw());
-        aggiungiPersona.setString(7,c.getCentroVaccinale());
 
         return handler.insert(aggiungiPersona);
     }
@@ -131,9 +120,18 @@ public class DataManager {
      * @return boolean
      * @throws SQLException
      */
+
+    //TODO: da finire perchè c'è discordanza tra tuple e oggetto
+    // (la tabella ha il CF del cittadino ma l'oggetto Vaccinazione no!) mannaggia a te Giorgio
     public boolean registraVaccinazione(CentroVaccinale c, Vaccinazione v) throws SQLException {
-        final String VERIFICA_CITTADINO_REGISTRATO = "SELECT cf, centrovaccinale FROM ? WHERE cf=? AND centrovaccinale=?;";
-        final String NUOVO_VACCINAZIONE = "INSERT INTO ? VALUES (?,?,?);";
+        final String VERIFICA_CITTADINO_REGISTRATO = "SELECT cf, centrovaccinale FROM "+ SWVar.TAB_CITTADINI +
+                " WHERE cf= " + "//TODO" + " AND centrovaccinale= " + c.getNome();
+        final String NUOVO_VACCINAZIONE = "INSERT INTO " + SWVar.TAB_VACCINAZIONI + "()" +
+                " VALUES('" +
+                v.getCodPrenotazione() + "','" +
+                v.getCodPrenotazione() + "','" +
+                v.getData() + "','" +
+                v.getVaccino() + "');";
         //TODO: controllare query + nomi tabelle
 
         DBHandler handler = new DBHandler();
@@ -174,19 +172,18 @@ public class DataManager {
      * @throws SQLException
      */
     public boolean registraEventoAvverso(EventoAvverso ea) throws SQLException {
-        final String NUOVO_EVENTOAVVERSO = "INSERT INTO ? VALUES (?,?,?,?);";
+        final String NUOVO_EVENTOAVVERSO = "INSERT INTO " + SWVar.TAB_EVENTIAVVERSI +
+                " VALUES('" +
+                ea.getIdVaccinazione() + "','" +
+                ea.getQualeEvento() + "','" +
+                ea.getSeverita() + "','" +
+                ea.getNota() + "');";
 
         DBHandler handler = new DBHandler();
-        Connection conn = handler.getConnection();
+        Connection dbConn = handler.getConnection();
+        PreparedStatement aggiungiPersona = dbConn.prepareStatement(NUOVO_EVENTOAVVERSO);
 
-        PreparedStatement nuovoEvento = conn.prepareStatement(NUOVO_EVENTOAVVERSO);
-        nuovoEvento.setString(1,SWVar.TAB_EVENTIAVVERSI);
-        nuovoEvento.setInt(2,ea.getIdVaccinazione());
-        nuovoEvento.setString(3,ea.getQualeEvento().name());
-        nuovoEvento.setByte(4,ea.getSeverita());
-        nuovoEvento.setString(5,ea.getNota());
-
-        return handler.insert(nuovoEvento);
+        return handler.insert(aggiungiPersona);
     }
 
     /**
@@ -199,16 +196,13 @@ public class DataManager {
      * @throws SQLException Se si verifica un errore durante la comunicazione con il database.
      */
     public List<CentroVaccinale> elencoCentriVaccinali(String searchString) throws SQLException {
-        final String GET_ELENCO_CV = "SELECT * FROM ? JOIN ? ON ? WHERE ? LIKE '%" + searchString + "%'";
+        final String GET_ELENCO_CV =
+                "SELECT * FROM " + SWVar.TAB_CENTRIVACCINALI + " JOIN  " + SWVar.TAB_INDIRIZZI + " ON 'nome = nomecentro' " +
+                        "WHERE 'nome' LIKE '%" + searchString + "%'";
 
         DBHandler handler = new DBHandler();
         Connection conn = handler.getConnection();
-
         PreparedStatement chiediLista = conn.prepareStatement(GET_ELENCO_CV);
-        chiediLista.setString(1,SWVar.TAB_CENTRIVACCINALI);
-        chiediLista.setString(2,SWVar.TAB_INDIRIZZI);
-        chiediLista.setString(3,"nome = nomecentro");
-        chiediLista.setString(4,"nome");
 
         ResultSet rs = handler.select(chiediLista);
 
@@ -247,6 +241,7 @@ public class DataManager {
      * @return La lista dei centri vaccinali corrispondenti alla stringa di ricerca.
      * @throws SQLException Se si verifica un errore durante la comunicazione con il database.
      */
+    //TODO
     public List<CentroVaccinale> elencoCentriVaccinaliPerComune(String comune, String tipologia) throws SQLException {
         final String GET_ELENCO_TIPOLOGIA = "SELECT * FROM ? JOIN ? ON ? WHERE ? LIKE '%" + comune + "%' AND ?";
 
