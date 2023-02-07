@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #ffffff;"
+            xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.applicazionecittadini.GUI.ControllerVisualizzaCVperComuneTipologia">
+    <ImageView fx:id="logoApp" fitHeight="257.0" fitWidth="256.0" layoutX="72.0" pickOnBounds="true"
+               preserveRatio="true" AnchorPane.bottomAnchor="343.0" AnchorPane.leftAnchor="72.0"
+               AnchorPane.rightAnchor="472.0" AnchorPane.topAnchor="0.0">
+        <Image url="@IMM/logo.png"/>
+    </ImageView>
+    <Button fx:id="btIndietro" layoutX="70.0" layoutY="544.0" mnemonicParsing="false" onAction="#tornaSceltaRicerca"
+            prefHeight="30.0" prefWidth="658.0" style="-fx-background-color: RED;" text="INDIETRO" textFill="WHITE">
+        <font>
+            <Font name="Georgia Pro" size="16.0"/>
+        </font>
+    </Button>
+    <ListView fx:id="lvVisualizzaCV" layoutX="71.0" layoutY="231.0" prefHeight="256.0" prefWidth="658.0"/>
+    <TextField layoutX="384.0" layoutY="89.0" prefHeight="26.0" prefWidth="344.0"
+               promptText="Comune centro vaccinale da cercare">
+        <font>
+            <Font name="Georgia Pro" size="16.0"/>
+        </font>
+    </TextField>
+    <ComboBox fx:id="cb_tipo" layoutX="384.0" layoutY="147.0" prefHeight="30.0" prefWidth="344.0"
+              promptText="tipologia di centro">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="OSPEDALE"/>
+                <String fx:value="AZIENDA"/>
+                <String fx:value="HUB"/>
+            </FXCollections>
+        </items>
+    </ComboBox>
+    <Button fx:id="btCercaCV" layoutX="70.0" layoutY="501.0" mnemonicParsing="false"
+            onAction="#cercaCVperComuneTipologia" prefHeight="30.0" prefWidth="658.0"
+            style="-fx-background-color: #598990;" text="CERCA IL CENTRO VACCINALE" textFill="WHITE">
+        <font>
+            <Font name="Georgia Pro" size="16.0"/>
+        </font>
+    </Button>
+</AnchorPane>

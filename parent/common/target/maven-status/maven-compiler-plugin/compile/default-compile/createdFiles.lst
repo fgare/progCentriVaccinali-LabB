@@ -1,0 +1,16 @@
+com\example\common\CentroVaccinale.class
+com\example\common\CentroVaccinale$1.class
+com\example\common\Cittadino.class
+com\example\common\ClientCVInterface.class
+com\example\common\EventoAvverso.class
+module-info.class
+com\example\common\CentroVaccinale$Tipologia.class
+com\example\common\ClientCittadinoInterface.class
+com\example\common\EventoAvverso$QualeEvento.class
+com\example\common\Indirizzo.class
+com\example\common\Vaccinazione$1.class
+com\example\common\Vaccinazione$Vaccino.class
+com\example\common\Vaccinazione.class
+com\example\common\ServerInterface.class
+com\example\common\Indirizzo$1.class
+com\example\common\Indirizzo$Identificatore.class

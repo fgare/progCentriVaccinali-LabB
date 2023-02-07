@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="applicazioneCV" />
+        <module name="common" />
+        <module name="applicazioneCittadini" />
+        <module name="applicazioneServer" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="applicazioneCittadini" target="19" />
+      <module name="applicazioneCV" target="19" />
+      <module name="applicazioneServer" target="19" />
+      <module name="common" target="19" />
+      <module name="parent" target="19" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

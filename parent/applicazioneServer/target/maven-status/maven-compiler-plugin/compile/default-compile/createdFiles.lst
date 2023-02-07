@@ -1,0 +1,6 @@
+module-info.class
+com\example\applicazioneServer\ServerImpl.class
+com\example\applicazioneServer\SWVar.class
+com\example\applicazioneServer\ServerMain.class
+com\example\applicazioneServer\File\DBHandler.class
+com\example\applicazioneServer\DataManager.class
