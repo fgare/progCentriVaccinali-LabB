@@ -35,10 +35,6 @@ public class ControllerRegistraVaccinato {
     @FXML
     private Button btRegistraVaccinato;
     @FXML
-    private TextField tFnomeV;
-    @FXML
-    private TextField tFcognomeV;
-    @FXML
     private TextField tFcfV;
     @FXML
     private ComboBox cbTipo;
@@ -59,30 +55,14 @@ public class ControllerRegistraVaccinato {
         boolean err = false;
 
         try {
-            nomeCittadino = tFnomeV.getText();
-            cognomeCittadino = tFcognomeV.getText();
             cfCittadino = tFcfV.getText();
             tipoVaccino = cbTipo.getValue().toString();
-
-            if (!nomeCorretto(nomeCittadino)) {
-                err = true;
-                tFnomeV.clear();
-                System.out.println("nome errato");
-                lbErr.setText("CAMPI ERRATI O CAMPI NON SELZIONATI O ERRATI!\"");
-            }
-
-            if (!nomeCorretto(cognomeCittadino)) {
-                err = true;
-                tFcognomeV.clear();
-                System.out.println("cognome errato");
-                lbErr.setText("CAMPI ERRATI O CAMPI NON SELZIONATI O ERRATI!");
-            }
 
             if (!cfCorretto(cfCittadino.toUpperCase())) {
                 err = true;
                 tFcfV.clear();
                 System.out.println("CF errato");
-                lbErr.setText("CAMPI ERRATI O CAMPI NON SELZIONATI O ERRATI!");
+                lbErr.setText("CAMPI ERRATI O CAMPI NON SELZIONATI!");
             }
 
             if (!err) {

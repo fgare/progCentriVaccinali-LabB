@@ -12,14 +12,17 @@ public class ControllerAccessoCittadino {
     private Button btRegistraCittadino;
     @FXML
     private Button btIndietro;
+    @FXML
+    private Button btAccessoCittadino;
 
     public void registraCittadino(ActionEvent event) throws IOException {
         UniversalMethods.handleCloseButtonAction(event, btRegistraCittadino);
         UniversalMethods.vediFinestra("RegistraCittadino.fxml", "TATUM VACCINI - Registrazione cittadino");
     }
 
-    public void accessoCittadino(ActionEvent event) {
-
+    public void accessoCittadino(ActionEvent event) throws IOException{
+        UniversalMethods.handleCloseButtonAction(event, btAccessoCittadino);
+        UniversalMethods.vediFinestra("InserimentoEventiAvversi.fxml", "TATUM VACCINI - Inserimento eventi avversi");
     }
 
     public void tornaHomepage(ActionEvent event) throws IOException {

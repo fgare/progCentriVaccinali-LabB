@@ -60,18 +60,18 @@ public class ControllerCVRegistrato {
         if (textFieldIdCv.getText().length() == 0) {
             labelMessage.setText("QUALCOSA E' ANDATO STORTO");
             tornaCvRegistrato(event);
-        } else {
+        } /*else {
             boolean accessoConfermato = ClientMedico.getInstance().accediACv(textFieldIdCv.getText());
 
-            if(accessoConfermato) {
+            if(accessoConfermato) {*/
                 UniversalMethods.handleCloseButtonAction(event, btAccedi);
                 UniversalMethods.vediFinestra("RegistraVaccinato.fxml", "TATUM VACCINI - Registrazione vaccinati");
-            } else {
+           // } else {
                 //TODO: visualizza messaggio di errore ("Centro vaccinale non registrato")
                 //alert.setContentText("OPERAZIONE NON ANDATA A BUON FINE");
                 //alert.showAndWait();
-            }
-        }
+           // }
+        //}
     }
 
     /**
