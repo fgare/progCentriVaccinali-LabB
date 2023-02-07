@@ -6,7 +6,7 @@ import com.example.common.EventoAvverso;
 import com.example.common.ServerInterface;
 
 import java.rmi.RemoteException;
-
+//TODO FARE JAVADOC
 public interface ServIntCittadino extends ServerInterface {
     void aggiungiApplicazioneCittadino(ClientCittadinoInterface cci) throws RemoteException;
     void rimuoviApplicazioneCittadino(ClientCittadinoInterface cci) throws RemoteException;
