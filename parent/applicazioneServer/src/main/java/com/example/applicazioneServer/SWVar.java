@@ -18,30 +18,30 @@ public class SWVar {
     /**
      * Il nome della tabella CentriVaccinali nel database.
      */
-    public static final String TAB_CENTRIVACCINALI = "CentriVaccinali";
+    public static final String TAB_CENTRIVACCINALI = "centro_vaccinale";
 
     /**
      * Il nome della tabella Indirizzi nel database.
      */
-    public static final String TAB_INDIRIZZI = "Indirizzi";
+    public static final String TAB_INDIRIZZI = "indirizzo";
 
     /**
      * Il nome della tabella Cittadini nel database.
      */
-    public static final String TAB_CITTADINI = "Cittadini";
+    public static final String TAB_CITTADINI = "cittadino";
 
     /**
      * Il nome della tabella Vaccinazioni nel database.
      */
-    public static final String TAB_VACCINAZIONI = "Vaccinazioni";
+    public static final String TAB_VACCINAZIONI = "vaccinazione";
 
     /**
      * Il nome della tabella EventiAvversi nel database.
      */
-    public static final String TAB_EVENTIAVVERSI = "EventiAvversi";
+    public static final String TAB_EVENTIAVVERSI = "evento_avverso";
 
     /**
      * Il nome della tabella Registrazione nel database.
      */
-    public static final String TAB_REGISTRAZIONE = "Registrazione";
+    public static final String TAB_REGISTRAZIONE = "registrazione";
 }
