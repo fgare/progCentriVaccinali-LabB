@@ -14,7 +14,7 @@ public class ControllerVisualizzaCvPerNome {
     @FXML
     private Button btCercaCV;
     @FXML
-    private TableView<CentroVaccinale> lvVisualizzaCV;
+    private TableView<CentroVaccinale> tvVisualizzaCV;
     @FXML
     private Button btIndietro;
     @FXML

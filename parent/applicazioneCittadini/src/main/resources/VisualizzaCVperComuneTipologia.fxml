@@ -11,6 +11,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
 <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #ffffff;"
             xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.applicazionecittadini.GUI.ControllerVisualizzaCVperComuneTipologia">
@@ -25,7 +27,6 @@
             <Font name="Georgia Pro" size="16.0"/>
         </font>
     </Button>
-    <ListView fx:id="lvVisualizzaCV" layoutX="71.0" layoutY="231.0" prefHeight="256.0" prefWidth="658.0"/>
     <TextField layoutX="384.0" layoutY="89.0" prefHeight="26.0" prefWidth="344.0"
                promptText="Comune centro vaccinale da cercare">
         <font>
@@ -49,4 +50,11 @@
             <Font name="Georgia Pro" size="16.0"/>
         </font>
     </Button>
+    <TableView layoutX="72.0" layoutY="230.0" prefHeight="246.0" prefWidth="658.0" fx:id="tvVisualizzaCV">
+        <columns>
+            <TableColumn prefWidth="150.0" text="nome" />
+            <TableColumn prefWidth="375.0" text="indirizzo" />
+            <TableColumn prefWidth="150.0" text="tiplogia" />
+        </columns>
+    </TableView>
 </AnchorPane>

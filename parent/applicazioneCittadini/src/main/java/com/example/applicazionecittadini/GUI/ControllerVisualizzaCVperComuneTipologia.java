@@ -1,9 +1,11 @@
 package com.example.applicazionecittadini.GUI;
 
+import com.example.common.CentroVaccinale;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableView;
 
 import java.io.IOException;
 
@@ -11,7 +13,7 @@ public class ControllerVisualizzaCVperComuneTipologia {
     @FXML
     private Button btCercaCV;
     @FXML
-    private ListView lvVisualizzaCV;
+    private TableView<CentroVaccinale> tvVisualizzaCV;
     @FXML
     private Button btIndietro;
 
