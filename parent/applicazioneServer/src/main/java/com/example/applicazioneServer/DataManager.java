@@ -64,9 +64,10 @@ public class DataManager {
     public boolean registraCentroVaccinale(CentroVaccinale c) throws SQLException {
         final String NUOVO_CV = "INSERT INTO ? VALUES (?,?);";
         final String NUOVO_INDIRIZZO = "INSERT INTO " + SWVar.TAB_INDIRIZZI +
-                "(identificatore,localizzazione,civico,comune,provincia,centro_vaccinale)" +
-                " VALUES (?,?,?,?,?,?);";
+                "(identificatore,localizzazione,civico,comune,provincia,zip,centro_vaccinale)" +
+                " VALUES (?,?,?,?,?,?,?);";
         System.out.println(c);
+
         DBHandler handler = new DBHandler();
         Connection dbConn = handler.getConnection();
 
@@ -84,9 +85,14 @@ public class DataManager {
         aggiungiIndirizzo.setShort(3,i.numCivico());
         aggiungiIndirizzo.setString(4,i.comune());
         aggiungiIndirizzo.setString(5,i.provincia());
-        aggiungiIndirizzo.setString(6,c.getNome()); //nome del centro vaccinale
+        aggiungiIndirizzo.setString(6,i.ZIP());
+        aggiungiIndirizzo.setString(7,c.getNome()); //nome del centro vaccinale
 
-        return handler.insert(aggiungiCV,aggiungiIndirizzo);
+        //return handler.insert(aggiungiCV,aggiungiIndirizzo);
+
+        String s = "INSERT INTO centro_vaccinale VALUES ('" + c.getNome() + "','" + c.getTipologia().name() + "');";
+        aggiungiCV = dbConn.prepareStatement(s);
+        return handler.insert(aggiungiCV);
     }
 
     /**

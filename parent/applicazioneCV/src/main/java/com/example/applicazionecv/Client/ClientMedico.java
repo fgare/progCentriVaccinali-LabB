@@ -55,7 +55,6 @@ public class ClientMedico extends Thread {
      */
     private void connetti() throws RemoteException, NotBoundException {
         Registry registro = LocateRegistry.getRegistry(REGISTRYPORT);
-        System.out.println(registro.list());
         server = (ServerInterface) registro.lookup("com.example.applicazioneServer.Server-appCV");
         System.out.println("Connesso al server: " + server.toString());
     }

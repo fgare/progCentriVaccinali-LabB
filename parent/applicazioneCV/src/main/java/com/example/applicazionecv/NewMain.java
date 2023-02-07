@@ -1,3 +1,5 @@
+package com.example.applicazionecv;
+
 import com.example.applicazionecv.Main;
 
 public class NewMain {

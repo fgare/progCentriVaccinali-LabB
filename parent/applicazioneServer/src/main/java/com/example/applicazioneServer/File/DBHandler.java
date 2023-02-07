@@ -53,11 +53,9 @@ public class DBHandler {
      * @throws SQLException
      */
     //metodo che instanzia la connessione al server (la istanzia al DB standard postgres, non al databaseCV!)
-    private void connect() throws SQLException {
-        if(conn == null) {
-            conn = DriverManager.getConnection(JDBCurl, user, password);
-            System.out.println("Connesso al database postgres");
-        }
+    private void connectDBMS() throws SQLException {
+        conn = DriverManager.getConnection(JDBCurl, user, password);
+        System.out.println("Connesso al database postgres");
     }
 
     /**
@@ -65,10 +63,12 @@ public class DBHandler {
      * @throws SQLException
      */
     //metodo che istanzia la connessione al databasecv (da usare con cautela)
-    private void connectDbCv() throws SQLException {
+    private Connection connectDbCv() throws SQLException {
         String dbCvUrl = JDBCurl + dbCV;
         conn = DriverManager.getConnection(dbCvUrl, user, password);
         System.out.println("Connesso al databaseCV");
+        return conn;
+
     }
 
     /**
@@ -83,7 +83,10 @@ public class DBHandler {
      * Metodo che restituisce la connessione
      * @throws SQLException
      */
-    public Connection getConnection() {
+    public Connection getConnection() throws SQLException {
+        if(conn == null || conn.isClosed()) {
+            return connectDbCv();
+        }
         return conn;
     }
 
@@ -94,7 +97,7 @@ public class DBHandler {
      * @throws SQLException
      */
     public void initDB() throws SQLException {
-        connect();
+        connectDBMS();
         String createQuery = "SELECT 1 FROM pg_database WHERE datname = ?";
         PreparedStatement st = conn.prepareStatement(createQuery);
         st.setString(1, dbCV);
@@ -115,7 +118,6 @@ public class DBHandler {
         }
         disconnect();
     }
-
 
     /**
      * Questo metodo esegue una serie di query su una connessione al database,
@@ -146,7 +148,6 @@ public class DBHandler {
                 "CREATE TABLE " + SWVar.TAB_CENTRIVACCINALI + "( " +
                         " nome VARCHAR(255), " +
                         " tipologia VARCHAR(10), " +
-                        " indirizzo INTEGER, " +
                         " PRIMARY KEY ( nome ));"); {
             stmt.executeUpdate();
         }
@@ -186,6 +187,7 @@ public class DBHandler {
                         " civico NUMERIC(4), " +
                         " comune VARCHAR(255)," +
                         " provincia CHAR(2), " +
+                        " zip CHAR(5), " +
                         " centro_vaccinale VARCHAR(255), " +
                         " FOREIGN KEY (centro_vaccinale) REFERENCES " + SWVar.TAB_CENTRIVACCINALI + "(nome) " +
                         " ON UPDATE CASCADE " +
@@ -218,8 +220,6 @@ public class DBHandler {
         }
     }
 
-
-
     /**
      * Questo metodo crea la tabella "TAB_VACCINAZIONI" nel database databaseCV.
      *
@@ -249,7 +249,7 @@ public class DBHandler {
     public void createTableVaccinazioniEventiAvversi() throws SQLException {
         PreparedStatement stmt = conn.prepareStatement(
                 "CREATE TABLE " + SWVar.TAB_EVENTIAVVERSI + "( " +
-                        " ID_ea NUMERIC(6) PRIMARY KEY , " +
+                        " ID_ea SERIAL PRIMARY KEY , " +
                         " evento VARCHAR(32), " +
                         " intensita SMALLINT, " +
                         " ID_vaccino NUMERIC(6), " +
@@ -290,6 +290,15 @@ public class DBHandler {
         try {
             DBHandler dbHandler = new DBHandler();
             dbHandler.initDB();
+
+            Connection conn = dbHandler.getConnection();
+            PreparedStatement[] pst = new PreparedStatement[2];
+            System.out.println("connection > " + conn.toString());
+
+            pst[0] = conn.prepareStatement("INSERT INTO " + SWVar.TAB_CENTRIVACCINALI + " VALUES ('Ospedale di Gallarate','Ospedale')");
+            pst[1] = conn.prepareStatement("INSERT INTO " + SWVar.TAB_INDIRIZZI + "(identificatore,localizzazione,provincia) VALUES ('Via','milano','VA')");
+            dbHandler.insert(pst);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

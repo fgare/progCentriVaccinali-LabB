@@ -33,6 +33,10 @@ public record Indirizzo(int id, Identificatore identificatore, String localizzaz
         this(0,Identificatore.parse(ident),localizzazione,numCivico,comune,provincia,ZIP);
     }
 
+    public Indirizzo(Identificatore ident, String localizzazione, short numCivico, String comune, String provincia, String ZIP) {
+        this(0,ident,localizzazione,numCivico,comune,provincia,ZIP);
+    }
+
     public String toString() {
         return identificatore.toString() + " " +
                 localizzazione + " " +
