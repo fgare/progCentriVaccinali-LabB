@@ -126,7 +126,7 @@ public class Vaccinazione implements Serializable {
      * @return Vaccinato: oggetto di tipo Vaccinato
      * /@see Vaccinato
      */
-    public String getCodPrenotazione() {
+    public String getCfCitt() {
         return this.cfCitt;
     }
 }

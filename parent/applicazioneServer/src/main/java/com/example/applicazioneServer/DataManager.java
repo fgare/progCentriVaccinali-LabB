@@ -121,7 +121,7 @@ public class DataManager {
                 " VALUES('" +
                 v.getData() + "','" +
                 v.getVaccino() + "','" +
-                v.getCodPrenotazione() + "');";
+                v.getCfCitt() + "');";
         //TODO: controllare query + nomi tabelle
 
         DBHandler handler = new DBHandler();
@@ -129,7 +129,7 @@ public class DataManager {
 
         PreparedStatement verificaCittadino = conn.prepareStatement(VERIFICA_CITTADINO_REGISTRATO);
         verificaCittadino.setString(1,SWVar.TAB_CITTADINI);
-        verificaCittadino.setString(2,"'" + v.getCodPrenotazione() + "'");
+        verificaCittadino.setString(2,"'" + v.getCfCitt() + "'");
         verificaCittadino.setString(3,"'" + c.getNome() + "'");
 
         ResultSet rs = new DBHandler().select(verificaCittadino);
@@ -144,7 +144,7 @@ public class DataManager {
 
         PreparedStatement nuovaVaccinazione = conn.prepareStatement(NUOVO_VACCINAZIONE);
         nuovaVaccinazione.setString(1,SWVar.TAB_VACCINAZIONI);
-        nuovaVaccinazione.setString(2,v.getCodPrenotazione());
+        nuovaVaccinazione.setString(2,v.getCfCitt());
         LocalDate dataVac = v.getData();
         nuovaVaccinazione.setDate(3,new Date(dataVac.getYear(),dataVac.getMonthValue(),dataVac.getDayOfMonth()));
         nuovaVaccinazione.setString(3,v.getVaccino().name());
