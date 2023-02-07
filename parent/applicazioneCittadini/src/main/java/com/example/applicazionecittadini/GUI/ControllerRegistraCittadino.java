@@ -1,5 +1,6 @@
 package com.example.applicazionecittadini.GUI;
 
+import com.example.applicazionecittadini.Client.ClientCittadino;
 import com.example.common.Cittadino;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -114,8 +115,9 @@ public class ControllerRegistraCittadino {
 
             if (!err) {
                 Cittadino c = new Cittadino(nomeCittadino, cognomeCittadino, cfCittadino, usernameCittadino, emailCittadino, passwordCittadino);
-                int id = UniversalMethods.assegnaId();
-                System.out.println(c);
+                boolean esito = ClientCittadino.getInstance().nuovoCittadino(c);
+                System.out.printf("Inserimento cittadino: esito %b per cittadino >\n %s\n",esito,c.toString());
+
                 a.setHeaderText("CODICE PRENOTAZIONE: ");
                 a.setContentText("" + id);
                 a.show();

@@ -1,5 +1,6 @@
 package com.example.applicazionecittadini.GUI;
 
+import com.example.common.EventoAvverso;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -15,6 +16,8 @@ public class ControllerInserimentoEventiAvversi {
     public void inserisciEventoAvversoCittadino(ActionEvent event)throws IOException {
         UniversalMethods.handleCloseButtonAction(event, btInserisciEventoAvverso);
         UniversalMethods.vediFinestra("InserimentoEventiAvversi.fxml", "TATUM VACCINI - Inserimento eventi avversi");
+
+        new EventoAvverso(); //TODO
     }
 
     public void tornaHomepage(ActionEvent event) throws IOException {

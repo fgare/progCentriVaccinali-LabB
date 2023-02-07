@@ -12,14 +12,8 @@ import java.util.List;
 public class ServerImpl extends Thread implements ServerInterface {
     private final short REGISTRYPORT = 1099;
     private final short SERVERPORT = 1100;
-    //private List<ClientCVInterface> listaMediciConnessi;
-    //private List<ClientCittadinoInterface> listaCittadiniConnessi;
 
-
-    public ServerImpl() throws RemoteException {
-        //listaMediciConnessi = new LinkedList<>();
-        //listaCittadiniConnessi = new LinkedList<>();
-    }
+    public ServerImpl() throws RemoteException {}
 
     private void pubblica() throws RemoteException {
         ServerInterface stub = (ServerInterface) UnicastRemoteObject.exportObject(this, SERVERPORT);
@@ -33,18 +27,6 @@ public class ServerImpl extends Thread implements ServerInterface {
             pubblica();
         }catch (RemoteException e){System.out.println("Errore nell'avvio del server");}
     }
-
-    /*@Override
-    public synchronized void aggiungiApplicazioneCV(ClientCVInterface ccvi) throws RemoteException {
-        listaMediciConnessi.add(ccvi);
-        System.out.println("Registrata nuova applicazione Centro Vaccinale");
-    }
-
-    @Override
-    public synchronized void rimuoviApplicazioneCV(ClientCVInterface ccvi) throws RemoteException {
-        listaMediciConnessi.remove(ccvi);
-        System.out.println("Rimossa applicazione Centro Vaccinale");
-    }*/
 
     @Override
     public synchronized boolean registraCentroVaccinale(CentroVaccinale c) throws RemoteException {
@@ -74,7 +56,7 @@ public class ServerImpl extends Thread implements ServerInterface {
         try {
             DataManager.getInstance().registraVaccinazione(c,v);
         } catch(SQLException e) {
-            System.out.printf("aggiungiDoseAPaziente(cf=%s, vaccino=%s) > SQLException\n", v.getCodPrenotazione(), v.getVaccino().name());
+            System.out.printf("aggiungiDoseAPaziente(cf=%s, vaccino=%s) > SQLException\n", v.getCfCitt(), v.getVaccino().name());
             return false;
         }
         System.out.println("Registrata nuova vaccinazione > " + v.toString() + " presso " + c.getNome());
@@ -93,17 +75,16 @@ public class ServerImpl extends Thread implements ServerInterface {
         return ls;
     }
 
-    /*@Override
-    public synchronized void aggiungiApplicazioneCittadino(ClientCittadinoInterface cci) throws RemoteException {
-        listaCittadiniConnessi.add(cci);
-        System.out.println("Registrata nuova applicazione cittadino");
+    public synchronized List<CentroVaccinale> getListaCvComuneTipologia(String comune, String tipologia) throws RemoteException {
+        List<CentroVaccinale> ls;
+        try {
+            ls = DataManager.getInstance().elencoCentriVaccinaliPerComune(comune,tipologia);
+        } catch(SQLException e) {
+            return null;
+        }
+        System.out.println("Restituita lista di " + ls.size() + " centri vaccinali");
+        return ls;
     }
-
-    @Override
-    public synchronized void rimuoviApplicazioneCittadino(ClientCittadinoInterface cci) throws RemoteException {
-        listaCittadiniConnessi.remove(cci);
-        System.out.println("Rimossa applicazione cittadino");
-    }*/
 
     @Override
     public synchronized boolean registraCittadino(Cittadino c) throws RemoteException {
@@ -115,11 +96,6 @@ public class ServerImpl extends Thread implements ServerInterface {
         }
         System.out.println("Registrato nuovo cittadino > " + c.toString());
         return true;
-    }
-
-    @Override
-    public synchronized void rimuoviPaziente(Cittadino c) throws RemoteException {
-
     }
 
     @Override
@@ -135,12 +111,11 @@ public class ServerImpl extends Thread implements ServerInterface {
     }
 
     @Override
-    public synchronized void cercaCentroVaccinale(String s) throws RemoteException {
+    public synchronized boolean accessoCentroVaccinale(String username, String password) throws RemoteException {
+        try {
 
-    }
-
-    @Override
-    public synchronized CentroVaccinale consultaInfoCentroVaccinale(CentroVaccinale c) throws RemoteException {
-        return null;
+        } catch(SQLException e) {
+            return false;
+        }
     }
 }

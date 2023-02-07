@@ -1,5 +1,6 @@
 package com.example.applicazionecittadini.GUI;
 
+import com.example.applicazionecittadini.Client.ClientCittadino;
 import com.example.common.CentroVaccinale;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ControllerVisualizzaCvPerNome {
     @FXML
@@ -27,7 +29,7 @@ public class ControllerVisualizzaCvPerNome {
     }
 
     public void cercaCVperNome(ActionEvent event) {
-        CentroVaccinale cv = new CentroVaccinale("mamma mia");
+        CentroVaccinale cv = new CentroVaccinale("centro1");
         try {
             TableView<CentroVaccinale> tableView = new TableView<>();
             TableColumn colonnaNomeCV = new TableColumn<>("Nome");
@@ -43,6 +45,9 @@ public class ControllerVisualizzaCvPerNome {
             listaCv.add(new CentroVaccinale(tFcercaCV.toString(), new Indirizzo("Via", "pippo18", (short) 1, "comune", "AO", "66666"), CentroVaccinale.Tipologia.HUB));
             tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
             tableView.setItems(listaCv);*/
+
+            ArrayList listaRisultato = ClientCittadino.getInstance().ricercaCVperNome(); //TODO inserire stringa di ricerca
+
 
             //TODO metodo per visualizzare nella list view i cv
             //TODO CV da cliccare

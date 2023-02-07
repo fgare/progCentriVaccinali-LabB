@@ -1,5 +1,6 @@
 package com.example.applicazionecittadini.GUI;
 
+import com.example.applicazionecittadini.Client.ClientCittadino;
 import com.example.common.CentroVaccinale;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,6 +9,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TableView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ControllerVisualizzaCVperComuneTipologia {
     @FXML
@@ -23,6 +25,7 @@ public class ControllerVisualizzaCVperComuneTipologia {
     }
 
     public void cercaCVperComuneTipologia(ActionEvent event) {
-        //TODO metodo per visualizzare nella list view i cv
+        //TODO: bisogna raccogliere il valore dei due campi
+        ArrayList<CentroVaccinale> listaRisultato = ClientCittadino.getInstance().ricercaCvNomeTipologia();
     }
 }
