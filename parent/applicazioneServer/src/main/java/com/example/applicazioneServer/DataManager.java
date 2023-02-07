@@ -116,8 +116,8 @@ public class DataManager {
     //TODO: da finire
     public boolean registraVaccinazione(CentroVaccinale c, Vaccinazione v) throws SQLException {
         final String VERIFICA_CITTADINO_REGISTRATO = "SELECT cf, centrovaccinale FROM "+ SWVar.TAB_CITTADINI +
-                " WHERE cf= " + "//TODO" + " AND centrovaccinale= " + c.getNome();
-        final String NUOVO_VACCINAZIONE = "INSERT INTO " + SWVar.TAB_VACCINAZIONI + "(data, vaccino, CF_citt) " +
+                " WHERE .cf= " + v.getCfCitt() + " AND centrovaccinale= " + c.getNome();
+        final String NUOVA_VACCINAZIONE = "INSERT INTO " + SWVar.TAB_VACCINAZIONI + "(data, vaccino, CF_citt) " +
                 " VALUES('" +
                 v.getData() + "','" +
                 v.getVaccino() + "','" +
@@ -132,7 +132,7 @@ public class DataManager {
         verificaCittadino.setString(2,"'" + v.getCfCitt() + "'");
         verificaCittadino.setString(3,"'" + c.getNome() + "'");
 
-        ResultSet rs = new DBHandler().select(verificaCittadino);
+        ResultSet rs = new DBHandler().select(VERIFICA_CITTADINO_REGISTRATO);
 
         //Bisognerebbe controllare che il cv esista, ma lo è per forza perchè il cittadino si è precedentemente registrato
 
@@ -142,14 +142,14 @@ public class DataManager {
         handler = new DBHandler();
         conn = handler.getConnection();
 
-        PreparedStatement nuovaVaccinazione = conn.prepareStatement(NUOVO_VACCINAZIONE);
+        PreparedStatement nuovaVaccinazione = conn.prepareStatement(NUOVA_VACCINAZIONE);
         nuovaVaccinazione.setString(1,SWVar.TAB_VACCINAZIONI);
         nuovaVaccinazione.setString(2,v.getCfCitt());
         LocalDate dataVac = v.getData();
         nuovaVaccinazione.setDate(3,new Date(dataVac.getYear(),dataVac.getMonthValue(),dataVac.getDayOfMonth()));
         nuovaVaccinazione.setString(3,v.getVaccino().name());
 
-        return handler.insert(VERIFICA_CITTADINO_REGISTRATO);
+        return handler.insert(NUOVA_VACCINAZIONE);
     }
 
     /**
