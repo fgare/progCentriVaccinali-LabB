@@ -24,7 +24,7 @@ public class Vaccinazione implements Serializable {
     private int id;
     private LocalDate data;
     private Vaccino v;
-    private String codPrenotazione;
+    private String cfCitt;
 
     public enum Vaccino implements Serializable {
         PFIZER, MODERNA, ASTRAZENECA, JJ;
@@ -60,9 +60,9 @@ public class Vaccinazione implements Serializable {
      * @param vac  Vaccino: nome del vaccino somministrato
      * @param data LocalDate: data della vaccinazione
      */
-    public Vaccinazione(int id, Vaccino vac, LocalDate data, String cod) {
+    public Vaccinazione(int id, Vaccino vac, LocalDate data, String cf) {
         this.id = id;
-        this.codPrenotazione = cod;
+        this.cfCitt = cf;
         this.data = data;
         this.v = vac;
     }
@@ -127,6 +127,6 @@ public class Vaccinazione implements Serializable {
      * /@see Vaccinato
      */
     public String getCodPrenotazione() {
-        return this.codPrenotazione;
+        return this.cfCitt;
     }
 }

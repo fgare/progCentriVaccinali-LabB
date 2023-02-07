@@ -131,14 +131,14 @@ public class DBHandler {
      * come una transazione, che viene confermata (commit) se non vengono
      * sollevate eccezioni.
      *
-     * @param queries Una serie di query da eseguire come transazione
+     * @param query Una serie di query da eseguire come transazione
      * @return true se tutte le query sono state eseguite correttamente, false altrimenti
      * @throws SQLException Se viene sollevata un'eccezione durante l'esecuzione delle query
      */
-    public boolean insert(PreparedStatement... queries) throws SQLException {
-        conn.setAutoCommit(false);
-        for(PreparedStatement p: queries) p.executeUpdate();
-        conn.commit();
+    public boolean insert(String query) throws SQLException {
+        this.connectDbCv();
+        PreparedStatement ps = conn.prepareStatement(query);
+        ps.executeUpdate();
         conn.close();
 
         return true; //se non sono state sollevate eccezioni restituisci TRUE
@@ -259,6 +259,7 @@ public class DBHandler {
                         " evento VARCHAR(32), " +
                         " intensita SMALLINT, " +
                         " ID_vaccino NUMERIC(6), " +
+                        " Note VARCHAR(255), " +
                         " FOREIGN KEY (ID_vaccino) REFERENCES " + SWVar.TAB_VACCINAZIONI + "(ID_vaccino) " +
                         " ON UPDATE CASCADE ON DELETE CASCADE" +
                         ")");
@@ -268,12 +269,14 @@ public class DBHandler {
     /**
      * Questo metodo esegue una query di selezione sul database e restituisce i risultati.
      *
-     * @param p La query da eseguire come oggetto PreparedStatement
+     * @param query La query da eseguire come oggetto PreparedStatement
      * @return Il ResultSet con i risultati della query
      * @throws SQLException Se viene sollevata un'eccezione durante l'esecuzione della query
      */
-    public ResultSet select(PreparedStatement p) throws SQLException {
-        ResultSet rs = p.executeQuery();
+    public ResultSet select(String query) throws SQLException {
+        this.connectDbCv();
+        PreparedStatement ps = conn.prepareStatement(query);
+        ResultSet rs = ps.executeQuery(query);
         conn.close();
         return rs;
     }
