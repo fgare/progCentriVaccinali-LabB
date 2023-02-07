@@ -8,16 +8,13 @@ package com.example.common;
 import java.io.Serializable;
 
 /**
- * Classe del package Data che implementa l'interfaccia Fop per memorizzare e gestire tutte le informazioni
+ * Classe che implementa Serializable per memorizzare e gestire tutte le informazioni
  * riguardanti i centri vaccinali.
  *
+ * @see Tipologia
+ * @see Serializable
+ *
  * @author Giorgio Rossi
- * <p>
- * /@see Fop
- * /@see DataManager
- * /@see SWVar
- * /@see Tipologia
- * @since 12/12/2021
  */
 
 public class CentroVaccinale implements Serializable {
@@ -26,6 +23,11 @@ public class CentroVaccinale implements Serializable {
     private Indirizzo indirizzo;
     private Tipologia tipologia;
 
+    /**
+     * Tipo enumerativo che può assumere tre valori:
+     * OSPEDALE, AZIENDA, HUB
+     *
+     */
     public enum Tipologia implements Serializable {
         OSPEDALE, AZIENDA, HUB;
 
@@ -42,6 +44,10 @@ public class CentroVaccinale implements Serializable {
             }
         }
 
+        /**
+         * @param s String: tipologia
+         * @return OSPEDALE|AZIENDA|HUB
+         */
         public static Tipologia parse(String s) {
             if(s.equals("OSPEDALIERO")) return Tipologia.OSPEDALE;
             if(s.equals("AZIENDALE")) return Tipologia.AZIENDA;
@@ -51,16 +57,13 @@ public class CentroVaccinale implements Serializable {
 
     /**
      * Metodo costruttore di CentroVaccinale per lettura da file.
-     * Alloca le variabili di CentroVaccinale compresa la lista di EventoAvverso.
-     * <p>
-     * /@param nome String: nome del centro vaccinale
-     * /@param indirizzo String: indirizzo del centro vaccinale
-     * /@param tipologia Tipologia: tipologia del centro vaccinale
-     * /@param l ArrayList<EventoAvverso>: Lista di EventoAvverso associata alle vaccinazioni eseguite nel centro
-     * vaccinale
+     * Alloca le variabili di CentroVaccinale.
+     * @param nome String: nome del centro vaccinale
+     * @param indirizzo Indirizzo: indirizzo del centro vaccinale
+     * @param tipologia Tipologia: tipologia del centro vaccinale
      *
+     * @see Indirizzo
      * @see Tipologia
-     * @see EventoAvverso
      */
     public CentroVaccinale(String nome, Indirizzo indirizzo, Tipologia tipologia) {
         this.nome = nome;
