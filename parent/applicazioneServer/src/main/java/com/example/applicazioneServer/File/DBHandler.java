@@ -106,8 +106,8 @@ public class DBHandler {
             disconnect(); //disconnessione dal server
             connectDbCv(); //conessione al server e al databaseCV
             createTableCV();
-            createTableRegistrazione();
             createTableCittadino();
+            createTableRegistrazione();
             createTableIndirizzi();
             createTableVaccinazioni();
             createTableVaccinazioniEventiAvversi();
@@ -153,6 +153,26 @@ public class DBHandler {
     }
 
     /**
+     * Questo metodo crea la tabella "TAB_CITTADINI" nel database databaseCV.
+     *
+     * @throws SQLException Se viene sollevata un'eccezione durante la creazione della tabella
+     */
+    private void createTableCittadino() throws SQLException {
+        PreparedStatement stmt = conn.prepareStatement(
+                "CREATE TABLE " + SWVar.TAB_CITTADINI + "( " +
+                        " CF VARCHAR(16), " +
+                        " nome VARCHAR(128), " +
+                        " cognome VARCHAR(128), " +
+                        " email VARCHAR(255), " +
+                        " password VARCHAR(255), " +
+                        " username VARCHAR(255), " +
+                        " PRIMARY KEY (CF) )" );
+        {
+            stmt.executeUpdate();
+        }
+    }
+
+    /**
      * Questo metodo crea la tabella "TAB_INDIRIZZI" nel database databaseCV.
      *
      * @throws SQLException Se viene sollevata un'eccezione durante la creazione della tabella
@@ -160,12 +180,11 @@ public class DBHandler {
     private void createTableIndirizzi() throws SQLException {
         PreparedStatement stmt = conn.prepareStatement(
                 "CREATE TABLE " + SWVar.TAB_INDIRIZZI + "( " +
-                        " id_ind NUMERIC(6) PRIMARY KEY, " +
+                        " id_ind SERIAL PRIMARY KEY, " +
                         " identificatore VARCHAR(10), " +
                         " localizzazione VARCHAR(255), " +
                         " civico NUMERIC(4), " +
                         " provincia CHAR(2), " +
-                        " stato VARCHAR(32), " +
                         " centro_vaccinale VARCHAR(255), " +
                         " FOREIGN KEY (centro_vaccinale) REFERENCES " + SWVar.TAB_CENTRIVACCINALI + "(nome) " +
                         " ON UPDATE CASCADE " +
@@ -183,41 +202,21 @@ public class DBHandler {
     private void createTableRegistrazione() throws SQLException {
         PreparedStatement stmt = conn.prepareStatement(
                 "CREATE TABLE " + SWVar.TAB_REGISTRAZIONE + "( " +
-                        " centro_vaccinale VARCHAR(255), " +
-                        " CF VARCHAR(16) UNIQUE, " +
-                        " codice NUMERIC(6), " +
-                        " PRIMARY KEY (centro_vaccinale,CF), " +
-                        " FOREIGN KEY (centro_vaccinale) REFERENCES " + SWVar.TAB_CENTRIVACCINALI + "(nome) " +
+                        " centro_vaccinale VARCHAR(255) " +
+                        " REFERENCES " + SWVar.TAB_CENTRIVACCINALI +
                         " ON UPDATE CASCADE " +
-                        " ON DELETE CASCADE)");
+                        " ON DELETE CASCADE," +
+                        " CF VARCHAR(16) UNIQUE " +
+                        " REFERENCES " + SWVar.TAB_CITTADINI +
+                        " ON UPDATE CASCADE " +
+                        " ON DELETE CASCADE," +
+                        " codice SERIAL, " +
+                        " PRIMARY KEY (centro_vaccinale,CF))");
         {
             stmt.executeUpdate();
         }
     }
 
-
-    /**
-     * Questo metodo crea la tabella "TAB_CITTADINI" nel database databaseCV.
-     *
-     * @throws SQLException Se viene sollevata un'eccezione durante la creazione della tabella
-     */
-    private void createTableCittadino() throws SQLException {
-        PreparedStatement stmt = conn.prepareStatement(
-                "CREATE TABLE " + SWVar.TAB_CITTADINI + "( " +
-                        " CF VARCHAR(16), " +
-                        " nome VARCHAR(128), " +
-                        " cognome VARCHAR(128), " +
-                        " email VARCHAR(255), " +
-                        " password VARCHAR(255), " +
-                        " username VARCHAR(255), " +
-                        " PRIMARY KEY (CF), " +
-                        " FOREIGN KEY (CF) REFERENCES " + SWVar.TAB_REGISTRAZIONE + "(CF) " +
-                        " ON UPDATE CASCADE " +
-                        " ON DELETE CASCADE)");
-        {
-            stmt.executeUpdate();
-        }
-    }
 
 
     /**
@@ -228,11 +227,11 @@ public class DBHandler {
     private void createTableVaccinazioni() throws SQLException {
         PreparedStatement stmt = conn.prepareStatement(
                 "CREATE TABLE " + SWVar.TAB_VACCINAZIONI + "( " +
-                        " ID_vaccino NUMERIC(6) PRIMARY KEY, " +
+                        " ID_vaccino SERIAL PRIMARY KEY, " +
                         " data DATE, " +
                         " vaccino VARCHAR(20), " +
                         " CF_citt VARCHAR(16), " +
-                        " FOREIGN KEY (CF_citt) REFERENCES " + SWVar.TAB_CITTADINI + "(CF) " +
+                        " FOREIGN KEY (CF_citt) REFERENCES " + SWVar.TAB_CITTADINI +
                         " ON UPDATE CASCADE " +
                         " ON DELETE CASCADE " +
                         ")");
