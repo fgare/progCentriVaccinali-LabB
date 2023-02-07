@@ -79,7 +79,7 @@ public class DataManager {
                 i.ZIP() + "','" +
                 c.getNome() + "');";
 
-        return new DBHandler().insert(NUOVO_INDIRIZZO);
+        return new DBHandler().insert(NUOVO_CV);
     }
 
     /**
@@ -286,5 +286,14 @@ public class DataManager {
                 indirizzo.provincia() + "');";
 
         return new DBHandler().insert(NUOVO_INDIRIZZO);
+    }
+
+    public boolean login(String username, String password) throws SQLException {
+        final String ESISTE =
+                "SELECT 1 FROM " + SWVar.TAB_CITTADINI +
+                        " WHERE username = '" + username + "' AND password = '" + password + "'";
+        DBHandler dbh = new DBHandler();
+        ResultSet result = dbh.select(ESISTE);
+        return result.next();
     }
 }
