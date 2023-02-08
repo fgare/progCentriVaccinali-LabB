@@ -8,15 +8,9 @@ package com.example.common;
 import java.io.Serializable;
 
 /**
- * Classe del package Data che implementa l'interfaccia Fop per memorizzare e gestire tutte le informazioni
+ * Classe che implementa l'interfaccia Serializable per memorizzare e gestire tutte le informazioni
  * riguardanti gli eventi avversi relativi al vaccino.
  *
- * @author Giorgio Rossi
- * <p>
- * /*@see Fop
- * /*@see DataManager
- * /*@see SWVar
- * @since 12/12/2021
  */
 
 

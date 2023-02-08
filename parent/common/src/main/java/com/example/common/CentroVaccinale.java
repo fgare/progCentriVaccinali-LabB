@@ -8,13 +8,12 @@ package com.example.common;
 import java.io.Serializable;
 
 /**
- * Classe che implementa Serializable per memorizzare e gestire tutte le informazioni
+ * Classe che implementa l'interfaccia Serializable per memorizzare e gestire tutte le informazioni
  * riguardanti i centri vaccinali.
  *
  * @see Tipologia
  * @see Serializable
  *
- * @author Giorgio Rossi
  */
 
 public class CentroVaccinale implements Serializable {
@@ -28,7 +27,8 @@ public class CentroVaccinale implements Serializable {
     }
 
     /**
-     * Tipo enumerativo che può assumere tre valori:
+     * Tipo enumerativo che memorizza la tipologia di centro vaccinale.
+     * Può assumere tre valori:
      * OSPEDALE, AZIENDA, HUB
      *
      */
@@ -49,7 +49,7 @@ public class CentroVaccinale implements Serializable {
         }
 
         /**
-         * @param s String: tipologia
+         * @param s String: tipologia di centro vaccinale
          * @return OSPEDALE|AZIENDA|HUB
          */
         public static Tipologia parse(String s) {
