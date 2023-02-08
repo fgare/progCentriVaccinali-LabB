@@ -27,6 +27,7 @@ public class Cittadino implements Serializable {
     private String nome;
     private String cognome;
     private String cf;
+    private String username;
     private String email;
     private String psw;
     private String nomeCentroVaccinale;
@@ -43,11 +44,12 @@ public class Cittadino implements Serializable {
      * @param psw     String: password del cittadino
      * @param cv      CentroVaccinale: centro vaccinale dove il cittadino vuole vaccinarsi
      */
-    public Cittadino(int id, String nome, String cognome, String cf, String email, String psw, String cv) {
+    public Cittadino(int id, String nome, String cognome, String cf, String username, String email, String psw, String cv) {
         this.id = id;
         this.nome = nome;
         this.cognome = cognome;
         this.cf = cf;
+        this.username = username;
         this.email = email;
         this.psw = psw;
         this.nomeCentroVaccinale = cv;
@@ -67,12 +69,12 @@ public class Cittadino implements Serializable {
      * @param cv      CentroVaccinale: centro vaccinale dove il cittadino vuole vaccinarsi
      * @see CentroVaccinale
      */
-    public Cittadino(String nome, String cognome, String cf, String email, String psw, String cv) {
-        this(-1,nome,cognome,cf,email,psw,cv);
+    public Cittadino(String nome, String cognome, String cf, String username, String email, String psw, String cv) {
+        this(-1,nome,cognome,cf,username,email,psw,cv);
     }
 
-    public Cittadino(String nomeCittadino, String cognomeCittadino, String cfCittadino, String usernameCittadino, String emailCittadino, String passwordCittadino, String text) {
-        this(-1,null, null, null, null, null, null);
+    public Cittadino() {
+        this(-1,null,null, null, null, null, null, null);
     }
 
     /**

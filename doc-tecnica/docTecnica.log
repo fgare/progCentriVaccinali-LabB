@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.9.14)  7 FEB 2023 22:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.9.14)  8 FEB 2023 13:49
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -665,15 +665,21 @@ seCentriVaccinali.png (PNG copy)> <./img/UseCaseCittadino.png (PNG copy)> <./im
 g/StateMachineDiagramCentroVaccinale.png (PNG copy)>] [10 <./img/StateMachineDi
 agramCittadini.png (PNG copy)> <./img/CentriVaccinaliDB.png (PNG copy)>]
 (./docTecnica.aux)
-Package rerunfilecheck Info: File `docTecnica.out' has not changed.
-(rerunfilecheck)             Checksum: C291E18D2395746E516E37EEA955B292;1340.
+
+Package rerunfilecheck Warning: File `docTecnica.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `docTecnica.out':
+(rerunfilecheck)             Before: C291E18D2395746E516E37EEA955B292;1340
+(rerunfilecheck)             After:  8273D5D8B2641D111D46FFB0D7B806EF;1471.
 runsystem(del docTecnica.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 16112 strings out of 476855
- 282043 string characters out of 5822299
- 684947 words of memory out of 5000000
+ 16114 strings out of 476855
+ 282068 string characters out of 5822299
+ 684961 words of memory out of 5000000
  36960 multiletter control sequences out of 15000+600000
  482499 words of font info for 52 fonts, out of 8000000 for 9000
  62 hyphenation exceptions out of 8191
@@ -691,10 +697,10 @@ exmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb><c:/texlive/2022/texmf-dist/
 fonts/type1/public/cm-super/sfrm1728.pfb><c:/texlive/2022/texmf-dist/fonts/type
 1/public/cm-super/sfti1000.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/c
 m-super/sftt1000.pfb>
-Output written on docTecnica.pdf (11 pages, 1323947 bytes).
+Output written on docTecnica.pdf (11 pages, 1324219 bytes).
 PDF statistics:
- 220 PDF objects out of 1000 (max. 8388607)
- 174 compressed objects within 2 object streams
- 53 named destinations out of 1000 (max. 500000)
+ 223 PDF objects out of 1000 (max. 8388607)
+ 177 compressed objects within 2 object streams
+ 55 named destinations out of 1000 (max. 500000)
  111 words of extra memory for PDF output out of 10000 (max. 10000000)
 
