@@ -36,8 +36,8 @@ public class UniversalMethods {
             scene = new Scene(loader.load(), 630, 370);
         else if (res.equals("VisualizzaCVperNome.fxml") || res.equals("VisualizzaCVperComuneTipologia.fxml"))
             scene = new Scene(loader.load(), 800, 600);
-        else
-            scene = new Scene(loader.load(), 600, 400);
+        else scene = new Scene(loader.load(), 600, 400);
+
         Stage stage = new Stage();
         stage.setTitle(tit);
         stage.setScene(scene);

@@ -18,6 +18,10 @@ import java.util.regex.Pattern;
 
 public class ControllerRegistraCittadino {
     @FXML
+    private Label lbCVScelto;
+    @FXML
+    private Button btSelCVxCittadino;
+    @FXML
     private Button btSelezionaCV;
     @FXML
     private Label lbNome;
@@ -51,8 +55,6 @@ public class ControllerRegistraCittadino {
     private Button btRegistraCittadino;
     @FXML
     private Button btIndietro;
-    @FXML
-    private Button btIndietro1;
     @FXML
     private Button btAvanti;
     @FXML
@@ -115,6 +117,7 @@ public class ControllerRegistraCittadino {
                 System.out.println("password errata");
             } else pfPswCittadini.setStyle("-fx-text-fill: green; -fx-border-color: green;");
 
+
             if (!err) {
                 Cittadino c = new Cittadino(nomeCittadino, cognomeCittadino, cfCittadino, usernameCittadino, emailCittadino, passwordCittadino);
                 ArrayList<CentroVaccinale> tuttiCv = (ArrayList<CentroVaccinale>) ClientCittadino.getInstance().ricercaCVperNome("");
@@ -128,6 +131,19 @@ public class ControllerRegistraCittadino {
         } catch (Exception e) {
             System.out.println("ERRORONE!!!");
         }
+    }
+
+    public void prendiCV(ActionEvent event) throws IOException{
+        //TODO apre pagina per selzionare il cv; inserisce codice cv da mandare poi in DB
+        UniversalMethods.vediFinestra("selezionaCV", "TATUM VACCINI - Scelta centro vaccinale");
+        String nome = sceltaCVVaccinazione(event);
+        lbCVScelto.setText(nome);
+    }
+
+    public String sceltaCVVaccinazione(ActionEvent event) {
+        //nome preso da selezione
+        //CentroVaccinale c= new CentroVaccinale(nome);
+        return null;//c.getNome();
     }
 
     private boolean pswCorretta(String str) {
@@ -155,7 +171,5 @@ public class ControllerRegistraCittadino {
     }
 
 
-    public void prendiCV(ActionEvent event) {
 
-    }
 }
