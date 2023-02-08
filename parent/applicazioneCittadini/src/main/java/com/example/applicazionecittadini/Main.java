@@ -8,6 +8,10 @@ import java.io.IOException;
 import java.rmi.ConnectException;
 import java.rmi.RemoteException;
 
+/**
+ * Classe Main che estende la classe Application di JavaFX.
+ * Questa classe viene utilizzata per avviare l'interfaccia grafica dell'applicazione.
+ */
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
