@@ -258,9 +258,9 @@ public class DBHandler {
                         " ID_ea SERIAL PRIMARY KEY , " +
                         " evento VARCHAR(32), " +
                         " intensita SMALLINT, " +
-                        " ID_vaccino NUMERIC(6), " +
+                        " ID_vaccino SERIAL, " +
                         " Note VARCHAR(255), " +
-                        " FOREIGN KEY (ID_vaccino) REFERENCES " + SWVar.TAB_VACCINAZIONI + "(ID_vaccino) " +
+                        " FOREIGN KEY (ID_vaccino) REFERENCES " + SWVar.TAB_VACCINAZIONI +
                         " ON UPDATE CASCADE ON DELETE CASCADE" +
                         ")");
         stmt.executeUpdate();
