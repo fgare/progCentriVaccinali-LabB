@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{CREATE}\PYG{+w}{ }\PYG{k}{TABLE}\PYG{+w}{ }\PYG{n}{Registrazione}\PYG{+w}{ }\PYG{p}{(}
+\PYG{+w}{	}\PYG{n}{centro\PYGZus{}vaccinale}\PYG{+w}{ }\PYG{n+nb}{VARCHAR}\PYG{p}{(}\PYG{l+m+mi}{255}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{REFERENCES}\PYG{+w}{ }\PYG{n}{centro\PYGZus{}vaccinale}
+\PYG{+w}{		}\PYG{k}{ON}\PYG{+w}{ }\PYG{k}{UPDATE}\PYG{+w}{ }\PYG{k}{CASCADE}
+\PYG{+w}{		}\PYG{k}{ON}\PYG{+w}{ }\PYG{k}{DELETE}\PYG{+w}{ }\PYG{k}{CASCADE}\PYG{p}{,}
+\PYG{+w}{	}\PYG{n}{CF}\PYG{+w}{ }\PYG{n+nb}{CHAR}\PYG{p}{(}\PYG{l+m+mi}{16}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{UNIQUE}\PYG{+w}{ }\PYG{k}{REFERENCES}\PYG{+w}{ }\PYG{n}{cittadino}
+\PYG{+w}{		}\PYG{k}{ON}\PYG{+w}{ }\PYG{k}{UPDATE}\PYG{+w}{ }\PYG{k}{CASCADE}
+\PYG{+w}{		}\PYG{k}{ON}\PYG{+w}{ }\PYG{k}{DELETE}\PYG{+w}{ }\PYG{k}{CASCADE}\PYG{p}{,}
+\PYG{+w}{	}\PYG{n}{codice}\PYG{+w}{ }\PYG{n+nb}{SERIAL}\PYG{p}{,}
+\PYG{+w}{	}\PYG{k}{PRIMARY}\PYG{+w}{ }\PYG{k}{KEY}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{centro\PYGZus{}vaccinale}\PYG{p}{,}\PYG{n}{CF}\PYG{p}{)}
+\PYG{p}{);}
+\end{Verbatim}

@@ -31,11 +31,8 @@ public class ServerImpl extends Thread implements ServerInterface {
     @Override
     public synchronized boolean registraCentroVaccinale(CentroVaccinale c) throws RemoteException {
         try {
-            System.out.println("Sono stato chiamato");
-            Indirizzo i = new Indirizzo(Indirizzo.Identificatore.VIA,"cremona",(short) 23,"varese","VA","12345");
-            CentroVaccinale cv = new CentroVaccinale("Ospedale di varese",i, CentroVaccinale.Tipologia.OSPEDALE);
-            DataManager.getInstance().registraCentroVaccinale(cv);
-            //DataManager.getInstance().registraCentroVaccinale(c);
+            System.out.println("Sono stato chiamato"); //TODO da cancellare
+            DataManager.getInstance().registraCentroVaccinale(c);
         } catch(SQLException e) {
             System.out.println("registraCentroVaccinale(" + c.getNome() + ") > SQLException");
             e.printStackTrace();

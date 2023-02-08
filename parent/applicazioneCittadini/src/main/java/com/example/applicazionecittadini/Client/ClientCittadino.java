@@ -17,7 +17,6 @@ import java.util.List;
 public class ClientCittadino extends Thread {
     private static ClientCittadino instance = null;
     private final short REGISTRYPORT = 1099;
-    private final short CLIENTCITTPORT = 1101;
     private ServerInterface server;
 
     public ClientCittadino() throws RemoteException,NotBoundException {
@@ -69,6 +68,14 @@ public class ClientCittadino extends Thread {
     public boolean nuovoEventoAvverso(EventoAvverso e) {
         try {
             return server.registraEventoAvverso(e);
+        } catch(RemoteException e) {
+            return false;
+        }
+    }
+
+    public boolean login(String username, String password) {
+        try {
+            return server.accessoCentroVaccinale(username,password);
         } catch(RemoteException e) {
             return false;
         }

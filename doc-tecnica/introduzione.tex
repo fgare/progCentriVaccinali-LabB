@@ -1,0 +1,32 @@
+\section{Introduzione}
+
+	Tatum Vaccini è un progetto sviluppato nell'ambito del progetto di Laboratorio~A per il corso di laurea in Informatica dell'Università degli Studi dell'Insubria.
+	Il progetto è sviluppato in Java 19, usa un’interfaccia grafica costruita con OpenJFx 19ed è stato sviluppato e testato sui sistemi operativi Windows 10, Windows 11 e Mac OS Ventura.\\
+	Esso è costituito da 3 applicazioni distinte: \emph{Applicazione Centri Vaccinali}, \emph{Applicazione cittadini} e \emph{Applicazione server}.
+	
+\subsection{Librerie esterne utilizzate}
+	L'unica libreria esterna di cui l'applicazione fa uso è OpenJFx~12, la quale contiene tutti gli elementi necessari allo sviluppo dell'interfaccia grafica.
+	Si è reso necessario appoggiarsi a una libreria esterna in quanto, a partire dalla release 9 del linguaggio Java, JavaFx non è più inclusa all'interno del Java Development Kit (JDK) distribuito da Oracle.
+	
+\subsection{Struttura generale delle classi}
+	Il progetto è organizzato in quattro moduli: \emph{modulo server}, \emph{modulo centri vaccinali}, \emph{modulo cittadini} e \emph{modulo common}.
+	La struttura generale è riportata in Figura \ref*{graph:gerarchiaClassi}.
+	Descriveremo nel seguito le classi di cui si compone ogni modulo e come esse sono organizzate in package.
+	
+	\input{gerarchiaClassi.tex}
+	
+\subsubsection*{Applicazione server}
+	L'applicazione server rappresenta il cuore dell'intero progetto, ad essa si collegano in remoto le altre applicazioni e gestisce inoltre l'interazione con il DBMS.
+	
+	
+\subsubsection*{Applicazione centri vaccinali}
+	Il modulo centri vaccinali è la parte del programma dedicata agli operatori sanitari, essa permette di registrare nuovi centri vaccinali ed inserire vaccinazioni.
+
+
+\subsubsection*{Applicazione cittadini}
+	Il modulo cittadini è infine l'applicazione orientata all'uso da parte dei pazienti, essa permette la registrazione e l'inserimento di eventuali evento avversi riscontrati in seguito alla vaccinazione.
+	
+	
+\subsubsection*{Modulo common}
+	Questo modulo ha il solo scopo di fungere da \emph{contenitore} delle classi condivise dall'intero progetto.
+	Esso non è pertanto un'applicazione avviabile ma solamente un modulo verso cui tutti gli altri moduli hanno dipendenze.

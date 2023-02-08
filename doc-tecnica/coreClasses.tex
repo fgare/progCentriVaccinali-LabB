@@ -1,0 +1,94 @@
+\section{Core classes}
+	Di seguito viene trattata nel dettaglio ogni classe definita all'interno del codice.
+
+\subsection{Classi generiche}
+
+	\paragraph{ServerImpl}
+	La classe \verb|ServerImpl| si occupa dell'interazione del server con i client attraverso RMI, ovvero l'insieme di procedure fornite da Java che permettono a due processi distribuiti di comunicare tra loro.
+	La comunicazione avviene grazie alle interfacce \verb|ServIntCentroVaccinale| e \verb|ServIntCittadino| che la classe implementa e che le permettono di fornire alcuni metodi invocabili dai client.
+	
+	Sono presenti quattro campi, due sono costanti contenenti i numeri di porta sui quali verranno pubblicati il registro e l'applicazione stessa, mentre i rimanenti sono due variabili di tipo \verb|List<>|;  esse sono inizializzate nel costruttore come \verb|LinkedList<>| e i loro elementi andranno a memorizzare i riferimenti remoti dei client.
+	In questo caso si è scelta una LinkedList in quanto sono più frequenti le operazioni di aggiunta e rimozione di elementi rispetto a quelle di ricerca di un elemento specifico.	
+	
+	All'avvio del programma la prima classe ad essere istanziata è proprio \verb|ServerImpl|, il costruttore si occupa di creare il registro e registrarlo sulla porta \verb|1099|, generare un riferimento remoto dell'oggetto e pubblicarlo all'interno del registro; oltre a inizializzare i due campi di tipo \verb|List<>|.
+	
+	
+	\paragraph{DataManager}
+	Questa classe rappresenta un gestore di dati per l’applicazione.
+	La classe contiene metodi per registrare un centro vaccinale, un cittadino e una vaccinazione.
+	Ogni volta che viene chiamato uno di questi metodi, viene eseguita una query sul database per inserire i dati necessari.
+	La classe utilizza un design pattern singleton, il che significa che verrà creata una sola istanza di DataManager durante l'esecuzione dell'applicazione.
+	Questo viene fatto utilizzando un metodo factory, \verb|getInstance()|, che crea un'istanza solo se non esiste già
+	
+	
+	\paragraph{SWVar}
+	La classe contiene alcune variabili costanti che rappresentano i nomi delle tabelle in un database.
+	Essa è sfruttata nelle classi \verb|DBHandler| e \verb|DataManager| per tenere traccia dei nomi delle tabelle.
+	
+	
+	\paragraph{DBHandler}
+	La classe DBHandler rappresenta un gestore di database.
+	Utilizza la libreria JDBC per la connessione a un database PostgreSQL.
+	La classe ha metodi per connettersi e disconnettersi dal database, creare tabelle, inserire dati nelle tabelle e inizializzare il database (se non esiste).
+	La classe utilizza il pattern Singleton per garantire che ci sia una sola istanza della connessione al database.
+	
+	
+	\paragraph{CentroVaccinale}
+	Definisce un centro vaccinale, si compone di tre campi: nome, indirizzo, tipologia.	
+	
+	
+	\paragraph{Cittadino}
+	La classe Cittadino è pensata per rappresentare una persona che si registri all’interno dell’applicazione per essere vaccinata.
+	Sono definiti da sette campi: \verb|id|, \verb|nome|, \verb|cognome|, \verb|cf|, \verb|email|, \verb|psw|, \verb|nomeCentroVaccinale|.
+	
+	
+	\paragraph{EventoAvverso}
+	EventoAvverso è la classe pensata per modellizzare eventuali effetti collaterali del vaccino; ogni istanza di questa classe rappresenta una particolare complicazione scelta tra sei, con la relativa intensità riscontrata dal paziente ed è accompagnata da un'eventuale nota testuale.
+	
+	
+	\paragraph{Indirizzo}
+	Classe di tipo record che ingloba al suo interno tutti i campi di cui si compone un indirizzo.
+	I campi sono in totale sette
+	\begin{itemize}
+		\item \verb|id| identificativo univoco associato all'indirizzo assegnato automaticamente dal DBMS
+		\item \verb|identificatore| riferimento a un oggetto della classe enumerativa \verb|Identificatore|
+		\item  \verb|nome|, \verb|comune|, \verb|provincia|, \verb|ZIP| campi di tipo stringa per memorizzare rispettivamente il nome della via/viale/piazza, il comune, la provincia (2 lettere), lo ZIP code (ossia il CAP, 5 numeri)
+		\item \verb|numCivico| parametro di tipo short per il numero civico
+	\end{itemize}
+	La classe prevede due costruttori, il primo definito di default che accetta sette parametri, ognuno corrispondente in tipo al campo della classe, mentre il secondo non prevede il parametro per l'id, che viene assegnato di default a 0 ed inoltre richiede un oggetto \verb|String| come identificatore.
+	
+	
+	\paragraph{Vaccinazione}
+	La classe Vaccinazione vuole modellizzare un’avvenuta vaccinazione ed è definita dai seguenti quattro campi: id, data, v, codicePrenotazione.
+	\begin{itemize}
+		\item \verb|Id| è un numero progressivo che identifica automaticamente la vaccinazione ed è assegnato automaticamente dal DBMS
+		\item \verb|data| è un campo di tipo \verb|LocalDate| in cui viene memorizzato il giorno in cui è stata effettuata la vaccinazione (di default la data odierna)
+		\item \verb|v| è un riferimento al tipo enumerativo \verb|Vaccino| e indica quale vaccino tra quelli disponibili è stato somministrato
+		\item \verb|codicePrenotazione| è una stringa contenente il codice della prenotazione assegnato al cittadino al momento della registrazione
+	\end{itemize}
+	
+	
+\subsection{Interfacce}
+	
+	\paragraph{ServerInterface}
+	Questa interfaccia rappresenta un'interfaccia remota del server.
+	Essa è implementata dalla classe \verb|ServerImpl| e definisce i metodi che il server rende disponibili ai proprio client.
+		
+
+\subsection{Classi enumerative}
+	
+	\paragraph{Tipologia}
+	Si tratta di una classe enumerativa molto semplice, volta a memorizzare le possibili tipologie di centro vaccinale: ospedaliero, aziendale, hub.
+	
+	\paragraph{QualeEvento}
+	Classe enumerativa definita all'interno della classe \verb|EventoAvverso| in cui sono definiti un totale di sei sintomi che si possono riscontrare in seguito a una vaccinazione.
+	I sintomi definiti sono: \verb|mal di testa|, \verb|febbre|, \verb|dolori muscolari e articolari|, \verb|linfoadenopatia|, \verb|tachicardia|, \verb|crisi ipertensiva|.
+	
+	\paragraph{Identificatore}
+	Classe enumerativa definita all'interno del record \verb|Indirizzo| che definisce gli identificatori dell'indirizzo che è possibile scegliere.
+	I valori presenti sono: \verb|via|, \verb|viale|, \verb|piazza|.
+	
+	\paragraph{Vaccino}
+	Classe enumerativa contenente in nomi dei vaccini approvati dall’Agenzia Europea per i Medicinali e che è quindi possibile somministrare.
+	Al 12/12/2021 i vaccini approvati sono quattro: Pfizer, Moderna, AstraZeneca, Johnson \& Johnson.
+	

@@ -1,5 +1,6 @@
 package com.example.applicazionecittadini.GUI;
 
+import com.example.applicazionecittadini.Client.ClientCittadino;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -23,6 +24,8 @@ public class ControllerAccessoCittadino {
     public void accessoCittadino(ActionEvent event) throws IOException{
         UniversalMethods.handleCloseButtonAction(event, btAccessoCittadino);
         UniversalMethods.vediFinestra("InserimentoEventiAvversi.fxml", "TATUM VACCINI - Inserimento eventi avversi");
+
+        boolean accessoConsentito = ClientCittadino.getInstance().login(); //TODO
     }
 
     public void tornaHomepage(ActionEvent event) throws IOException {

@@ -1,0 +1,42 @@
+\documentclass[a4paper,titlepage]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+
+\usepackage{dirtree}
+\usepackage{verbatim}
+\usepackage{graphicx}
+
+\usepackage[hidelinks]{hyperref}
+
+\usepackage{minted}
+
+\usepackage[export]{adjustbox}
+\usepackage{caption}
+\captionsetup{font=small}
+
+\title{{\Huge \textbf{Tatum Vaccini}}\\
+		Documentazione tecnica}
+\author{
+	\begin{tabular}{rcl}
+		Rossi Giorgio & 746571 & VA\\
+		Garegnani Federico & 746789 & VA\\
+		Canali Luca & 744802 & VA\\
+		Callegari Pietro & 746568 & VA\\
+		Invernizzi Daniele & 746484 & VA\\
+	\end{tabular}
+}
+\date{\today}
+
+\begin{document}
+	\maketitle
+	
+	\tableofcontents
+	\pagebreak
+	
+	\input{introduzione.tex}
+	\input{coreClasses.tex}
+	\input{umlDiagrams.tex}
+	\input{database.tex}
+	
+\end{document}
