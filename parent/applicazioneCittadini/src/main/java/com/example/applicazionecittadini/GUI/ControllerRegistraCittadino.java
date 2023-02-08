@@ -1,6 +1,7 @@
 package com.example.applicazionecittadini.GUI;
 
 import com.example.applicazionecittadini.Client.ClientCittadino;
+import com.example.common.CentroVaccinale;
 import com.example.common.Cittadino;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,6 +12,7 @@ import javafx.scene.layout.Border;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -115,12 +117,11 @@ public class ControllerRegistraCittadino {
 
             if (!err) {
                 Cittadino c = new Cittadino(nomeCittadino, cognomeCittadino, cfCittadino, usernameCittadino, emailCittadino, passwordCittadino);
+                ArrayList<CentroVaccinale> tuttiCv = (ArrayList<CentroVaccinale>) ClientCittadino.getInstance().ricercaCVperNome("");
+                //TODO: inserire elementi in tabella --> FARE
                 boolean esito = ClientCittadino.getInstance().nuovoCittadino(c);
                 System.out.printf("Inserimento cittadino: esito %b per cittadino >\n %s\n",esito,c.toString());
 
-                a.setHeaderText("CODICE PRENOTAZIONE: ");
-                a.setContentText("" + id);
-                a.show();
                 UniversalMethods.handleCloseButtonAction(event, btRegistraCittadino);
                 UniversalMethods.vediFinestra("AccessoCittadino.fxml", "TATUM VACCINI - Richiesta accesso cittadino");
             }

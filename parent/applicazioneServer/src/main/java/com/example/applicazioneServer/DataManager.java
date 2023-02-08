@@ -182,11 +182,15 @@ public class DataManager {
         final String GET_ELENCO_CV =
                 "SELECT * FROM " + SWVar.TAB_CENTRIVACCINALI + " JOIN  " + SWVar.TAB_INDIRIZZI + " ON " + SWVar.TAB_CENTRIVACCINALI + ".nome = " + SWVar.TAB_INDIRIZZI + ".centro_vaccinale " +
                         "WHERE " + SWVar.TAB_CENTRIVACCINALI + ".nome LIKE '%" + searchString + "%'";
-
+        final String GET_TUTTI_CV = "SELECT * FROM " + SWVar.TAB_CENTRIVACCINALI + " JOIN  " + SWVar.TAB_INDIRIZZI + " ON " + SWVar.TAB_CENTRIVACCINALI + ".nome = " + SWVar.TAB_INDIRIZZI + ".centro_vaccinale;";
 
         DBHandler handler = new DBHandler();
         Connection conn = handler.getConnection();
-        PreparedStatement chiediLista = conn.prepareStatement(GET_ELENCO_CV);
+
+        PreparedStatement chiediLista;
+        if(searchString == null || searchString.equals("")) {
+            chiediLista = conn.prepareStatement(GET_TUTTI_CV);
+        } else chiediLista = conn.prepareStatement(GET_ELENCO_CV);
 
         ResultSet rs = new DBHandler().select(chiediLista.toString());
 
@@ -262,7 +266,6 @@ public class DataManager {
                     )
             );
         }
-        //TODO: controllare i nomi delle colonne
         return lsCV;
     }
 

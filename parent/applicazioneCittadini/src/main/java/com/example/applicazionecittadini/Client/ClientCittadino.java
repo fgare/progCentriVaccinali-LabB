@@ -68,7 +68,7 @@ public class ClientCittadino extends Thread {
     public boolean nuovoEventoAvverso(EventoAvverso e) {
         try {
             return server.registraEventoAvverso(e);
-        } catch(RemoteException e) {
+        } catch(RemoteException ex) {
             return false;
         }
     }

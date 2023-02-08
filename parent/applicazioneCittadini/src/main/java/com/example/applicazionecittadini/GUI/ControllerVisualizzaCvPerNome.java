@@ -41,13 +41,14 @@ public class ControllerVisualizzaCvPerNome {
 
             tableView.getColumns().addAll(colonnaNomeCV, colonnaIndirizzoCV, colonnaTipologia);
 
-            /*ObservableList<CentroVaccinale> listaCv = FXCollections.observableArrayList();
-            listaCv.add(new CentroVaccinale(tFcercaCV.toString(), new Indirizzo("Via", "pippo18", (short) 1, "comune", "AO", "66666"), CentroVaccinale.Tipologia.HUB));
+            ObservableList<CentroVaccinale> listaCv = FXCollections.observableArrayList();
+            ArrayList<CentroVaccinale> listaRisultato = (ArrayList<CentroVaccinale>) ClientCittadino.getInstance().ricercaCVperNome(tFcercaCV.getText());
+            for(CentroVaccinale c: listaRisultato) {
+                listaCv.add(c);
+            }
+
             tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-            tableView.setItems(listaCv);*/
-
-            ArrayList listaRisultato = ClientCittadino.getInstance().ricercaCVperNome(); //TODO inserire stringa di ricerca
-
+            tableView.setItems(listaCv);
 
             //TODO metodo per visualizzare nella list view i cv
             //TODO CV da cliccare
