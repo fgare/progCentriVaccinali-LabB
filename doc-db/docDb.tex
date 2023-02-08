@@ -1,12 +1,38 @@
-\usepackage[a4paper,titlepage]{article}
+\documentclass[a4paper,titlepage]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[italian]{babel}
 
+\usepackage{verbatim}
+\usepackage[hidelinks]{hyperref}
+\usepackage{minted}
+
+\usepackage{caption}
+\captionsetup{font=small}
+
+\title{{\Huge \textbf{Tatum Vaccini}}\\
+	Documentazione tecnica}
+\author{
+	\begin{tabular}{rcl}
+		Garegnani Federico & 746789 & VA\\
+		Rossi Giorgio & 746571 & VA\\
+		Canali Luca & 744802 & VA\\
+		Callegari Pietro & 746568 & VA\\
+		Invernizzi Daniele & 746484 & VA\\
+	\end{tabular}
+}
+\date{3 febbraio 2023}
 
 \begin{document}
+	\maketitle
 	
+	\tableofcontents
+	\pagebreak
 	
+	\input{introDb.tex}
+	\input{schemaLogico.tex}
+	\input{schemaER.tex}
+	\input{SQLImpl.tex}
 	
 	
 \end{document}

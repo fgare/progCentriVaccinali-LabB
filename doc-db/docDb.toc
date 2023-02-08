@@ -1,0 +1,6 @@
+\babel@toc {italian}{}\relax 
+\babel@toc {italian}{}\relax 
+\contentsline {section}{\numberline {1}Introduzione}{2}{section.1}%
+\contentsline {section}{\numberline {2}Schema logico}{2}{section.2}%
+\contentsline {section}{\numberline {3}Schema ER}{2}{section.3}%
+\contentsline {section}{\numberline {4}Implementazione SQL}{2}{section.4}%
