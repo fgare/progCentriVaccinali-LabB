@@ -109,10 +109,6 @@ public class ServerImpl extends Thread implements ServerInterface {
 
     @Override
     public synchronized boolean accessoCentroVaccinale(String username, String password) throws RemoteException {
-        try {
-
-        } catch(SQLException e) {
-            return false;
-        }
+        return false;
     }
 }
