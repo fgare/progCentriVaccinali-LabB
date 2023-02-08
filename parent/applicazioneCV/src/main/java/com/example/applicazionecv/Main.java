@@ -11,6 +11,12 @@ import java.io.IOException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
+/**
+ * Classe principale che estende la classe Application di JavaFX e serve come punto di ingresso per l'applicazione.
+ * Contiene il metodo start, che viene chiamato quando viene avviata l'applicazione, e il metodo main,
+ * che viene utilizzato per avviare l'applicazione.
+ */
+
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {

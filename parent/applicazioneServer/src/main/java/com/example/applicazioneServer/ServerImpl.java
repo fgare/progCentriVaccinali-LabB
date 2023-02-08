@@ -9,13 +9,24 @@ import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
 import java.util.List;
 
-//TODO FARE JAVADOC
+/**
+ * Questa classe implementa un server remoto per un'applicazione Java.
+ * Estende la classe Thread e implementa l'interfaccia ServerInterface.
+ */
 public class ServerImpl extends Thread implements ServerInterface {
     private final short REGISTRYPORT = 1099;
     private final short SERVERPORT = 1100;
 
+    /**
+     * Costruttore della classe
+     * @throws RemoteException
+     */
     public ServerImpl() throws RemoteException {}
 
+    /**
+     * Metodo privato che pubblica l'oggetto remoto sulla rete.
+     * @throws RemoteException se si verifica un errore durante la pubblicazione dell'oggetto.
+     */
     private void pubblica() throws RemoteException {
         ServerInterface stub = (ServerInterface) UnicastRemoteObject.exportObject(this, SERVERPORT);
         Registry registro = LocateRegistry.createRegistry(REGISTRYPORT);
@@ -23,11 +34,24 @@ public class ServerImpl extends Thread implements ServerInterface {
         System.out.println("com.example.applicazioneServer.Server pronto");
     }
 
+    /**
+     * Questo metodo viene eseguito quando il thread viene avviato.
+     * Chiama il metodo pubblica() per pubblicare l'oggetto remoto sulla rete.
+     * In caso di errore durante l'avvio del server, stampa un messaggio di errore.
+     */
     public void run(){
         try {
             pubblica();
         }catch (RemoteException e){System.out.println("Errore nell'avvio del server");}
     }
+
+    /**
+     * Questo metodo registra un centro vaccinale nel database.
+     * Utilizza il DataManager per registrare il centro vaccinale nel database.
+     * @param c Il centro vaccinale da registrare nel database.
+     * @return true se la registrazione è avvenuta con successo, false altrimenti.
+     * @throws RemoteException se si verifica un errore durante la chiamata remota.
+     */
 
     @Override
     public synchronized boolean registraCentroVaccinale(CentroVaccinale c) throws RemoteException {
@@ -43,12 +67,23 @@ public class ServerImpl extends Thread implements ServerInterface {
         return true;
     }
 
+    /**
+     * Questo metodo rimuove un centro vaccinale dal database.
+     * @param c Il centro vaccinale da rimuovere dal database.
+     * @throws RemoteException se si verifica un errore durante la chiamata remota.
+     */
     @Override
     public synchronized boolean rimuoviCentroVaccinale(CentroVaccinale c) throws RemoteException {
         System.out.println("Rimosso centro vaccinale > " + c.toString());
         return false;
     }
 
+    /**
+    *Questo metodo sincronizzato registra una vaccinazione per un paziente in un determinato centro vaccinale.
+    *@param c Il centro vaccinale in cui è stata effettuata la vaccinazione.
+    *@param v La vaccinazione da registrare.
+    *@return true se la registrazione è andata a buon fine, false altrimenti.
+    */
     @Override
     public synchronized boolean aggiungiDoseAPaziente(CentroVaccinale c, Vaccinazione v) throws RemoteException {
         try {
@@ -61,6 +96,13 @@ public class ServerImpl extends Thread implements ServerInterface {
         return true;
     }
 
+    /**
+     *Questo metodo restituisce una lista di centri vaccinali che corrispondono alla stringa di ricerca fornita.
+     *La stringa di ricerca viene utilizzata per filtrare i centri vaccinali presenti nel database.
+     *@param ricerca stringa di ricerca per filtrare i centri vaccinali.
+     *@return una lista di oggetti CentroVaccinale che corrisponde alla stringa di ricerca fornita.
+     *@throws RemoteException in caso di errore nella comunicazione remota.
+     */
     @Override
     public synchronized List<CentroVaccinale> getElencoCentriVaccinali(String ricerca) throws RemoteException {
         List<CentroVaccinale> ls;
@@ -74,6 +116,13 @@ public class ServerImpl extends Thread implements ServerInterface {
         }
     }
 
+    /**
+     * Questo metodo restituisce una lista di centri vaccinali filtrati per comune e tipologia.
+     * @param comune Il nome del comune per il quale filtrare la lista dei centri vaccinali
+     * @param tipologia La tipologia di centro vaccinale per il quale filtrare la lista
+     * @return La lista di centri vaccinali filtrati per comune e tipologia, oppure null in caso di errore
+     * @throws RemoteException in caso di errore nella comunicazione remota
+     */
     public synchronized List<CentroVaccinale> getListaCvComuneTipologia(String comune, String tipologia) throws RemoteException {
         List<CentroVaccinale> ls;
         try {
@@ -85,6 +134,12 @@ public class ServerImpl extends Thread implements ServerInterface {
         return ls;
     }
 
+    /**
+     * Questo metodo permette di registrare un nuovo cittadino nel sistema.
+     * @param c l'oggetto Cittadino che rappresenta il cittadino da registrare
+     * @return true se la registrazione è avvenuta con successo, false altrimenti.
+     * @throws RemoteException in caso di problemi di connessione remota.
+     */
     @Override
     public synchronized boolean registraCittadino(Cittadino c) throws RemoteException {
         try {
@@ -97,6 +152,12 @@ public class ServerImpl extends Thread implements ServerInterface {
         return true;
     }
 
+    /**
+     *Questo metodo consente di registrare un nuovo evento avverso.
+     *@param ea L'evento avverso da registrare
+     *@return true se l'evento è stato registrato con successo, false altrimenti
+     *@throws RemoteException In caso di problemi di connessione remota
+     */
     @Override
     public synchronized boolean registraEventoAvverso(EventoAvverso ea) throws RemoteException {
         try {
@@ -109,6 +170,12 @@ public class ServerImpl extends Thread implements ServerInterface {
         return true;
     }
 
+    /**
+     *Verifica se l'accesso al centro vaccinale sia possibile con le credenziali fornite.
+     *@param username nome utente per l'accesso
+     *@param password password per l'accesso
+     *@throws RemoteException in caso di problemi di connessione con il server
+     */
     @Override
     public synchronized boolean accessoCentroVaccinale(String username, String password) throws RemoteException {
         return false;
