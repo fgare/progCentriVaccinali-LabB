@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -65,15 +66,11 @@
          </font>
       </Label>
       <PasswordField fx:id="pfPswCittadini" layoutX="369.0" layoutY="217.0" prefHeight="26.0" prefWidth="194.0" promptText="password (min. 8 caratteri)" />
-      <Button fx:id="btSelezionaCV" layoutX="251.0" layoutY="260.0" mnemonicParsing="false" onAction="#prendiCV" prefHeight="6.0" prefWidth="103.0" style="-fx-background-color: #598990;" text="SELEZIONA CV" textFill="WHITE">
+      <Button fx:id="btSelezionaCV" layoutX="199.0" layoutY="260.0" mnemonicParsing="false" onAction="#prendiCV" prefHeight="6.0" prefWidth="103.0" style="-fx-background-color: #598990;" text="SELEZIONA CV" textFill="WHITE">
          <font>
             <Font name="Georgia Pro" size="10.0" />
          </font>
       </Button>
-      <Label layoutX="371.0" layoutY="256.0" prefHeight="26.0" prefWidth="194.0" fx:id="lbCVScelto">
-         <font>
-            <Font name="Georgia Pro" size="14.0" />
-         </font>
-      </Label>
+      <ChoiceBox fx:id="cbSceltaCV" layoutX="318.0" layoutY="256.0" prefHeight="26.0" prefWidth="246.0" />
     </children>
 </AnchorPane>
