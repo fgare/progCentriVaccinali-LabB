@@ -278,7 +278,7 @@ public class DBHandler {
         this.connectDbCv();
         System.out.println("Connessione DB > " + conn.toString());
 
-        Statement stm = conn.createStatement();
+        Statement stm = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         ResultSet rs = stm.executeQuery(query);
 
         while(rs.next()) {
@@ -306,7 +306,6 @@ public class DBHandler {
     public static void main(String[] args) {
         String q = "select * from centro_vaccinale";
         ResultSet rs = null;
-
         try {
             rs = new DBHandler().select(q);
             System.out.println("Numero di tuple > "  + DBHandler.resultSetSize(rs));
