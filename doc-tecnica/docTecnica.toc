@@ -3,26 +3,26 @@
 \contentsline {section}{\numberline {1}Introduzione}{2}{section.1}%
 \contentsline {subsection}{\numberline {1.1}Librerie esterne utilizzate}{2}{subsection.1.1}%
 \contentsline {subsection}{\numberline {1.2}Struttura generale delle classi}{2}{subsection.1.2}%
+\contentsline {paragraph}{Applicazione server}{2}{section*.3}%
+\contentsline {paragraph}{Applicazione centri vaccinali}{2}{section*.4}%
+\contentsline {paragraph}{Applicazione cittadini}{2}{section*.5}%
+\contentsline {paragraph}{Modulo common}{2}{section*.6}%
 \contentsline {section}{\numberline {2}Core classes}{2}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Classi generiche}{3}{subsection.2.1}%
-\contentsline {paragraph}{ServerImpl}{3}{section*.7}%
-\contentsline {paragraph}{DataManager}{3}{section*.8}%
-\contentsline {paragraph}{SWVar}{3}{section*.9}%
-\contentsline {paragraph}{DBHandler}{3}{section*.10}%
-\contentsline {paragraph}{CentroVaccinale}{3}{section*.11}%
-\contentsline {paragraph}{Cittadino}{3}{section*.12}%
-\contentsline {paragraph}{EventoAvverso}{4}{section*.13}%
-\contentsline {paragraph}{Indirizzo}{4}{section*.14}%
-\contentsline {paragraph}{Vaccinazione}{4}{section*.15}%
-\contentsline {subsection}{\numberline {2.2}Interfacce}{4}{subsection.2.2}%
-\contentsline {paragraph}{ServerInterface}{4}{section*.16}%
-\contentsline {subsection}{\numberline {2.3}Classi enumerative}{4}{subsection.2.3}%
-\contentsline {paragraph}{Tipologia}{4}{section*.17}%
-\contentsline {paragraph}{QualeEvento}{4}{section*.18}%
-\contentsline {paragraph}{Identificatore}{5}{section*.19}%
-\contentsline {paragraph}{Vaccino}{5}{section*.20}%
-\contentsline {section}{\numberline {3}UML Diagrams}{5}{section.3}%
-\contentsline {section}{\numberline {4}Database}{5}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Schema logico}{5}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Chiavi esterne}{5}{subsection.4.2}%
-\contentsline {paragraph}{Indirizzo}{5}{section*.27}%
+\contentsline {subsection}{\numberline {2.1}Classi generiche}{4}{subsection.2.1}%
+\contentsline {paragraph}{ServerImpl}{4}{section*.7}%
+\contentsline {paragraph}{DataManager}{4}{section*.8}%
+\contentsline {paragraph}{SWVar}{4}{section*.9}%
+\contentsline {paragraph}{DBHandler}{4}{section*.10}%
+\contentsline {paragraph}{CentroVaccinale}{4}{section*.11}%
+\contentsline {paragraph}{Cittadino}{4}{section*.12}%
+\contentsline {paragraph}{EventoAvverso}{5}{section*.13}%
+\contentsline {paragraph}{Indirizzo}{5}{section*.14}%
+\contentsline {paragraph}{Vaccinazione}{5}{section*.15}%
+\contentsline {subsection}{\numberline {2.2}Interfacce}{5}{subsection.2.2}%
+\contentsline {paragraph}{ServerInterface}{5}{section*.16}%
+\contentsline {subsection}{\numberline {2.3}Classi enumerative}{5}{subsection.2.3}%
+\contentsline {paragraph}{Tipologia}{5}{section*.17}%
+\contentsline {paragraph}{QualeEvento}{5}{section*.18}%
+\contentsline {paragraph}{Identificatore}{6}{section*.19}%
+\contentsline {paragraph}{Vaccino}{6}{section*.20}%
+\contentsline {section}{\numberline {3}UML Diagrams}{6}{section.3}%

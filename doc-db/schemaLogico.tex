@@ -1,1 +1,13 @@
 \section{Schema logico}
+
+	\begin{itemize}
+		\item Centro\_vaccinale(\underline{Nome}, tipologia)
+		
+		\item Cittadino(\underline{CF}, Nome, Cognome, email, Username, Password)
+		
+		\item Vaccinazione(\underline{IDvacc}, \underline{CF\textsuperscript{citt}}, Data, Vaccino)
+		
+		\item EventoAvverso(\underline{IDea}, \underline{ID\textsuperscript{vacc}}, Evento, Intensità)
+	\end{itemize}
+	
+	In questo schema sono state evidenziate in \textbf{\textit{corsivo grassetto}} le chiavi primarie della tabella e in \underline{\textit{corsivo sottolineato}} le chiavi esterne della tabella.
