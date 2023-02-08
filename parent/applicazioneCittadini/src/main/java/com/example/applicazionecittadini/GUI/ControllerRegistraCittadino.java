@@ -16,6 +16,9 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ *Classe che gestisce la finestra di registrazione del cittadino.
+ */
 public class ControllerRegistraCittadino {
     @FXML
     private Label lbCVScelto;
@@ -64,11 +67,21 @@ public class ControllerRegistraCittadino {
     @FXML
     private Button btSelCV;
 
+    /**
+     *Questo metodo gestisce l'evento di chiusura della finestra corrente".
+     *@param event l'evento che ha causato l'esecuzione del metodo
+     *@throws IOException eccezione lanciata in caso di errore nell'apertura della finestra "AccessoCittadino.fxml"
+     */
     public void tornaAccessoCittadini(ActionEvent event) throws IOException {
         UniversalMethods.handleCloseButtonAction(event, btIndietro);
         UniversalMethods.vediFinestra("AccessoCittadino.fxml", "TATUM VACCINI - Richiesta accesso cittadino");
     }
 
+    /**
+     * Questo metodo getsisce la registrazione di un cittadino a sistema
+     * @param s La stringa da verificare.
+     * @return true se la stringa è un palindromo, false altrimenti.
+     */
     public void registraCittadino(ActionEvent event) throws IOException {
         boolean err = false;
         String nomeCittadino, cognomeCittadino, cfCittadino, usernameCittadino, emailCittadino, passwordCittadino, nomeCV;

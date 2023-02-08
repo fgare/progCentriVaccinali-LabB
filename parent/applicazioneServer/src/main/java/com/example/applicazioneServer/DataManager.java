@@ -303,4 +303,24 @@ public class DataManager {
         ResultSet result = dbh.select(ESISTE);
         return result.next();
     }
+
+    public List<EventoAvverso> calcolaMedia() throws SQLException {
+        final String GET_ELENCO_EVENTI =
+                ("SELECT evento, AVG(intensita) AS media_intensita FROM " + SWVar.TAB_EVENTIAVVERSI + " GROUP BY evento");
+
+        List<EventoAvverso> listaEventiAvversi = new ArrayList<>();
+
+        try (ResultSet result = new DBHandler().select(GET_ELENCO_EVENTI)) {
+            while (result.next()) {
+                int id = result.getInt("id");
+                String evento = result.getString("evento");
+                int mediaInt = result.getByte("media_intensita");
+                int id_vacc = result.getInt("ID_vaccino");
+                String note = result.getString("note");
+                listaEventiAvversi.add(new EventoAvverso(id, id_vacc, evento, mediaInt, note));
+            }
+        }
+
+        return listaEventiAvversi;
+    }
 }
