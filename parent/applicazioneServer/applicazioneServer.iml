@@ -19,7 +19,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="postgresql-42.5.3" level="project" />
     <orderEntry type="library" name="lib1" level="application" />
     <orderEntry type="library" name="postgresql-42.5.1" level="application" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:11" level="project" />
@@ -38,5 +37,6 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-engine:5.8.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-engine:1.8.2" level="project" />
     <orderEntry type="library" name="lib" level="application" />
+    <orderEntry type="library" name="postgresql-42.5.3" level="application" />
   </component>
 </module>

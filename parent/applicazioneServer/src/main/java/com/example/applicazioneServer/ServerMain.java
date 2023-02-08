@@ -11,7 +11,7 @@ public class ServerMain {
     public static void main(String[] args) {
         try {
             new ServerImpl().start();
-                DataManager.getInstance(); //inizializza il DB se non esiste
+            DataManager.getInstance(); //inizializza il DB se non esiste
             /*try {
                 //DataManager.getInstance(); //inizializza il DB se non esiste
                 DataManager d = new DataManager();
@@ -25,8 +25,10 @@ public class ServerMain {
                 d.registraCentroVaccinale(cv);
             } catch(SQLException e) {
                 System.out.println("Impossibile creare il database");*/
-        } catch (RemoteException | SQLException e) {
+        } catch (RemoteException e) {
             System.out.println("RemoteException - errore connessione del server");
+        } catch (SQLException e) {
+            System.out.println("SQLException - errore connessione del server");
         }
     }
 }

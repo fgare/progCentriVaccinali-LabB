@@ -23,6 +23,10 @@ public class CentroVaccinale implements Serializable {
     private Indirizzo indirizzo;
     private Tipologia tipologia;
 
+    public CentroVaccinale() {
+
+    }
+
     /**
      * Tipo enumerativo che può assumere tre valori:
      * OSPEDALE, AZIENDA, HUB

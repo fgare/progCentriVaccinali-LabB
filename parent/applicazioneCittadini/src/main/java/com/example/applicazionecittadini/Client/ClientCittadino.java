@@ -35,7 +35,7 @@ public class ClientCittadino extends Thread {
 
     private void connetti() throws RemoteException, NotBoundException {
         Registry registro = LocateRegistry.getRegistry(REGISTRYPORT);
-        ServerInterface server = (ServerInterface) registro.lookup("com.example.applicazioneServer.Server-appCV");
+        server = (ServerInterface) registro.lookup("com.example.applicazioneServer.Server-appCV");
         System.out.println("Connesso al server: " + server.toString());
     }
 
@@ -51,6 +51,7 @@ public class ClientCittadino extends Thread {
 
     public List<CentroVaccinale> ricercaCVperNome(String ricerca) {
         try {
+            System.out.println("sono in ricercaCVxNome");
             return server.getElencoCentriVaccinali(ricerca);
         } catch (RemoteException e) {
             return null;

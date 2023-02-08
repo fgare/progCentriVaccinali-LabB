@@ -2,6 +2,7 @@ package com.example.applicazionecittadini.GUI;
 
 import com.example.applicazionecittadini.Client.ClientCittadino;
 import com.example.common.CentroVaccinale;
+import com.example.common.Indirizzo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,25 +30,23 @@ public class ControllerVisualizzaCvPerNome {
     }
 
     public void cercaCVperNome(ActionEvent event) {
-        CentroVaccinale cv = new CentroVaccinale("centro1");
+        CentroVaccinale cv = new CentroVaccinale();
         try {
             TableView<CentroVaccinale> tableView = new TableView<>();
-            TableColumn colonnaNomeCV = new TableColumn<>("Nome");
+            TableColumn<CentroVaccinale, String> colonnaNomeCV = new TableColumn<>("Nome");
             colonnaNomeCV.setCellValueFactory(new PropertyValueFactory<>(cv.getNome()));
-            TableColumn colonnaIndirizzoCV = new TableColumn<>("Indirizzo centro vaccinale");
+            TableColumn<CentroVaccinale, String> colonnaIndirizzoCV = new TableColumn<>("Indirizzo centro vaccinale");
             colonnaIndirizzoCV.setCellValueFactory(new PropertyValueFactory<>(cv.getIndirizzo().toString()));
-            TableColumn colonnaTipologia = new TableColumn<>("Tipologia centro vaccinale");
-            colonnaTipologia.setCellValueFactory(new PropertyValueFactory<>(cv.getIndirizzo().toString()));
+            TableColumn<CentroVaccinale, String> colonnaTipologia = new TableColumn<>("Tipologia centro vaccinale");
+            colonnaTipologia.setCellValueFactory(new PropertyValueFactory<>(cv.getTipologia().toString()));
 
             tableView.getColumns().addAll(colonnaNomeCV, colonnaIndirizzoCV, colonnaTipologia);
 
             ObservableList<CentroVaccinale> listaCv = FXCollections.observableArrayList();
             ArrayList<CentroVaccinale> listaRisultato = (ArrayList<CentroVaccinale>) ClientCittadino.getInstance().ricercaCVperNome(tFcercaCV.getText());
-            /*for(CentroVaccinale c: listaRisultato) {
+            for(CentroVaccinale c: listaRisultato) {
                 listaCv.add(c);
-            }*/
-
-
+            }
             tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
             tableView.setItems(listaCv);
 
