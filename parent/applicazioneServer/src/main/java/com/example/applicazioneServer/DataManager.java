@@ -184,6 +184,10 @@ public class DataManager {
                         "WHERE nome LIKE '%" + searchString + "%'";
         final String GET_TUTTI_CV = "SELECT * FROM " + SWVar.TAB_CENTRIVACCINALI + " JOIN " + SWVar.TAB_INDIRIZZI + " ON nome=centro_vaccinale;";
 
+        //connessione al database
+        DBHandler handler = new DBHandler();
+        Connection conn = handler.getConnection();
+
         ResultSet rs;
         if(searchString.equals("") || searchString == null) {
             System.out.println("Eseguo query > " + GET_TUTTI_CV);
@@ -193,8 +197,8 @@ public class DataManager {
             rs = new DBHandler().select(GET_ELENCO_CV);
         }
 
-        List<CentroVaccinale> lsCV = new ArrayList<>(DBHandler.resultSetSize(rs));
-        System.out.println("Inizializzo lista di " + lsCV.size() + " elementi");
+        List<CentroVaccinale> lsCV = new ArrayList<>();
+        //System.out.println("Inizializzo lista di " + lsCV.size() + " elementi");
         while(rs.next()) {
             //costruisco prima l'indirizzo
             Indirizzo i = new Indirizzo(
@@ -216,6 +220,8 @@ public class DataManager {
                     )
             );
         }
+
+        handler.disconnect();
         //TODO: controllare i nomi delle colonne
         return lsCV;
     }
@@ -254,8 +260,8 @@ public class DataManager {
                     rs.getString(5),
                     rs.getShort(6),
                     rs.getString(7),
-                    rs.getString("provincia"),
-                    rs.getString("zip")
+                    rs.getString(8),
+                    rs.getString(9)
             );
 
             //costruisco l'oggetto centro vaccinale e lo aggiungo alla lista

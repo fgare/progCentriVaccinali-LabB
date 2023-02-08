@@ -17,7 +17,6 @@ public class Main extends Application {
         try {
             ClientMedico.getInstance().start();
         } catch(RemoteException e) {
-            e.printStackTrace();
             System.out.println("Connessione al server fallita");
         }
         UniversalMethods.vediFinestra("Homepage.fxml", "TATUM VACCINI PER CENTRI VACCINALI - Homepage");

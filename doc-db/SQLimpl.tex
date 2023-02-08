@@ -1,3 +1,30 @@
 \section{Implementazione SQL}
 
+\subsection{Chiavi esterne e integrità referenziale}
+
+	\begin{description}
+		\item[Indirizzo]
+			Presenta una chiave esterna denominata \verb|centro_vaccinale| alla quale è impostata \verb|ON UPDATE CASCADE| e \verb|ON DELETE CASCADE|, questo al fine di mantenere la base di dati in uno stato consistente; vogliamo infatti che alla cancellazione di un centro vaccinale venga eliminato anche il relativo indirizzo.
+		
+		\item[Registrazione]
+			Ha una chiave primaria costituita da due elementi: \verb|(centro_vaccinale,CF)|, entrambi chiavi esterne.
+			Il primo elemento fa riferimento al centro vaccinale in cui avviene la registrazione, meentre il secondo al codice fiscale del cittadino che si è registrato.
+			Entrambi i campi sono ovviamente impostati con \verb|ON UPDATE CASCADE| e \verb|ON DELETE CASCADE| perchè l'eliminazione di uno dei due valori comporterebbe l'impossibilità di effettuare una vaccinazione nel dominio reale e un'inconsistenza logica nel dominio astratto della base di dati.
+			La relazione esistente tra la tabella \verb|centro_vaccinale| e \verb|registrazione| è del tipo \emph{uno a molti}, per ogni centro vaccinale sono infatti permesse molte registrazioni;
+			la relazione tra \verb|cittadino| e \verb|registrazione| è invece \emph{uno a uno}, ogni cittadino è infatti registrato presso un solo centro vaccinale.
+		
+		\item[Vaccinazione]
+			Presenta la chiave esterna \verb|CF_citt| avente come riferimento il codice fiscale nella tabella \verb|cittadino|.
+			Al campo \verb|CF_citt| sono impostati \verb|ON UPDATE CASCADE| e \verb|ON DELETE CASCADE| per le stese ragioni discusse con le tabelle precedenti.
+			La relazione esistente tra \verb|cittadino| e \verb|vaccinazione| è del tipo \emph{uno a molti}, è infatti previsto il caso in cui un cittadino venga sottoposto a diverse vaccinazioni.		
+		
+		\item[EventoAvverso]
+			Presenta una chiave esterna verso la tabella \verb|vaccinazione| nel campo \verb|ID_vaccino| a cui è associato il solito \verb|ON UPDATE CASCADE| e \verb|ON DELETE CASCADE|.
+			Questa tabella tiene traccia di ogni evento avverso generatosi in seguito a una vaccinazione e registrato dal cittadino; per ogni vaccinazione possono essere registrati più eventi avversi, la relazione tra la tabella \verb|vaccinazione| e la tabella \verb|evento_avverso| è quindi del tipo \emph{uno a molti}.
+	\end{description}
+
+\subsection{Creazione tabelle}
+
+	Riportiamo di seguito le istruzione per la creazione delle tabelle all'interno del database.
+
 	\input{createTable.tex}

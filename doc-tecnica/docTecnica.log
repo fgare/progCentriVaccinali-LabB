@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.9.14)  8 FEB 2023 13:49
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.9.14)  8 FEB 2023 21:36
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -557,18 +557,18 @@ been already used, duplicate ignored
 l.36 	
        [1] (./introduzione.tex (./gerarchiaClassi.tex
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 4
-1.
+9.
 
 (c:/texlive/2022/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 ))) (./coreClasses.tex
-[2]
+[2] [3]
 Overfull \hbox (23.4137pt too wide) in paragraph at lines 13--14
 []\T1/cmr/m/n/10 All'avvio del pro-gram-ma la pri-ma clas-se ad es-se-re istan-
 zia-ta è pro-prio [][]\T1/cmtt/m/n/10 ServerImpl[]\T1/cmr/m/n/10 ,
  []
 
-[3]
+[4]
 Overfull \hbox (39.32895pt too wide) in paragraph at lines 54--55
 [][][]\T1/cmtt/m/n/10 identificatore []\T1/cmr/m/n/10 ri-fe-ri-men-to a un og-g
 et-to del-la clas-se enu-me-ra-ti-va [][]\T1/cmtt/m/n/10 Identificatore 
@@ -587,120 +587,75 @@ t/m/n/10 linfoadenopatia[]\T1/cmr/m/n/10 , [][]\T1/cmtt/m/n/10 tachicardia[]\T1
 /cmr/m/n/10 , [][]\T1/cmtt/m/n/10 crisi ipertensiva[]\T1/cmr/m/n/10 . 
  []
 
-[4]) (./umlDiagrams.tex
-<./img/Server.png, id=101, 595.5048pt x 779.0706pt>
-File: ./img/Server.png Graphic file (type png)
-<use ./img/Server.png>
-Package pdftex.def Info: ./img/Server.png  used on input line 8.
-(pdftex.def)             Requested size: 448.50105pt x 586.75037pt.
-
-
-LaTeX Warning: Float too large for page by 9.75037pt on input line 11.
-
-<./img/UseCaseCentriVaccinali.png, id=102, 536.2434pt x 261.6174pt>
+[5]) (./umlDiagrams.tex
+<./img/UseCaseCentriVaccinali.png, id=97, 536.2434pt x 261.6174pt>
 File: ./img/UseCaseCentriVaccinali.png Graphic file (type png)
 <use ./img/UseCaseCentriVaccinali.png>
-Package pdftex.def Info: ./img/UseCaseCentriVaccinali.png  used on input line 1
-4.
+Package pdftex.def Info: ./img/UseCaseCentriVaccinali.png  used on input line 7
+.
 (pdftex.def)             Requested size: 345.0pt x 168.32077pt.
-<./img/UseCaseCittadino.png, id=103, 646.8165pt x 310.761pt>
+<./img/UseCaseCittadino.png, id=98, 646.8165pt x 310.761pt>
 File: ./img/UseCaseCittadino.png Graphic file (type png)
 <use ./img/UseCaseCittadino.png>
-Package pdftex.def Info: ./img/UseCaseCittadino.png  used on input line 19.
+Package pdftex.def Info: ./img/UseCaseCittadino.png  used on input line 12.
 (pdftex.def)             Requested size: 345.0pt x 165.75049pt.
-<./img/StateMachineDiagramCentroVaccinale.png, id=104, 448.7967pt x 158.994pt>
+<./img/StateMachineDiagramCentroVaccinale.png, id=99, 448.7967pt x 158.994pt>
 File: ./img/StateMachineDiagramCentroVaccinale.png Graphic file (type png)
 <use ./img/StateMachineDiagramCentroVaccinale.png>
 Package pdftex.def Info: ./img/StateMachineDiagramCentroVaccinale.png  used on 
-input line 24.
+input line 17.
 (pdftex.def)             Requested size: 345.0pt x 122.22438pt.
-<./img/StateMachineDiagramCittadini.png, id=105, 518.1759pt x 205.9695pt>
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<./img/StateMachineDiagramCittadini.png, id=100, 518.1759pt x 205.9695pt>
 File: ./img/StateMachineDiagramCittadini.png Graphic file (type png)
 <use ./img/StateMachineDiagramCittadini.png>
 Package pdftex.def Info: ./img/StateMachineDiagramCittadini.png  used on input 
-line 29.
+line 22.
 (pdftex.def)             Requested size: 345.0pt x 137.1377pt.
-<./img/CentriVaccinaliDB.png, id=106, 591.8913pt x 296.307pt>
-File: ./img/CentriVaccinaliDB.png Graphic file (type png)
-<use ./img/CentriVaccinaliDB.png>
-Package pdftex.def Info: ./img/CentriVaccinaliDB.png  used on input line 34.
-(pdftex.def)             Requested size: 345.0pt x 172.71269pt.
-) (./database.tex (./createTable.tex
-\openout3 = `docTecnica.pyg'.
 
- (./_minted-docTecnica/default.pygstyle)
-(./_minted-docTecnica/8762626527800F87204118FDD857E46EEF6DA5646BBD1235F44252DC7
-409415D.pygtex
-LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 2.
-)
-Package hyperref Info: bookmark level for unknown listing defaults to 0 on inpu
-t line 9.
-\openout3 = `docTecnica.pyg'.
+LaTeX Warning: `h' float specifier changed to `ht'.
 
+<./img/Server.png, id=101, 595.5048pt x 779.0706pt>
+File: ./img/Server.png Graphic file (type png)
+<use ./img/Server.png>
+Package pdftex.def Info: ./img/Server.png  used on input line 31.
+(pdftex.def)             Requested size: 448.50105pt x 586.75037pt.
 
-(./_minted-docTecnica/DBAFFB6B3F3BF008E9CBCD3E5749F888EF6DA5646BBD1235F44252DC7
-409415D.pygtex)
-\openout3 = `docTecnica.pyg'.
+LaTeX Warning: Float too large for page by 9.75037pt on input line 34.
 
-
-(./_minted-docTecnica/0C1D5E25FE18A264034099F6E04B9790EF6DA5646BBD1235F44252DC7
-409415D.pygtex)
-\openout3 = `docTecnica.pyg'.
-
-
-(./_minted-docTecnica/1969F82F4EE3357D349B15244C3A7D02EF6DA5646BBD1235F44252DC7
-409415D.pygtex)
-\openout3 = `docTecnica.pyg'.
-
-
-(./_minted-docTecnica/5AEFDA8976D0954123624143FA58C54EEF6DA5646BBD1235F44252DC7
-409415D.pygtex)
-\openout3 = `docTecnica.pyg'.
-
-
-(./_minted-docTecnica/3BC25F2E97CDCF3582A3E26082D439AFEF6DA5646BBD1235F44252DC7
-409415D.pygtex))) [5] [6] [7] [8 <./img/Server.png (PNG copy)>] [9 <./img/UseCa
-seCentriVaccinali.png (PNG copy)> <./img/UseCaseCittadino.png (PNG copy)> <./im
-g/StateMachineDiagramCentroVaccinale.png (PNG copy)>] [10 <./img/StateMachineDi
-agramCittadini.png (PNG copy)> <./img/CentriVaccinaliDB.png (PNG copy)>]
-(./docTecnica.aux)
-
-Package rerunfilecheck Warning: File `docTecnica.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `docTecnica.out':
-(rerunfilecheck)             Before: C291E18D2395746E516E37EEA955B292;1340
-(rerunfilecheck)             After:  8273D5D8B2641D111D46FFB0D7B806EF;1471.
-runsystem(del docTecnica.pyg)...executed.
-
+) [6 <./img/UseCaseCentriVaccinali.png (PNG copy)> <./img/UseCaseCittadino.png 
+(PNG copy)>] [7 <./img/StateMachineDiagramCentroVaccinale.png (PNG copy)> <./im
+g/StateMachineDiagramCittadini.png (PNG copy)>] [8 <./img/Server.png (PNG copy)
+>] (./docTecnica.aux)
+Package rerunfilecheck Info: File `docTecnica.out' has not changed.
+(rerunfilecheck)             Checksum: 5FA9B43DC2927A2C5A8D4167CA9FCC98;1131.
  ) 
 Here is how much of TeX's memory you used:
- 16114 strings out of 476855
- 282068 string characters out of 5822299
- 684961 words of memory out of 5000000
- 36960 multiletter control sequences out of 15000+600000
- 482499 words of font info for 52 fonts, out of 8000000 for 9000
+ 15941 strings out of 476855
+ 277173 string characters out of 5822299
+ 676493 words of memory out of 5000000
+ 36833 multiletter control sequences out of 15000+600000
+ 481030 words of font info for 50 fonts, out of 8000000 for 9000
  62 hyphenation exceptions out of 8191
- 75i,12n,117p,414b,692s stack positions out of 10000i,1000n,20000p,200000b,200000s
-{c:/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{c:/texl
-ive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<c:/texlive/2022/
-texmf-dist/fonts/type1/public/cm-super/sfbi1000.pfb><c:/texlive/2022/texmf-dist
-/fonts/type1/public/cm-super/sfbx1000.pfb><c:/texlive/2022/texmf-dist/fonts/typ
-e1/public/cm-super/sfbx1200.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/
-cm-super/sfbx1440.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/cm-super/s
-fbx2488.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm0700.pf
-b><c:/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb><c:/texl
-ive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb><c:/texlive/2022/t
-exmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb><c:/texlive/2022/texmf-dist/
-fonts/type1/public/cm-super/sfrm1728.pfb><c:/texlive/2022/texmf-dist/fonts/type
-1/public/cm-super/sfti1000.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/c
-m-super/sftt1000.pfb>
-Output written on docTecnica.pdf (11 pages, 1324219 bytes).
+ 75i,12n,117p,414b,528s stack positions out of 10000i,1000n,20000p,200000b,200000s
+{c:/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}{c:/tex
+live/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}<c:/texlive/2022/
+texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb><c:/texlive/2022/texmf-dist
+/fonts/type1/public/cm-super/sfbx1200.pfb><c:/texlive/2022/texmf-dist/fonts/typ
+e1/public/cm-super/sfbx1440.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/
+cm-super/sfbx2488.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/cm-super/s
+frm0900.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pf
+b><c:/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb><c:/texl
+ive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb><c:/texlive/2022/t
+exmf-dist/fonts/type1/public/cm-super/sfti1000.pfb><c:/texlive/2022/texmf-dist/
+fonts/type1/public/cm-super/sftt1000.pfb>
+Output written on docTecnica.pdf (9 pages, 1086641 bytes).
 PDF statistics:
- 223 PDF objects out of 1000 (max. 8388607)
- 177 compressed objects within 2 object streams
- 55 named destinations out of 1000 (max. 500000)
- 111 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 182 PDF objects out of 1000 (max. 8388607)
+ 143 compressed objects within 2 object streams
+ 42 named destinations out of 1000 (max. 500000)
+ 90 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -82,7 +82,7 @@ public class DBHandler {
      * Metodo che termina la connessione al database
      * @throws SQLException
      */
-    private void disconnect() throws SQLException {
+    public void disconnect() throws SQLException {
         conn.close();
     }
 

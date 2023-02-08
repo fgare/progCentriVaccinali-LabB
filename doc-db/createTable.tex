@@ -1,4 +1,4 @@
-\begin{listing}[t]
+\begin{listing}[h]
 	\begin{minted}{sql}
 CREATE TABLE centro_vaccinale (
 	nome VARCHAR(255),
@@ -9,7 +9,7 @@ CREATE TABLE centro_vaccinale (
 \caption{Codice per la creazione della tabella CentriVaccinali}
 \end{listing}
 
-\begin{listing}[t]
+\begin{listing}[h]
 	\begin{minted}{sql}
 CREATE TABLE Indirizzo (
 	id_ind SERIAL PRIMARY KEY,
@@ -28,7 +28,7 @@ CREATE TABLE Indirizzo (
 \caption{Codice per la creazione della tabella Indirizzi}
 \end{listing}
 
-\begin{listing}[t]
+\begin{listing}[h]
 	\begin{minted}{sql}
 CREATE TABLE Registrazione (
 	centro_vaccinale VARCHAR(255) REFERENCES centro_vaccinale
@@ -44,7 +44,7 @@ CREATE TABLE Registrazione (
 \caption{Codice per la creazione della tabella Registrazione}
 \end{listing}
 
-\begin{listing}[t]
+\begin{listing}[h]
 	\begin{minted}{sql}
 CREATE TABLE cittadino (
 	CF CHAR(16),
@@ -59,7 +59,7 @@ CREATE TABLE cittadino (
 \caption{Codice per la creazione della tabella Cittadini}
 \end{listing}
 
-\begin{listing}[t]
+\begin{listing}[h]
 	\begin{minted}{sql}
 CREATE TABLE Vaccinazione (
 	ID_vaccino SERIAL PRIMARY KEY,
@@ -74,7 +74,7 @@ CREATE TABLE Vaccinazione (
 \caption{Codice per la creazione della tabella Vaccinazioni}
 \end{listing}
 
-\begin{listing}[t]
+\begin{listing}[h]
 	\begin{minted}{sql}
 CREATE TABLE EventoAvverso (
 	ID_ea SERIAL PRIMARY KEY,
