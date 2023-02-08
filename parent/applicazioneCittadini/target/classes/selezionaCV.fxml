@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.applicazionecittadini.GUI.ControllerRegistraCittadino">
+   <children>
+      <TableView layoutX="26.0" layoutY="31.0" prefHeight="278.0" prefWidth="548.0">
+        <columns>
+          <TableColumn prefWidth="163.199951171875" text="nome" />
+          <TableColumn prefWidth="240.800048828125" text="indirizzo" />
+            <TableColumn prefWidth="144.800048828125" text="tipologia" />
+        </columns>
+      </TableView>
+       <Button fx:id="btSelCVxCittadino" layoutX="26.0" layoutY="317.0" mnemonicParsing="false" onAction="#sceltaCVVaccinazione" prefHeight="30.0" prefWidth="548.0" style="-fx-background-color: #336e77;" text="SELEZIONA" textFill="WHITE" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="26.0">
+           <font>
+               <Font name="Georgia Pro" size="16.0" />
+           </font></Button>
+       <Button fx:id="btIndietro1" layoutX="26.0" layoutY="355.0" mnemonicParsing="false" onAction="#tornaRegistraCittadini" prefHeight="30.0" prefWidth="548.0" style="-fx-background-color: RED;" text="INDIETRO" textFill="WHITE" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="26.0">
+           <font>
+               <Font name="Georgia Pro" size="16.0" />
+           </font>
+       </Button>
+   </children>
+</AnchorPane>
