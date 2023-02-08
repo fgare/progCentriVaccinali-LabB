@@ -26,6 +26,6 @@ public class ControllerVisualizzaCVperComuneTipologia {
 
     public void cercaCVperComuneTipologia(ActionEvent event) {
         //TODO: bisogna raccogliere il valore dei due campi
-        ArrayList<CentroVaccinale> listaRisultato = ClientCittadino.getInstance().ricercaCvNomeTipologia();
+        //ArrayList<CentroVaccinale> listaRisultato = ClientCittadino.getInstance().ricercaCvNomeTipologia();
     }
 }

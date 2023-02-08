@@ -18,6 +18,10 @@ import java.util.regex.Pattern;
 
 public class ControllerRegistraCittadino {
     @FXML
+    private Label lbCVScelto;
+    @FXML
+    private Button btSelCVxCittadino;
+    @FXML
     private Button btSelezionaCV;
     @FXML
     private Label lbNome;
@@ -67,7 +71,7 @@ public class ControllerRegistraCittadino {
 
     public void registraCittadino(ActionEvent event) throws IOException {
         boolean err = false;
-        String nomeCittadino, cognomeCittadino, cfCittadino, usernameCittadino, emailCittadino, passwordCittadino;
+        String nomeCittadino, cognomeCittadino, cfCittadino, usernameCittadino, emailCittadino, passwordCittadino, nomeCV;
         Alert a = new Alert(Alert.AlertType.INFORMATION);
 
         try {
@@ -115,8 +119,9 @@ public class ControllerRegistraCittadino {
                 System.out.println("password errata");
             } else pfPswCittadini.setStyle("-fx-text-fill: green; -fx-border-color: green;");
 
+
             if (!err) {
-                Cittadino c = new Cittadino(nomeCittadino, cognomeCittadino, cfCittadino, usernameCittadino, emailCittadino, passwordCittadino);
+                Cittadino c = new Cittadino(nomeCittadino, cognomeCittadino, cfCittadino, usernameCittadino, emailCittadino, passwordCittadino, nomeCV);
                 ArrayList<CentroVaccinale> tuttiCv = (ArrayList<CentroVaccinale>) ClientCittadino.getInstance().ricercaCVperNome("");
                 //TODO: inserire elementi in tabella --> FARE
                 boolean esito = ClientCittadino.getInstance().nuovoCittadino(c);
@@ -128,6 +133,20 @@ public class ControllerRegistraCittadino {
         } catch (Exception e) {
             System.out.println("ERRORONE!!!");
         }
+    }
+
+    public void prendiCV(ActionEvent event) throws IOException{
+        //TODO apre pagina per selzionare il cv; inserisce codice cv da mandare poi in DB
+        UniversalMethods.vediFinestra("selezionaCV.fxml", "TATUM VACCINI - Scelta centro vaccinale");
+        /*String nome = sceltaCVVaccinazione(event);
+        lbCVScelto.setText(nome);*/
+    }
+
+    public String sceltaCVVaccinazione(ActionEvent event){
+        //nome preso da selezione
+        //CentroVaccinale c = new CentroVaccinale(nome);
+        UniversalMethods.handleCloseButtonAction(event, btSelCVxCittadino);
+        return null;//c.getNome();
     }
 
     private boolean pswCorretta(String str) {
@@ -155,7 +174,7 @@ public class ControllerRegistraCittadino {
     }
 
 
-    public void prendiCV(ActionEvent event) {
-
+    public void tornaRegistraCittadini(ActionEvent event) {
+        UniversalMethods.handleCloseButtonAction(event, btIndietro1);
     }
 }
