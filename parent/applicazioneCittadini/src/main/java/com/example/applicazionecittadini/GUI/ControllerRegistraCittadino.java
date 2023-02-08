@@ -56,6 +56,8 @@ public class ControllerRegistraCittadino {
     @FXML
     private Button btIndietro;
     @FXML
+    private Button btIndietro1;
+    @FXML
     private Button btAvanti;
     @FXML
     private TableView twSelCV;
@@ -69,7 +71,7 @@ public class ControllerRegistraCittadino {
 
     public void registraCittadino(ActionEvent event) throws IOException {
         boolean err = false;
-        String nomeCittadino, cognomeCittadino, cfCittadino, usernameCittadino, emailCittadino, passwordCittadino;
+        String nomeCittadino, cognomeCittadino, cfCittadino, usernameCittadino, emailCittadino, passwordCittadino, nomeCV;
         Alert a = new Alert(Alert.AlertType.INFORMATION);
 
         try {
@@ -119,7 +121,7 @@ public class ControllerRegistraCittadino {
 
 
             if (!err) {
-                Cittadino c = new Cittadino(nomeCittadino, cognomeCittadino, cfCittadino, usernameCittadino, emailCittadino, passwordCittadino);
+                Cittadino c = new Cittadino(nomeCittadino, cognomeCittadino, cfCittadino, usernameCittadino, emailCittadino, passwordCittadino, nomeCV);
                 ArrayList<CentroVaccinale> tuttiCv = (ArrayList<CentroVaccinale>) ClientCittadino.getInstance().ricercaCVperNome("");
                 //TODO: inserire elementi in tabella --> FARE
                 boolean esito = ClientCittadino.getInstance().nuovoCittadino(c);
@@ -135,14 +137,15 @@ public class ControllerRegistraCittadino {
 
     public void prendiCV(ActionEvent event) throws IOException{
         //TODO apre pagina per selzionare il cv; inserisce codice cv da mandare poi in DB
-        UniversalMethods.vediFinestra("selezionaCV", "TATUM VACCINI - Scelta centro vaccinale");
-        String nome = sceltaCVVaccinazione(event);
-        lbCVScelto.setText(nome);
+        UniversalMethods.vediFinestra("selezionaCV.fxml", "TATUM VACCINI - Scelta centro vaccinale");
+        /*String nome = sceltaCVVaccinazione(event);
+        lbCVScelto.setText(nome);*/
     }
 
-    public String sceltaCVVaccinazione(ActionEvent event) {
+    public String sceltaCVVaccinazione(ActionEvent event){
         //nome preso da selezione
-        //CentroVaccinale c= new CentroVaccinale(nome);
+        //CentroVaccinale c = new CentroVaccinale(nome);
+        UniversalMethods.handleCloseButtonAction(event, btSelCVxCittadino);
         return null;//c.getNome();
     }
 
@@ -171,5 +174,7 @@ public class ControllerRegistraCittadino {
     }
 
 
-
+    public void tornaRegistraCittadini(ActionEvent event) {
+        UniversalMethods.handleCloseButtonAction(event, btIndietro1);
+    }
 }

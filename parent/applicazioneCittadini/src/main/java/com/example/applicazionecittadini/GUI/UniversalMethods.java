@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class UniversalMethods {
 
-    public static void handleCloseButtonAction(ActionEvent event, Button bt) {
+    public static void handleCloseButtonAction(ActionEvent event, Button bt) throws NullPointerException{
         Stage stage = (Stage) bt.getScene().getWindow();
         stage.close();
     }
@@ -36,8 +36,9 @@ public class UniversalMethods {
             scene = new Scene(loader.load(), 630, 370);
         else if (res.equals("VisualizzaCVperNome.fxml") || res.equals("VisualizzaCVperComuneTipologia.fxml"))
             scene = new Scene(loader.load(), 800, 600);
+        else if(res.equals("selezionaCV.fxml"))
+            scene = new Scene(loader.load(), 600, 400);
         else scene = new Scene(loader.load(), 600, 400);
-
         Stage stage = new Stage();
         stage.setTitle(tit);
         stage.setScene(scene);
