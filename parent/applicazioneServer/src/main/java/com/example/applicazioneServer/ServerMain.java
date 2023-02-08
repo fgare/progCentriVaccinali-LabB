@@ -8,10 +8,10 @@ import java.rmi.RemoteException;
 import java.sql.SQLException;
 
 public class ServerMain {
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
         try {
             new ServerImpl().start();
-            DataManager.getInstance(); //inizializza il DB se non esiste
+                DataManager.getInstance(); //inizializza il DB se non esiste
             /*try {
                 //DataManager.getInstance(); //inizializza il DB se non esiste
                 DataManager d = new DataManager();
@@ -25,7 +25,7 @@ public class ServerMain {
                 d.registraCentroVaccinale(cv);
             } catch(SQLException e) {
                 System.out.println("Impossibile creare il database");*/
-        } catch (RemoteException e) {
+        } catch (RemoteException | SQLException e) {
             System.out.println("RemoteException - errore connessione del server");
         }
     }

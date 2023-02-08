@@ -43,9 +43,10 @@ public class ControllerVisualizzaCvPerNome {
 
             ObservableList<CentroVaccinale> listaCv = FXCollections.observableArrayList();
             ArrayList<CentroVaccinale> listaRisultato = (ArrayList<CentroVaccinale>) ClientCittadino.getInstance().ricercaCVperNome(tFcercaCV.getText());
-            for(CentroVaccinale c: listaRisultato) {
+            /*for(CentroVaccinale c: listaRisultato) {
                 listaCv.add(c);
-            }
+            }*/
+
 
             tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
             tableView.setItems(listaCv);
