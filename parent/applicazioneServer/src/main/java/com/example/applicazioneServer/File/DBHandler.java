@@ -55,16 +55,6 @@ public class DBHandler {
     public DBHandler() throws SQLException { }
 
     /**
-     * Metodo che istanzia la connessione al database
-     * @throws SQLException
-     */
-    //metodo che instanzia la connessione al server (la istanzia al DB standard postgres, non al databaseCV!)
-    private void connectDBMS() throws SQLException {
-        conn = DriverManager.getConnection(JDBCurl, user, password);
-        System.out.println("Connesso al database postgres");
-    }
-
-    /**
      * Metodo che istanzia la connessione al databaseCV
      * @throws SQLException
      */
@@ -94,35 +84,6 @@ public class DBHandler {
             return connectDbCv();
         }
         return conn;
-    }
-
-    /**
-     * Metodo che inizializza il databaseCV.
-     * Se non esiste viene creato e popolato con le tabelle necessarie
-     *
-     * @throws SQLException
-     */
-    public void initDB() throws SQLException {
-        connectDBMS();
-        String createQuery = "SELECT 1 FROM pg_database WHERE datname = ?";
-        PreparedStatement st = conn.prepareStatement(createQuery);
-        st.setString(1, dbCV);
-        ResultSet rs = st.executeQuery();
-        if(!rs.next()) {
-            createQuery = "CREATE DATABASE " + dbCV;
-            st = conn.prepareStatement(createQuery);
-            st.executeUpdate();
-            disconnect(); //disconnessione dal server
-            connectDbCv(); //conessione al server e al databaseCV
-            createTableCV();
-            createTableCittadino();
-            createTableRegistrazione();
-            createTableIndirizzi();
-            createTableVaccinazioni();
-            createTableVaccinazioniEventiAvversi();
-            System.out.println("Tabelle create");
-        }
-        disconnect();
     }
 
     /**

@@ -32,7 +32,7 @@ public class DataManager {
      * @throws SQLException in caso di errore durante la creazione del database
      */
     public DataManager() throws SQLException {
-        new DBHandler().initDB(); //crea il database nel caso non esistesse
+        new DBHandler().connectDbCv(); //crea il database nel caso non esistesse
     }
 
     /**
