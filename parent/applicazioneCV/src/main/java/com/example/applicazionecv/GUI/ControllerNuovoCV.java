@@ -187,12 +187,22 @@ public class ControllerNuovoCV {
         return m.matches();
     }
 
+    /**
+     *Questo metodo verifica che una stringa rappresenti un numero intero positivo.
+     *@param nc stringa da verificare
+     *@return true se la stringa rappresenta un numero intero positivo, false altrimenti
+     */
     private boolean ncCorretto(String nc) {
         Pattern p = Pattern.compile("[0-9]{1,}");
         Matcher m = p.matcher(nc);
         return m.matches();
     }
 
+    /**
+     *Verifica se una stringa contiene almeno un carattere numerico.
+     *@param strIn stringa da verificare
+     *@return true se la stringa contiene almeno un carattere numerico, false altrimenti
+     */
     private static boolean contieneNumeri(String strIn) {
         for (int i = 0; i < strIn.length(); i++) {
             char c = strIn.charAt(i);
@@ -202,6 +212,12 @@ public class ControllerNuovoCV {
         return false;
     }
 
+
+    /**
+     *Verifica se una stringa contiene solo caratteri numerici.
+     *@param strIn stringa da verificare
+     *@return true se la stringa contiene solo caratteri numerici, false altrimenti
+     */
     private static boolean contienesoloNumeri(String strIn) {
         for (int i = 0; i < strIn.length(); i++) {
             char c = strIn.charAt(i);

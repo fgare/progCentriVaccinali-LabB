@@ -49,6 +49,10 @@ public class UniversalMethods {
     }
 
 
+    /**
+     *Assegna un identificativo univoco a un elemento.
+     *@return un numero intero casuale compreso tra 0 e 65535
+     */
     public static int assegnaId() {
         Random r = new Random();
         int id = r.nextInt(65536);

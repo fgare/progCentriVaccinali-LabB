@@ -53,8 +53,7 @@ public class DataManager {
 
     /**
      * Questo metodo registra un nuovo centro vaccinale nel database.
-     * Utilizza una istanza di DBHandler per ottenere una connessione al database e
-     * prepara le query necessarie per l'inserimento dei dati del centro vaccinale e
+     * Prepara le query necessarie per l'inserimento dei dati del centro vaccinale e
      * dei suoi dettagli di indirizzo.
      *
      * @param c Centro Vaccinale
@@ -84,8 +83,7 @@ public class DataManager {
 
     /**
      * Questo metodo registraCittadino serve per registrare un oggetto Cittadino nel database.
-     * Crea una connessione al database con l'aiuto di DBHandler e prepara una query per inserire
-     * un nuovo cittadino con i dati forniti dall'oggetto Cittadino.
+     * Prepara una query per inserireun nuovo cittadino con i dati forniti dall'oggetto Cittadino.
      *
      * @param c Cittadino
      * @return boolean
@@ -154,8 +152,7 @@ public class DataManager {
 
     /**
      * Questo codice registra un evento avverso in un database.
-     * Utilizza la classe DBHandler per gestire la connessione al database
-     * e l'esecuzione delle query.
+     * Prepara le query necessarie per l'inserimento dei dati
      *
      * @param ea Evento Avverso
      * @return boolean
