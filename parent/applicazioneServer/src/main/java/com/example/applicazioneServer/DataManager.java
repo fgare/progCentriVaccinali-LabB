@@ -76,7 +76,14 @@ public class DataManager {
                 i.ZIP() + "','" +
                 c.getNome() + "');";
 
-        return new DBHandler().insert(NUOVO_CV);
+        DBHandler handler = new DBHandler();
+        Connection conn = handler.connectDbCv();
+
+        boolean esito = handler.insert(NUOVO_CV);
+
+        handler.disconnect();
+
+        return esito;
     }
 
     /**
@@ -96,7 +103,11 @@ public class DataManager {
                         c.getPsw() + "','" +
                         c.getCentroVaccinale() + "');";
 
-        return new DBHandler().insert(NUOVO_CITTADINO);
+        DBHandler handler = new DBHandler();
+        Connection conn = handler.connectDbCv();
+        boolean esito = handler.insert(NUOVO_CITTADINO);
+        handler.disconnect();
+        return esito;
     }
 
     /**
@@ -128,15 +139,13 @@ public class DataManager {
         verificaCittadino.setString(2,"'" + v.getCfCitt() + "'");
         verificaCittadino.setString(3,"'" + c.getNome() + "'");
 
-        ResultSet rs = new DBHandler().select(VERIFICA_CITTADINO_REGISTRATO);
+        ResultSet rs = handler.select(VERIFICA_CITTADINO_REGISTRATO);
 
         //Bisognerebbe controllare che il cv esista, ma lo è per forza perchè il cittadino si è precedentemente registrato
 
         if(DBHandler.resultSetSize(rs) == 0) return false; //termina segnalando che l'operazione non è riuscita
 
         //riapro la connessione che viene chiusa nella chiamata al metodo select
-        handler = new DBHandler();
-        conn = handler.getConnection();
 
         PreparedStatement nuovaVaccinazione = conn.prepareStatement(NUOVA_VACCINAZIONE);
         nuovaVaccinazione.setString(1,SWVar.TAB_VACCINAZIONI);
@@ -145,7 +154,9 @@ public class DataManager {
         nuovaVaccinazione.setDate(3,new Date(dataVac.getYear(),dataVac.getMonthValue(),dataVac.getDayOfMonth()));
         nuovaVaccinazione.setString(3,v.getVaccino().name());
 
-        return handler.insert(NUOVA_VACCINAZIONE);
+        boolean esito = handler.insert(NUOVA_VACCINAZIONE);
+        handler.disconnect();
+        return esito;
     }
 
     /**
@@ -164,7 +175,11 @@ public class DataManager {
                 ea.getSeverita() + "','" +
                 ea.getNota() + "');";
 
-        return new DBHandler().insert(NUOVO_EVENTOAVVERSO);
+        DBHandler handler = new DBHandler();
+        Connection conn = handler.connectDbCv();
+        boolean esito = handler.insert(NUOVO_EVENTOAVVERSO);
+        handler.disconnect();
+        return esito;
     }
 
     /**
@@ -189,10 +204,10 @@ public class DataManager {
         ResultSet rs;
         if(searchString.equals("") || searchString == null) {
             System.out.println("Eseguo query > " + GET_TUTTI_CV);
-            rs = new DBHandler().select(GET_TUTTI_CV);
+            rs = handler.select(GET_TUTTI_CV);
         } else {
             System.out.println("Eseguo query > " + GET_ELENCO_CV);
-            rs = new DBHandler().select(GET_ELENCO_CV);
+            rs = handler.select(GET_ELENCO_CV);
         }
 
         List<CentroVaccinale> lsCV = new ArrayList<>();
@@ -271,6 +286,8 @@ public class DataManager {
                     )
             );
         }
+
+        handler.disconnect();
         return lsCV;
     }
 
@@ -291,7 +308,11 @@ public class DataManager {
                 indirizzo.provincia() + "','" +
                 indirizzo.ZIP() + "');";
 
-        return new DBHandler().insert(NUOVO_INDIRIZZO);
+        DBHandler handler = new DBHandler();
+        Connection conn = handler.connectDbCv();
+        boolean esito = handler.insert(NUOVO_INDIRIZZO);
+        handler.disconnect();
+        return esito;
     }
 
     /**
@@ -306,8 +327,11 @@ public class DataManager {
                 "SELECT 1 FROM " + SWVar.TAB_CITTADINI +
                         " WHERE username = '" + username + "' AND password = '" + password + "'";
         DBHandler dbh = new DBHandler();
+        Connection conn = dbh.connectDbCv();
         ResultSet result = dbh.select(ESISTE);
-        return result.next();
+        boolean esito = result.next();
+        dbh.disconnect();
+        return esito;
     }
 
     public List<EventoAvverso> calcolaMedia() throws SQLException {
@@ -316,7 +340,10 @@ public class DataManager {
 
         List<EventoAvverso> listaEventiAvversi = new ArrayList<>();
 
-        try (ResultSet result = new DBHandler().select(GET_ELENCO_EVENTI)) {
+        DBHandler handler = new DBHandler();
+        Connection conn = handler.connectDbCv();
+
+        try (ResultSet result = handler.select(GET_ELENCO_EVENTI)) {
             while (result.next()) {
                 int id = result.getInt("id");
                 String evento = result.getString("evento");
@@ -326,6 +353,8 @@ public class DataManager {
                 //listaEventiAvversi.add(new EventoAvverso(id, id_vacc, evento, mediaInt, note));
             }
         }
+
+        handler.disconnect();
 
         return listaEventiAvversi;
     }

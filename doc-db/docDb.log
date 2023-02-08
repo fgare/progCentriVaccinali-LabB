@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.9.14)  8 FEB 2023 22:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.9.14)  8 FEB 2023 22:36
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -477,18 +477,27 @@ been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.32 	
-       [1] (./introDb.tex) (./schemaLogico.tex) (./schemaER.tex
+       [1] (./introDb.tex) (./schemaLogico.tex
+Overfull \hbox (63.62378pt too wide) in paragraph at lines 12--13
+[]\T1/cmr/m/n/10 indirizzo($[]$,Identificatore,Localizzazione,Civico,Provincia,
+centro_vaccinale$[]$) 
+ []
+
+) (./schemaER.tex
 <./img/ER.png, id=52, 539.01375pt x 392.21532pt>
 File: ./img/ER.png Graphic file (type png)
 <use ./img/ER.png>
 Package pdftex.def Info: ./img/ER.png  used on input line 7.
 (pdftex.def)             Requested size: 345.0pt x 251.04088pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
 <./img/ER-ristr.png, id=54, 554.07pt x 379.4175pt>
 File: ./img/ER-ristr.png Graphic file (type png)
 <use ./img/ER-ristr.png>
 Package pdftex.def Info: ./img/ER-ristr.png  used on input line 13.
 (pdftex.def)             Requested size: 345.0pt x 236.24956pt.
-
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
@@ -511,13 +520,13 @@ Overfull \hbox (1.23611pt too wide) in paragraph at lines 7--8
 10 centro_vaccinale []\T1/cmr/m/n/10 al-la qua-
  []
 
-[2 <./img/ER.png>]
+
 Overfull \hbox (59.265pt too wide) in paragraph at lines 10--15
 []\T1/cmr/m/n/10 Ha una chia-ve pri-ma-ria co-sti-tui-ta da due ele-men-ti: [][
 ]\T1/cmtt/m/n/10 (centro_vaccinale,CF)[]\T1/cmr/m/n/10 ,
  []
 
-[3 <./img/ER-ristr.png>] (./createTable.tex
+[2] (./createTable.tex
 \openout3 = `docDb.pyg'.
 
  (./_minted-docDb/default.pygstyle)
@@ -528,6 +537,10 @@ LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
 )
 Package hyperref Info: bookmark level for unknown listing defaults to 0 on inpu
 t line 9.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
 \openout3 = `docDb.pyg'.
 
 
@@ -568,37 +581,37 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-)) [4 <./img/CentriVaccinaliDB.png (PNG copy)>] [5] [6] (./docDb.aux)
+)) [3 <./img/ER.png>] [4 <./img/ER-ristr.png> <./img/CentriVaccinaliDB.png (PNG
+ copy)>] [5] [6] (./docDb.aux)
 Package rerunfilecheck Info: File `docDb.out' has not changed.
 (rerunfilecheck)             Checksum: 5F3090A76EF16BCDAFBB07CCEA31ACFD;858.
 runsystem(del docDb.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 14744 strings out of 476855
- 257000 string characters out of 5822299
- 651248 words of memory out of 5000000
- 35667 multiletter control sequences out of 15000+600000
- 482499 words of font info for 52 fonts, out of 8000000 for 9000
+ 14741 strings out of 476855
+ 256965 string characters out of 5822299
+ 652248 words of memory out of 5000000
+ 35665 multiletter control sequences out of 15000+600000
+ 482164 words of font info for 51 fonts, out of 8000000 for 9000
  62 hyphenation exceptions out of 8191
  75i,12n,81p,478b,651s stack positions out of 10000i,1000n,20000p,200000b,200000s
-{c:/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{c:/texl
-ive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<c:/texlive/2022/
-texmf-dist/fonts/type1/public/cm-super/sfbi1000.pfb><c:/texlive/2022/texmf-dist
-/fonts/type1/public/cm-super/sfbx1000.pfb><c:/texlive/2022/texmf-dist/fonts/typ
-e1/public/cm-super/sfbx1200.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/
-cm-super/sfbx1440.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/cm-super/s
-fbx2488.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm0700.pf
-b><c:/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb><c:/texl
-ive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb><c:/texlive/2022/t
-exmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb><c:/texlive/2022/texmf-dist/
-fonts/type1/public/cm-super/sfrm1728.pfb><c:/texlive/2022/texmf-dist/fonts/type
-1/public/cm-super/sfti1000.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/c
-m-super/sftt1000.pfb>
-Output written on docDb.pdf (7 pages, 463323 bytes).
+{c:/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}<c:/texl
+ive/2022/texmf-dist/fonts/type1/public/cm-super/sfbi1000.pfb><c:/texlive/2022/t
+exmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb><c:/texlive/2022/texmf-dist/
+fonts/type1/public/cm-super/sfbx1200.pfb><c:/texlive/2022/texmf-dist/fonts/type
+1/public/cm-super/sfbx1440.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/c
+m-super/sfbx2488.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sf
+rm0700.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb
+><c:/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb><c:/texli
+ve/2022/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb><c:/texlive/2022/te
+xmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb><c:/texlive/2022/texmf-dist/f
+onts/type1/public/cm-super/sfti1000.pfb><c:/texlive/2022/texmf-dist/fonts/type1
+/public/cm-super/sftt1000.pfb>
+Output written on docDb.pdf (7 pages, 464323 bytes).
 PDF statistics:
- 158 PDF objects out of 1000 (max. 8388607)
- 117 compressed objects within 2 object streams
+ 154 PDF objects out of 1000 (max. 8388607)
+ 114 compressed objects within 2 object streams
  23 named destinations out of 1000 (max. 500000)
  64 words of extra memory for PDF output out of 10000 (max. 10000000)
 
