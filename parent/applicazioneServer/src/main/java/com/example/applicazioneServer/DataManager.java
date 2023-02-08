@@ -288,6 +288,13 @@ public class DataManager {
         return new DBHandler().insert(NUOVO_INDIRIZZO);
     }
 
+    /**
+     * Questo metodo verifica se le credenziali inserite corrispondono a quelle di un utente registrato.
+     * @param username nome utente inserito
+     * @param password password inserita
+     * @return true se le credenziali sono valide, false altrimenti
+     * @throws SQLException in caso di errore di connessione al database
+     */
     public boolean login(String username, String password) throws SQLException {
         final String ESISTE =
                 "SELECT 1 FROM " + SWVar.TAB_CITTADINI +
