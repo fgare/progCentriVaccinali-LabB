@@ -317,7 +317,7 @@ public class DataManager {
                 int mediaInt = result.getByte("media_intensita");
                 int id_vacc = result.getInt("ID_vaccino");
                 String note = result.getString("note");
-                listaEventiAvversi.add(new EventoAvverso(id, id_vacc, evento, mediaInt, note));
+                //listaEventiAvversi.add(new EventoAvverso(id, id_vacc, evento, mediaInt, note));
             }
         }
 
