@@ -18,7 +18,7 @@
             <Font name="Georgia Pro" size="16.0" />
         </font>
     </Button>
-    <TextField layoutX="384.0" layoutY="113.0" prefHeight="26.0" prefWidth="344.0" promptText="nome centro vaccinale da cercare">
+    <TextField fx:id="tFcercaCV" layoutX="384.0" layoutY="113.0" prefHeight="26.0" prefWidth="344.0" promptText="nome centro vaccinale da cercare">
         <font>
             <Font name="Georgia Pro" size="16.0" />
         </font>

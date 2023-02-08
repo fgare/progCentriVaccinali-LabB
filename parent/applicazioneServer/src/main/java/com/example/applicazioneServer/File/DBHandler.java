@@ -11,6 +11,7 @@ import com.example.applicazioneServer.ServerImpl;
 import com.example.common.CentroVaccinale;
 import com.example.common.Indirizzo;
 
+import javax.xml.transform.Result;
 import java.rmi.RemoteException;
 import java.sql.*;
 
@@ -275,8 +276,15 @@ public class DBHandler {
      */
     public ResultSet select(String query) throws SQLException {
         this.connectDbCv();
-        PreparedStatement ps = conn.prepareStatement(query);
-        ResultSet rs = ps.executeQuery(query);
+        System.out.println("Connessione DB > " + conn.toString());
+
+        Statement stm = conn.createStatement();
+        ResultSet rs = stm.executeQuery(query);
+
+        while(rs.next()) {
+            rs.toString();
+        }
+
         conn.close();
         return rs;
     }
@@ -296,24 +304,14 @@ public class DBHandler {
     }
 
     public static void main(String[] args) {
+        String q = "select * from centro_vaccinale";
+        ResultSet rs = null;
+
         try {
-            new ServerImpl().start();
-            try {
-                //DataManager.getInstance(); //inizializza il DB se non esiste
-                DataManager d = new DataManager();
-                DBHandler dbh = new DBHandler();
-                dbh.initDB();
-                dbh.connectDbCv();
-                Indirizzo.Identificatore id = Indirizzo.Identificatore.VIA;
-                Indirizzo i = new Indirizzo(id, "liberta",(short) 1,"Varese","VA", String.valueOf(21100));
-                CentroVaccinale.Tipologia tip = CentroVaccinale.Tipologia.HUB;
-                CentroVaccinale cv = new CentroVaccinale("San Ambrogio",i, tip);
-                d.registraCentroVaccinale(cv);
-            } catch(SQLException e) {
-                System.out.println("Impossibile creare il database");
-            }
-        } catch(RemoteException e) {
-            System.out.println("RemoteException - errore connessione del server");
+            rs = new DBHandler().select(q);
+            System.out.println("Numero di tuple > "  + DBHandler.resultSetSize(rs));
+        } catch (SQLException e) {
+            System.out.println("SQLException");
         }
     }
 }

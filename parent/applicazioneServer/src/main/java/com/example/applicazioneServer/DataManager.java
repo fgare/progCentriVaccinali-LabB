@@ -180,38 +180,39 @@ public class DataManager {
      */
     public List<CentroVaccinale> elencoCentriVaccinali(String searchString) throws SQLException {
         final String GET_ELENCO_CV =
-                "SELECT * FROM " + SWVar.TAB_CENTRIVACCINALI + " JOIN  " + SWVar.TAB_INDIRIZZI + " ON " + SWVar.TAB_CENTRIVACCINALI + ".nome = " + SWVar.TAB_INDIRIZZI + ".centro_vaccinale " +
-                        "WHERE " + SWVar.TAB_CENTRIVACCINALI + ".nome LIKE '%" + searchString + "%'";
-        final String GET_TUTTI_CV = "SELECT * FROM " + SWVar.TAB_CENTRIVACCINALI + " JOIN  " + SWVar.TAB_INDIRIZZI + " ON " + SWVar.TAB_CENTRIVACCINALI + ".nome = " + SWVar.TAB_INDIRIZZI + ".centro_vaccinale;";
+                "SELECT * FROM " + SWVar.TAB_CENTRIVACCINALI + " JOIN " + SWVar.TAB_INDIRIZZI + " ON nome = centro_vaccinale " +
+                        "WHERE nome LIKE '%" + searchString + "%'";
+        final String GET_TUTTI_CV = "SELECT * FROM " + SWVar.TAB_CENTRIVACCINALI + " JOIN " + SWVar.TAB_INDIRIZZI + " ON nome=centro_vaccinale;";
 
-        DBHandler handler = new DBHandler();
-        Connection conn = handler.getConnection();
-
-        PreparedStatement chiediLista;
-        if(searchString == null || searchString.equals("")) {
-            chiediLista = conn.prepareStatement(GET_TUTTI_CV);
-        } else chiediLista = conn.prepareStatement(GET_ELENCO_CV);
-
-        ResultSet rs = new DBHandler().select(chiediLista.toString());
+        ResultSet rs;
+        if(searchString.equals("") || searchString == null) {
+            System.out.println("Eseguo query > " + GET_TUTTI_CV);
+            rs = new DBHandler().select(GET_TUTTI_CV);
+        } else {
+            System.out.println("Eseguo query > " + GET_ELENCO_CV);
+            rs = new DBHandler().select(GET_ELENCO_CV);
+        }
 
         List<CentroVaccinale> lsCV = new ArrayList<>(DBHandler.resultSetSize(rs));
+        System.out.println("Inizializzo lista di " + lsCV.size() + " elementi");
         while(rs.next()) {
             //costruisco prima l'indirizzo
             Indirizzo i = new Indirizzo(
-                    rs.getInt("id"),
-                    Indirizzo.Identificatore.parse(rs.getString("identificatore")),
-                    rs.getString("nome"),
-                    rs.getShort("civico"),
-                    rs.getString("citta"),
-                    rs.getString("provincia"),
-                    rs.getString("zip")
+                    rs.getInt(3),
+                    Indirizzo.Identificatore.parse(rs.getString(4)),
+                    rs.getString(5),
+                    rs.getShort(6),
+                    rs.getString(7),
+                    rs.getString(8),
+                    rs.getString(9)
             );
+            System.out.println("Indirizzo letto = " + i.toString());
             //costruisco l'oggetto centro vaccinale e lo aggiungo alla lista
             lsCV.add(
                     new CentroVaccinale(
-                        rs.getString("nome"),
+                        rs.getString(1),
                         i,
-                        CentroVaccinale.Tipologia.parse(rs.getString("tipologia"))
+                        CentroVaccinale.Tipologia.parse(rs.getString(2))
                     )
             );
         }
@@ -248,11 +249,11 @@ public class DataManager {
         while(rs.next()) {
             //costruisco prima l'indirizzo
             Indirizzo i = new Indirizzo(
-                    rs.getInt("id"),
-                    Indirizzo.Identificatore.parse(rs.getString("identificatore")),
-                    rs.getString("nome"),
-                    rs.getShort("civico"),
-                    rs.getString("citta"),
+                    rs.getInt("3"),
+                    Indirizzo.Identificatore.parse(rs.getString(4)),
+                    rs.getString(5),
+                    rs.getShort(6),
+                    rs.getString(7),
                     rs.getString("provincia"),
                     rs.getString("zip")
             );
@@ -260,9 +261,9 @@ public class DataManager {
             //costruisco l'oggetto centro vaccinale e lo aggiungo alla lista
             lsCV.add(
                     new CentroVaccinale(
-                            rs.getString("nome"),
+                            rs.getString(1),
                             i,
-                            CentroVaccinale.Tipologia.parse(rs.getString("tipologia"))
+                            CentroVaccinale.Tipologia.parse(rs.getString(2))
                     )
             );
         }

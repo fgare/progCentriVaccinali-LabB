@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class ControllerVisualizzaCvPerNome {
@@ -30,29 +31,44 @@ public class ControllerVisualizzaCvPerNome {
     }
 
     public void cercaCVperNome(ActionEvent event) {
+        System.out.println("Bottone premuto cercaCV");
         CentroVaccinale cv = new CentroVaccinale();
+
+        //se il campo viene lasciato vuoto viene assegnata la stringa vuota
+        if(tFcercaCV.getText().isEmpty()) tFcercaCV.setText("");
+
         try {
-            TableView<CentroVaccinale> tableView = new TableView<>();
-            TableColumn<CentroVaccinale, String> colonnaNomeCV = new TableColumn<>("Nome");
-            colonnaNomeCV.setCellValueFactory(new PropertyValueFactory<>(cv.getNome()));
-            TableColumn<CentroVaccinale, String> colonnaIndirizzoCV = new TableColumn<>("Indirizzo centro vaccinale");
-            colonnaIndirizzoCV.setCellValueFactory(new PropertyValueFactory<>(cv.getIndirizzo().toString()));
-            TableColumn<CentroVaccinale, String> colonnaTipologia = new TableColumn<>("Tipologia centro vaccinale");
-            colonnaTipologia.setCellValueFactory(new PropertyValueFactory<>(cv.getTipologia().toString()));
-
-            tableView.getColumns().addAll(colonnaNomeCV, colonnaIndirizzoCV, colonnaTipologia);
-
             ObservableList<CentroVaccinale> listaCv = FXCollections.observableArrayList();
             ArrayList<CentroVaccinale> listaRisultato = (ArrayList<CentroVaccinale>) ClientCittadino.getInstance().ricercaCVperNome(tFcercaCV.getText());
+            if(listaRisultato == null) System.out.println("listaRisultato = NULL");
+            System.out.println("testo ricercato : " + tFcercaCV.getText());
             for(CentroVaccinale c: listaRisultato) {
                 listaCv.add(c);
             }
-            tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+            //crea tabella
+            TableView<CentroVaccinale> tableView = new TableView<>();
+
             tableView.setItems(listaCv);
+
+            //crea colonne
+            TableColumn<CentroVaccinale, String> colonnaNomeCV = new TableColumn<>("Nome");
+            TableColumn<CentroVaccinale, String> colonnaIndirizzoCV = new TableColumn<>("Indirizzo");
+            TableColumn<CentroVaccinale, String> colonnaTipologia = new TableColumn<>("Tipologia");
+
+            colonnaNomeCV.setCellValueFactory(new PropertyValueFactory<>("nome"));
+            colonnaIndirizzoCV.setCellValueFactory(new PropertyValueFactory<>("indirizzo"));
+            colonnaTipologia.setCellValueFactory(new PropertyValueFactory<>("tipologia"));
+
+            tableView.getColumns().addAll(colonnaNomeCV, colonnaIndirizzoCV, colonnaTipologia);
+
+            tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
             //TODO metodo per visualizzare nella list view i cv
             //TODO CV da cliccare
-        }catch (Exception e){}
+        }catch (RemoteException e){
+            System.out.println("RemoteException cercaCVperNome");
+        }
     }
 
 

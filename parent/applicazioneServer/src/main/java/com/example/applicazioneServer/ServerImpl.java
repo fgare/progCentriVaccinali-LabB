@@ -65,11 +65,12 @@ public class ServerImpl extends Thread implements ServerInterface {
         List<CentroVaccinale> ls;
         try {
             ls = DataManager.getInstance().elencoCentriVaccinali(ricerca);
+            System.out.println("Restituita lista di " + ls.size() + " centri vaccinali");
+            return ls;
         } catch(SQLException e) {
+            System.out.println("Restituisco NULL");
             return null;
         }
-        System.out.println("Restituita lista di " + ls.size() + " centri vaccinali");
-        return ls;
     }
 
     public synchronized List<CentroVaccinale> getListaCvComuneTipologia(String comune, String tipologia) throws RemoteException {
