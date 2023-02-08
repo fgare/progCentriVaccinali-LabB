@@ -277,13 +277,14 @@ public class DataManager {
      * @throws SQLException
      */
     public boolean registraIndirizzo(Indirizzo indirizzo) throws SQLException {
-        final String NUOVO_INDIRIZZO = "INSERT INTO " + SWVar.TAB_INDIRIZZI + "(identificatore, localizzazione, civico, provincia, centro_vaccinale) " +
+        final String NUOVO_INDIRIZZO = "INSERT INTO " + SWVar.TAB_INDIRIZZI + "(identificatore, localizzazione, civico, comune, provincia, ZIP) " +
                 " VALUES('" +
                 indirizzo.identificatore() + "','" +
                 indirizzo.localizzazione() + "','" +
                 indirizzo.numCivico() + "','" +
                 indirizzo.comune() + "','" +
-                indirizzo.provincia() + "');";
+                indirizzo.provincia() + "','" +
+                indirizzo.ZIP() + "');";
 
         return new DBHandler().insert(NUOVO_INDIRIZZO);
     }
