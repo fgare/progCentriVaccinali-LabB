@@ -119,9 +119,9 @@ public class ControllerRegistraCittadino {
                 System.out.println("password errata");
             } else pfPswCittadini.setStyle("-fx-text-fill: green; -fx-border-color: green;");
 
-
             if (!err) {
-                Cittadino c = new Cittadino(nomeCittadino, cognomeCittadino, cfCittadino, usernameCittadino, emailCittadino, passwordCittadino, nomeCV);
+                prendiCV(event);
+                Cittadino c = new Cittadino(nomeCittadino, cognomeCittadino, cfCittadino, usernameCittadino, emailCittadino, passwordCittadino, lbCVScelto.getText());
                 ArrayList<CentroVaccinale> tuttiCv = (ArrayList<CentroVaccinale>) ClientCittadino.getInstance().ricercaCVperNome("");
                 //TODO: inserire elementi in tabella --> FARE
                 boolean esito = ClientCittadino.getInstance().nuovoCittadino(c);

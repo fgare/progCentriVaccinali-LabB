@@ -71,7 +71,7 @@ public class Cittadino implements Serializable {
         this(-1,nome,cognome,cf,email,psw,cv);
     }
 
-    public Cittadino() {
+    public Cittadino(String nomeCittadino, String cognomeCittadino, String cfCittadino, String usernameCittadino, String emailCittadino, String passwordCittadino, String text) {
         this(-1,null, null, null, null, null, null);
     }
 
