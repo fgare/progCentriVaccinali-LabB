@@ -3,6 +3,7 @@ package com.example.applicazionecittadini.GUI;
 import com.example.applicazionecittadini.Client.ClientCittadino;
 import com.example.common.CentroVaccinale;
 import com.example.common.Cittadino;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -20,26 +21,11 @@ import java.util.regex.Pattern;
  *Classe che gestisce la finestra di registrazione del cittadino.
  */
 public class ControllerRegistraCittadino {
+
     @FXML
-    private Label lbCVScelto;
+    private ChoiceBox cbSceltaCV;
     @FXML
     private Button btSelCVxCittadino;
-    @FXML
-    private Button btSelezionaCV;
-    @FXML
-    private Label lbNome;
-    @FXML
-    private Label lbPsw;
-    @FXML
-    private Label lbEmail;
-    @FXML
-    private Label lbUser;
-    @FXML
-    private Label lbCF;
-    @FXML
-    private Label lbCognome;
-    @FXML
-    private ImageView logoApp;
     @FXML
     private Label lbErr;
     @FXML
@@ -62,8 +48,6 @@ public class ControllerRegistraCittadino {
     private Button btIndietro1;
     @FXML
     private Button btAvanti;
-    @FXML
-    private TableView twSelCV;
     @FXML
     private Button btSelCV;
 
@@ -131,11 +115,15 @@ public class ControllerRegistraCittadino {
                 pfPswCittadini.setStyle("-fx-text-fill: red; -fx-border-color: red;");
                 System.out.println("password errata");
             } else pfPswCittadini.setStyle("-fx-text-fill: green; -fx-border-color: green;");
-
+            if(cbSceltaCV.getItems().isEmpty()){
+                err = true;
+                lbErr.setText("CAMPI ERRATI!");
+                cbSceltaCV.setStyle("-fx-text-fill: red; -fx-border-color: red;");
+                System.out.println("cv non selezionato");
+            } else cbSceltaCV.setStyle("-fx-text-fill: green; -fx-border-color: green;");
 
             if (!err) {
-                Cittadino c = new Cittadino(nomeCittadino, cognomeCittadino, cfCittadino, usernameCittadino, emailCittadino, passwordCittadino, lbCVScelto.getText());
-                ArrayList<CentroVaccinale> tuttiCv = (ArrayList<CentroVaccinale>) ClientCittadino.getInstance().ricercaCVperNome("");
+                Cittadino c = new Cittadino(nomeCittadino, cognomeCittadino, cfCittadino, usernameCittadino, emailCittadino, passwordCittadino, cbSceltaCV.getItems().toString());
                 //TODO: inserire elementi in tabella --> FARE
                 boolean esito = ClientCittadino.getInstance().nuovoCittadino(c);
                 System.out.printf("Inserimento cittadino: esito %b per cittadino >\n %s\n",esito,c.toString());
@@ -149,17 +137,12 @@ public class ControllerRegistraCittadino {
     }
 
     public void prendiCV(ActionEvent event) throws IOException{
-        //TODO apre pagina per selzionare il cv; inserisce codice cv da mandare poi in DB
-        UniversalMethods.vediFinestra("selezionaCV.fxml", "TATUM VACCINI - Scelta centro vaccinale");
-        /*String nome = sceltaCVVaccinazione(event);
-        lbCVScelto.setText(nome);*/
-    }
-
-    public String sceltaCVVaccinazione(ActionEvent event){
-        //nome preso da selezione
-        //CentroVaccinale c = new CentroVaccinale(nome);
-        UniversalMethods.handleCloseButtonAction(event, btSelCVxCittadino);
-        return null;//c.getNome();
+        //carica nella BOX tutti i centri vaccinali
+        ObservableList<CentroVaccinale>  listaCV = null;
+        ArrayList<CentroVaccinale> tuttiCv = (ArrayList<CentroVaccinale>) ClientCittadino.getInstance().ricercaCVperNome("");
+        for (int i=0; i<tuttiCv.size(); i++){
+            listaCV.add(0, tuttiCv.get(i));
+        }
     }
 
     private boolean pswCorretta(String str) {
