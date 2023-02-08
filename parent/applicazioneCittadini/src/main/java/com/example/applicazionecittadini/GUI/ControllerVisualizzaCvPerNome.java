@@ -31,7 +31,8 @@ public class ControllerVisualizzaCvPerNome {
     }
 
     public void cercaCVperNome(ActionEvent event) {
-        System.out.println("Bottone premuto cercaCV");
+        //TODO DA RIFARE CON LA BOX
+      /*  System.out.println("Bottone premuto cercaCV");
         CentroVaccinale cv = new CentroVaccinale();
 
         //se il campo viene lasciato vuoto viene assegnata la stringa vuota
@@ -68,7 +69,7 @@ public class ControllerVisualizzaCvPerNome {
             //TODO CV da cliccare
         }catch (RemoteException e){
             System.out.println("RemoteException cercaCVperNome");
-        }
+        }*/
     }
 
 
