@@ -144,6 +144,14 @@ public class Cittadino implements Serializable {
         this.cf = cf;
     }
 
+    public String username() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     /**
      * Metodo getEmail di Vaccinato: restituisce l'email del cittadino.
      *
