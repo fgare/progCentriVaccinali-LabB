@@ -68,7 +68,7 @@ public class ControllerRegistraCittadino {
      */
     public void registraCittadino(ActionEvent event) throws IOException {
         boolean err = false;
-        String nomeCittadino, cognomeCittadino, cfCittadino, usernameCittadino, emailCittadino, passwordCittadino, nomeCV;
+        String nomeCittadino, cognomeCittadino, cfCittadino, usernameCittadino, emailCittadino, passwordCittadino;
         Alert a = new Alert(Alert.AlertType.INFORMATION);
 
         try {
@@ -141,7 +141,7 @@ public class ControllerRegistraCittadino {
         ObservableList<CentroVaccinale>  listaCV = null;
         ArrayList<CentroVaccinale> tuttiCv = (ArrayList<CentroVaccinale>) ClientCittadino.getInstance().ricercaCVperNome("");
         for (int i=0; i<tuttiCv.size(); i++){
-            listaCV.add(0, tuttiCv.get(i));
+            listaCV.add(i, tuttiCv.get(i));
         }
     }
 

@@ -8,17 +8,11 @@ package com.example.common;
 import java.io.Serializable;
 
 /**
- * Classe del package Data che implementa l'interfaccia Fop per memorizzare e gestire tutte le informazioni
- * riguardanti i vaccinati
+ * Classe che implementa l'interfaccia Serializable per memorizzare e gestire tutte le informazioni
+ * riguardanti i Cittadini
  *
- * @author Giorgio Rossi
- * <p>
- * /@see Fop
- * /@see DataManager
- * /@see SWVar
- * /@see Vaccinazione
- * /@see CentroVaccinale
- * @since 12/12/2021
+ * @see Vaccinazione
+ * @see CentroVaccinale
  */
 
 public class Cittadino implements Serializable {
@@ -33,8 +27,8 @@ public class Cittadino implements Serializable {
     private String nomeCentroVaccinale;
 
     /**
-     * Metodo costruttore di Vaccinato per lettura da file.
-     * Alloca le variabili di Vaccinato compresi l'id e la vaccinazione.
+     * Metodo costruttore di Cittadino per lettura da file.
+     * Alloca le variabili di Cittadino compresi l'id e la vaccinazione.
      *
      * @param id      int: id del cittadino
      * @param nome    String: nome del cittadino
@@ -56,7 +50,7 @@ public class Cittadino implements Serializable {
     }
 
     /**
-     * Metodo costruttore di Vaccinato per creare nuovi cittadini
+     * Metodo costruttore di Cittadino per creare nuovi cittadini
      * senza vaccinazione.
      * Inizializza l'id del cittadino
      * Alloca le variabili di Vaccinato.
@@ -78,7 +72,7 @@ public class Cittadino implements Serializable {
     }
 
     /**
-     * Metodo getId di Vaccinato: restituisce l'id del cittadino.
+     * Metodo getId di Cittadino: restituisce l'id del cittadino.
      *
      * @return int: id del cittadino
      */
@@ -91,7 +85,7 @@ public class Cittadino implements Serializable {
     }
 
     /**
-     * Metodo getNome di Vaccinato: restituisce il nome del cittadino.
+     * Metodo getNome di Cittadino: restituisce il nome del cittadino.
      *
      * @return String: nome del cittadino
      */
@@ -100,7 +94,7 @@ public class Cittadino implements Serializable {
     }
 
     /**
-     * Metodo setNome di Vaccinato: setta il nome del cittadino.
+     * Metodo setNome di Cittadino: setta il nome del cittadino.
      *
      * @param n String: nome del cittadino
      */
@@ -109,7 +103,7 @@ public class Cittadino implements Serializable {
     }
 
     /**
-     * Metodo getCognome di Vaccinato: restituisce il cognome del cittadino.
+     * Metodo getCognome di Cittadino: restituisce il cognome del cittadino.
      *
      * @return String: cognome del cittadino
      */
@@ -118,7 +112,7 @@ public class Cittadino implements Serializable {
     }
 
     /**
-     * Metodo setCognome di Vaccinato: setta il cognome del cittadino.
+     * Metodo setCognome di Cittadino: setta il cognome del cittadino.
      *
      * @param cn String: nome del cittadino
      */
@@ -127,7 +121,7 @@ public class Cittadino implements Serializable {
     }
 
     /**
-     * Metodo getCf di Vaccinato: restituisce il codice fiscale del cittadino.
+     * Metodo getCf di Cittadino: restituisce il codice fiscale del cittadino.
      *
      * @return String: codice fiscale del cittadino
      */
@@ -136,7 +130,7 @@ public class Cittadino implements Serializable {
     }
 
     /**
-     * Metodo setCf di Vaccinato: setta il codice fiscale del cittadino.
+     * Metodo setCf di Cittadino: setta il codice fiscale del cittadino.
      *
      * @param cf String: nome del cittadino
      */
@@ -153,7 +147,7 @@ public class Cittadino implements Serializable {
     }
 
     /**
-     * Metodo getEmail di Vaccinato: restituisce l'email del cittadino.
+     * Metodo getEmail di Cittadino: restituisce l'email del cittadino.
      *
      * @return String: email del cittadino
      */
@@ -162,7 +156,7 @@ public class Cittadino implements Serializable {
     }
 
     /**
-     * Metodo setEmail di Vaccinato: setta l'email del cittadino.
+     * Metodo setEmail di Cittadino: setta l'email del cittadino.
      * @param e String: email del cittadino
      */
     public void setEmail(String e) {
@@ -170,7 +164,7 @@ public class Cittadino implements Serializable {
     }
 
     /**
-     * Metodo getPsw di Vaccinato: restituisce la password del cittadino.
+     * Metodo getPsw di Cittadino: restituisce la password del cittadino.
      *
      * @return String: password del cittadino
      */
@@ -179,7 +173,7 @@ public class Cittadino implements Serializable {
     }
 
     /**
-     * Metodo setPsw di Vaccinato: setta la password del cittadino.
+     * Metodo setPsw di Cittadino: setta la password del cittadino.
      *
      * @param p String: password del cittadino
      */
@@ -188,7 +182,7 @@ public class Cittadino implements Serializable {
     }
 
     /**
-     * Metodo getCentroVaccinale di Vaccinato: restituisce il centro vaccinale dove il cittadino si è registrato.
+     * Metodo getCentroVaccinale di v: restituisce il centro vaccinale dove il cittadino si è registrato.
      *
      * @return CentroVaccinale: oggetto di tipo CentroVaccinale
      * @see CentroVaccinale
@@ -199,7 +193,7 @@ public class Cittadino implements Serializable {
 
     @Override
     public String toString() {
-        return "Vaccinato {ID = " + id + " nome= '" + nome + " " + cognome + "', Centro vaccinale= '" + nomeCentroVaccinale + "'}";
+        return "Cittadino {ID = " + id + " nome= '" + nome + " " + cognome + "', Centro vaccinale= '" + nomeCentroVaccinale + "'}";
     }
 
 }

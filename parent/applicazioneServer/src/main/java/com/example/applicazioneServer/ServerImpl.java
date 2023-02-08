@@ -9,6 +9,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
 import java.util.List;
 
+//TODO FARE JAVADOC
 public class ServerImpl extends Thread implements ServerInterface {
     private final short REGISTRYPORT = 1099;
     private final short SERVERPORT = 1100;

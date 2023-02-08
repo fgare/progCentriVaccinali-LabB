@@ -7,7 +7,14 @@ import com.example.common.Indirizzo;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 
+/**
+ * Classe Main di applicazioneServer
+ */
 public class ServerMain {
+    /**
+     * Metodo main di ServerMain
+     * @param args
+     */
     public static void main(String[] args) {
         try {
             new ServerImpl().start();

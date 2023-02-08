@@ -8,8 +8,6 @@ package com.example.applicazioneServer;
 /**
  * La classe SWVar contiene costanti che rappresentano i nomi delle tabelle e del database utilizzati nel sistema.
  *
- * @author Luca Canali
- * @author Federico Garegnani
  */
 
 public class SWVar {

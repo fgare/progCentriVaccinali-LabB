@@ -15,8 +15,6 @@ import java.util.List;
 /**
  * Classe responsabile della gestione dei dati all'interno del database.
  *
- * @author Luca Canali
- * @author Federico Garegnani
  */
 
 public class DataManager {

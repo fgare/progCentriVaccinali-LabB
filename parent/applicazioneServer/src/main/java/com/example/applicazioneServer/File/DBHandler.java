@@ -19,7 +19,6 @@ import java.sql.*;
  * Classe gestionale del database per la sua creazione
  * e per la manipolazione delle tabelle
  *
- * @author Luca Canali
  */
 
 public class DBHandler {
