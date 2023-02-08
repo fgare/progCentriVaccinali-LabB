@@ -9,14 +9,13 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
- * Classe del package Data che implementa l'interfaccia Fop per memorizzare e gestire tutte le informazioni
+ * Classe che implementa l'interfaccia Serializable per memorizzare e gestire tutte le informazioni
  * riguardanti le vaccinazioni.
  *
- * @author Giorgio Rossi
- * /@see Vaccinato
+ * @see Cittadino
  * @see Vaccino
  * @see EventoAvverso
- * @since 12/12/2021
+ * @see Serializable
  */
 
 public class Vaccinazione implements Serializable {
@@ -26,6 +25,12 @@ public class Vaccinazione implements Serializable {
     private Vaccino v;
     private String cfCitt;
 
+    /**
+     * Tipo enumerativo che memorizza le tipologie di vaccino.
+     * Può assumere quattro valori:
+     * PFIZER, MODERNA, ASTRAZENECA,JJ
+     *
+     */
     public enum Vaccino implements Serializable {
         PFIZER, MODERNA, ASTRAZENECA, JJ;
 
@@ -44,6 +49,10 @@ public class Vaccinazione implements Serializable {
             }
         }
 
+        /**
+         * @param s String: tipologia di vaccino
+         * @return PFIZER|MODERNA|ASTRAZENECA|JJ;
+         */
         public static Vaccino parse(String s) {
             if(s.equals("PFIZER")) return Vaccino.PFIZER;
             if(s.equals("MODERNA")) return Vaccino.MODERNA;
@@ -121,10 +130,10 @@ public class Vaccinazione implements Serializable {
     }
 
     /**
-     * Metodo getCittadino di Vaccinato: restituisce le informazioni riguardanti il cittadino.
+     * Metodo getCfCitt di Vaccinato: restituisce il codice fiscale del cittadino.
      *
-     * @return Vaccinato: oggetto di tipo Vaccinato
-     * /@see Vaccinato
+     * @return Cittadino: oggetto di tipo Cittadino
+     * @see Cittadino
      */
     public String getCfCitt() {
         return this.cfCitt;
