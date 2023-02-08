@@ -138,11 +138,9 @@ public class ControllerRegistraCittadino {
 
     public void prendiCV(ActionEvent event) throws IOException{
         //carica nella BOX tutti i centri vaccinali
-        ObservableList<CentroVaccinale>  listaCV = null;
+        cbSceltaCV = new ChoiceBox<>();
         ArrayList<CentroVaccinale> tuttiCv = (ArrayList<CentroVaccinale>) ClientCittadino.getInstance().ricercaCVperNome("");
-        for (int i=0; i<tuttiCv.size(); i++){
-            listaCV.add(i, tuttiCv.get(i));
-        }
+        cbSceltaCV.getItems().addAll(tuttiCv);
     }
 
     private boolean pswCorretta(String str) {
