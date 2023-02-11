@@ -53,8 +53,8 @@ public class CentroVaccinale implements Serializable {
          * @return OSPEDALE|AZIENDA|HUB
          */
         public static Tipologia parse(String s) {
-            if(s.equals("OSPEDALIERO")) return Tipologia.OSPEDALE;
-            if(s.equals("AZIENDALE")) return Tipologia.AZIENDA;
+            if(s.equals("OSPEDALE")) return Tipologia.OSPEDALE;
+            if(s.equals("AZIENDA")) return Tipologia.AZIENDA;
             return Tipologia.HUB;
         }
     }

@@ -27,5 +27,5 @@
             <Font name="Georgia Pro" size="16.0" />
         </font>
     </Button>
-   <ChoiceBox layoutX="70.0" layoutY="322.0" prefHeight="26.0" prefWidth="658.0" />
+   <ChoiceBox fx:id="cbSceltaCV" onMouseClicked="#cercaCV" layoutX="70.0" layoutY="322.0" prefHeight="26.0" prefWidth="658.0" />
 </AnchorPane>

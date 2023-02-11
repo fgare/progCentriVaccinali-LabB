@@ -9,12 +9,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class ControllerVisualizzaCvPerNome {
+    @FXML
+    private ChoiceBox cbSceltaCV;
     @FXML
     private Button btCercaCV;
     @FXML
@@ -83,6 +86,16 @@ public class ControllerVisualizzaCvPerNome {
         for(CentroVaccinale c: listaRisultato) {
             System.out.println(c.toString());
         }
+    }
+
+    public void cercaCV(MouseEvent event) throws RemoteException {
+        ArrayList<CentroVaccinale> tuttiCv = (ArrayList<CentroVaccinale>) ClientCittadino.getInstance().ricercaCVperNome(tFcercaCV.getText());
+        //ObservableList<CentroVaccinale> options = FXCollections.observableArrayList(tuttiCv);
+        ObservableList<String> opts = FXCollections.observableArrayList();
+        for(CentroVaccinale c: tuttiCv) {
+            opts.add(c.getNome());
+        }
+        cbSceltaCV.setItems(opts);
     }
 
 
