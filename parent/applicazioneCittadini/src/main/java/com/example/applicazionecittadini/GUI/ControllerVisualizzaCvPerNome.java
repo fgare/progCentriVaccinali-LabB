@@ -70,6 +70,19 @@ public class ControllerVisualizzaCvPerNome {
         }catch (RemoteException e){
             System.out.println("RemoteException cercaCVperNome");
         }*/
+        ArrayList<CentroVaccinale> listaRisultato = new ArrayList<>();
+        try {
+            listaRisultato = (ArrayList<CentroVaccinale>) ClientCittadino.getInstance().ricercaCVperNome(tFcercaCV.getText());
+        } catch (RemoteException e) {
+            System.out.println("RemoteException cercaCVperNome");
+        }
+        if (listaRisultato == null) {
+            System.out.println("Lista vuota");
+            return;
+        }
+        for(CentroVaccinale c: listaRisultato) {
+            System.out.println(c.toString());
+        }
     }
 
 

@@ -96,16 +96,20 @@ public class DataManager {
      */
     public boolean registraCittadino(Cittadino c) throws SQLException {
         final String NUOVO_CITTADINO =
-                "INSERT INTO " + SWVar.TAB_CITTADINI + " VALUES('" + c.getNome() + "','" +
-                        c.getCognome() + "','" +
+                "INSERT INTO " + SWVar.TAB_CITTADINI + " VALUES('" +
                         c.getCf() + "','" +
+                        c.getNome() + "','" +
+                        c.getCognome() + "','" +
                         c.getEmail() + "','" +
                         c.getPsw() + "','" +
-                        c.getCentroVaccinale() + "');";
+                        c.getUsername() + "');";
+        final String INSERISCI_REGISTRAZIONE =
+                "INSERT INTO " + SWVar.TAB_REGISTRAZIONE + " VALUES ('" +
+                        c.getCentroVaccinale() + "', '" +
+                        c.getCf() + "');";
 
         DBHandler handler = new DBHandler();
-        Connection conn = handler.connectDbCv();
-        boolean esito = handler.insert(NUOVO_CITTADINO);
+        boolean esito = handler.insert(NUOVO_CITTADINO + "\n" + INSERISCI_REGISTRAZIONE);
         handler.disconnect();
         return esito;
     }
@@ -199,7 +203,7 @@ public class DataManager {
 
         //connessione al database
         DBHandler handler = new DBHandler();
-        Connection conn = handler.getConnection();
+        handler.connectDbCv();
 
         ResultSet rs;
         if(searchString.equals("") || searchString == null) {
@@ -211,7 +215,10 @@ public class DataManager {
         }
 
         List<CentroVaccinale> lsCV = new ArrayList<>();
-        //System.out.println("Inizializzo lista di " + lsCV.size() + " elementi");
+        System.out.println("Inizializzo arraylist lscv");
+        //rs.last();
+        //System.out.println("Dimensione = " + rs.getRow());
+
         while(rs.next()) {
             //costruisco prima l'indirizzo
             Indirizzo i = new Indirizzo(
@@ -225,17 +232,18 @@ public class DataManager {
             );
             System.out.println("Indirizzo letto = " + i.toString());
             //costruisco l'oggetto centro vaccinale e lo aggiungo alla lista
+            CentroVaccinale c = new CentroVaccinale(
+                    rs.getString(1),
+                    i,
+                    CentroVaccinale.Tipologia.parse(rs.getString(2))
+            );
             lsCV.add(
-                    new CentroVaccinale(
-                        rs.getString(1),
-                        i,
-                        CentroVaccinale.Tipologia.parse(rs.getString(2))
-                    )
+                    c
             );
         }
 
         handler.disconnect();
-        //TODO: controllare i nomi delle colonne
+        System.out.println("Ritorno lista di " + lsCV.size() + " elementi");
         return lsCV;
     }
 
@@ -357,5 +365,13 @@ public class DataManager {
         handler.disconnect();
 
         return listaEventiAvversi;
+    }
+
+    public static void main(String[] args) {
+        try {
+            DataManager.getInstance().elencoCentriVaccinali("");
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

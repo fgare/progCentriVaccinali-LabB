@@ -274,18 +274,11 @@ public class DBHandler {
      * @throws SQLException Se viene sollevata un'eccezione durante l'esecuzione della query
      */
     public ResultSet select(String query) throws SQLException {
-        this.connectDbCv();
+        //this.connectDbCv();
         System.out.println("Connessione DB > " + conn.toString());
 
         Statement stm = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        ResultSet rs = stm.executeQuery(query);
-
-        while(rs.next()) {
-            rs.toString();
-        }
-
-        conn.close();
-        return rs;
+        return stm.executeQuery(query);
     }
 
     /**
@@ -305,9 +298,15 @@ public class DBHandler {
     public static void main(String[] args) {
         String q = "select * from centro_vaccinale";
         ResultSet rs = null;
+
         try {
-            rs = new DBHandler().select(q);
-            System.out.println("Numero di tuple > "  + DBHandler.resultSetSize(rs));
+            DBHandler handler = new DBHandler();
+            handler.connectDbCv();
+
+            rs = handler.select(q);
+            System.out.println("Numero di tuple > " + DBHandler.resultSetSize(rs));
+
+            handler.disconnect();
         } catch (SQLException e) {
             System.out.println("SQLException");
         }

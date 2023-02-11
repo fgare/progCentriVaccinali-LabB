@@ -138,7 +138,7 @@ public class Cittadino implements Serializable {
         this.cf = cf;
     }
 
-    public String username() {
+    public String getUsername() {
         return username;
     }
 

@@ -66,12 +66,13 @@ public class ControllerRegistraCittadino {
 
     /**
      * Questo metodo getsisce la registrazione di un cittadino a sistema
-     * @param s La stringa da verificare.
      * @return true se la stringa è un palindromo, false altrimenti.
      */
     public void registraCittadino(ActionEvent event) throws IOException {
         boolean err = false;
         String nomeCittadino, cognomeCittadino, cfCittadino, usernameCittadino, emailCittadino, passwordCittadino;
+        CentroVaccinale centroScelto = null;
+        String selezioneBox;
         Alert a = new Alert(Alert.AlertType.INFORMATION);
 
         try {
@@ -81,6 +82,7 @@ public class ControllerRegistraCittadino {
             usernameCittadino = tfUserCittadino.getText();
             emailCittadino = tfEmailCittadino.getText();
             passwordCittadino = pfPswCittadini.getText();
+            selezioneBox = (String) cbSceltaCV.getSelectionModel().getSelectedItem();
 
             if (!nomeCorretto(nomeCittadino)) {
                 err = true;
@@ -118,15 +120,17 @@ public class ControllerRegistraCittadino {
                 pfPswCittadini.setStyle("-fx-text-fill: red; -fx-border-color: red;");
                 System.out.println("password errata");
             } else pfPswCittadini.setStyle("-fx-text-fill: green; -fx-border-color: green;");
-            if(cbSceltaCV.getItems().isEmpty()){
+            if(selezioneBox.isEmpty()){
                 err = true;
                 lbErr.setText("CAMPI ERRATI!");
                 cbSceltaCV.setStyle("-fx-text-fill: red; -fx-border-color: red;");
                 System.out.println("cv non selezionato");
-            } else cbSceltaCV.setStyle("-fx-text-fill: green; -fx-border-color: green;");
+            } else {
+                cbSceltaCV.setStyle("-fx-text-fill: green; -fx-border-color: green;");
+            }
 
             if (!err) {
-                Cittadino c = new Cittadino(nomeCittadino, cognomeCittadino, cfCittadino, usernameCittadino, emailCittadino, passwordCittadino, cbSceltaCV.getItems().toString());
+                Cittadino c = new Cittadino(nomeCittadino, cognomeCittadino, cfCittadino, usernameCittadino, emailCittadino, passwordCittadino, selezioneBox);
                 //TODO: inserire elementi in tabella --> FARE
                 boolean esito = ClientCittadino.getInstance().nuovoCittadino(c);
                 System.out.printf("Inserimento cittadino: esito %b per cittadino >\n %s\n",esito,c.toString());
@@ -155,7 +159,8 @@ public class ControllerRegistraCittadino {
     }
 
     private boolean emailCorretta(String str) {
-        Pattern p = Pattern.compile("([0-9a-zA-Z]+)@([0-9a-zA-Z]+).([a-z]{2,3})");
+        Pattern p = Pattern.compile("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@" +
+                    "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$");
         Matcher m = p.matcher(str);
         return m.matches();
     }
@@ -182,7 +187,11 @@ public class ControllerRegistraCittadino {
 
     public void caricaCV(MouseEvent event) throws RemoteException {
         ArrayList<CentroVaccinale> tuttiCv = (ArrayList<CentroVaccinale>) ClientCittadino.getInstance().ricercaCVperNome("");
-        ObservableList<CentroVaccinale> options = FXCollections.observableArrayList(tuttiCv);
-        cbSceltaCV.setItems(options);
+        //ObservableList<CentroVaccinale> options = FXCollections.observableArrayList(tuttiCv);
+        ObservableList<String> opts = FXCollections.observableArrayList();
+        for(CentroVaccinale c: tuttiCv) {
+            opts.add(c.getNome());
+        }
+        cbSceltaCV.setItems(opts);
     }
 }
