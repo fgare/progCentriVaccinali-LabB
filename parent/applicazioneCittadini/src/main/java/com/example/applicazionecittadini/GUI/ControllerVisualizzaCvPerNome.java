@@ -34,45 +34,10 @@ public class ControllerVisualizzaCvPerNome {
     }
 
     public void cercaCVperNome(ActionEvent event) {
-        //TODO DA RIFARE CON LA BOX
-      /*  System.out.println("Bottone premuto cercaCV");
-        CentroVaccinale cv = new CentroVaccinale();
+        Alert a = new Alert(Alert.AlertType.INFORMATION);
+        a.setContentText((String) cbSceltaCV.getSelectionModel().getSelectedItem());
+        a.show();
 
-        //se il campo viene lasciato vuoto viene assegnata la stringa vuota
-        if(tFcercaCV.getText().isEmpty()) tFcercaCV.setText("");
-
-        try {
-            ObservableList<CentroVaccinale> listaCv = FXCollections.observableArrayList();
-            ArrayList<CentroVaccinale> listaRisultato = (ArrayList<CentroVaccinale>) ClientCittadino.getInstance().ricercaCVperNome(tFcercaCV.getText());
-            if(listaRisultato == null) System.out.println("listaRisultato = NULL");
-            System.out.println("testo ricercato : " + tFcercaCV.getText());
-            for(CentroVaccinale c: listaRisultato) {
-                listaCv.add(c);
-            }
-
-            //crea tabella
-            TableView<CentroVaccinale> tableView = new TableView<>();
-
-            tableView.setItems(listaCv);
-
-            //crea colonne
-            TableColumn<CentroVaccinale, String> colonnaNomeCV = new TableColumn<>("Nome");
-            TableColumn<CentroVaccinale, String> colonnaIndirizzoCV = new TableColumn<>("Indirizzo");
-            TableColumn<CentroVaccinale, String> colonnaTipologia = new TableColumn<>("Tipologia");
-
-            colonnaNomeCV.setCellValueFactory(new PropertyValueFactory<>("nome"));
-            colonnaIndirizzoCV.setCellValueFactory(new PropertyValueFactory<>("indirizzo"));
-            colonnaTipologia.setCellValueFactory(new PropertyValueFactory<>("tipologia"));
-
-            tableView.getColumns().addAll(colonnaNomeCV, colonnaIndirizzoCV, colonnaTipologia);
-
-            tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-
-            //TODO metodo per visualizzare nella list view i cv
-            //TODO CV da cliccare
-        }catch (RemoteException e){
-            System.out.println("RemoteException cercaCVperNome");
-        }*/
         ArrayList<CentroVaccinale> listaRisultato = new ArrayList<>();
         try {
             listaRisultato = (ArrayList<CentroVaccinale>) ClientCittadino.getInstance().ricercaCVperNome(tFcercaCV.getText());
