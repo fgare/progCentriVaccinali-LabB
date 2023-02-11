@@ -3,16 +3,19 @@ package com.example.applicazionecittadini.GUI;
 import com.example.applicazionecittadini.Client.ClientCittadino;
 import com.example.common.CentroVaccinale;
 import com.example.common.Cittadino;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Border;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -138,9 +141,11 @@ public class ControllerRegistraCittadino {
 
     public void prendiCV(ActionEvent event) throws IOException{
         //carica nella BOX tutti i centri vaccinali
-        cbSceltaCV = new ChoiceBox<>();
-        ArrayList<CentroVaccinale> tuttiCv = (ArrayList<CentroVaccinale>) ClientCittadino.getInstance().ricercaCVperNome("");
-        cbSceltaCV.getItems().addAll(tuttiCv);
+        UniversalMethods.vediFinestra("selezionaCV.fxml", "TATUM VACCINI - Scelta centro vaccinale");
+        /*cbSceltaCV = new ChoiceBox<>();
+        //ArrayList<CentroVaccinale> tuttiCv = (ArrayList<CentroVaccinale>) ClientCittadino.getInstance().ricercaCVperNome("");
+        ObservableList<String> observableList = FXCollections.observableArrayList("a", "b", "c");
+        cbSceltaCV.setItems(observableList);*/
     }
 
     private boolean pswCorretta(String str) {
@@ -170,5 +175,14 @@ public class ControllerRegistraCittadino {
 
     public void tornaRegistraCittadini(ActionEvent event) {
         UniversalMethods.handleCloseButtonAction(event, btIndietro1);
+    }
+
+    public void sceltaCVVaccinazione(ActionEvent event) {
+    }
+
+    public void caricaCV(MouseEvent event) throws RemoteException {
+        ArrayList<CentroVaccinale> tuttiCv = (ArrayList<CentroVaccinale>) ClientCittadino.getInstance().ricercaCVperNome("");
+        ObservableList<CentroVaccinale> options = FXCollections.observableArrayList(tuttiCv);
+        cbSceltaCV.setItems(options);
     }
 }

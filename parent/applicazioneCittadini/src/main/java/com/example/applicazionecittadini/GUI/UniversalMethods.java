@@ -38,7 +38,7 @@ public class UniversalMethods {
             scene = new Scene(loader.load(), 800, 600);
         else if(res.equals("selezionaCV.fxml"))
             scene = new Scene(loader.load(), 600, 400);
-        else scene = new Scene(loader.load(), 600, 400);
+        else scene = new Scene(loader.load(), 650, 400);
         Stage stage = new Stage();
         stage.setTitle(tit);
         stage.setScene(scene);
