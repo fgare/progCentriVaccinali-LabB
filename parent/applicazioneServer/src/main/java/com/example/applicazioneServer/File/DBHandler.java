@@ -5,14 +5,8 @@
 //Callegari Pietro 746568 VA
 package com.example.applicazioneServer.File;
 
-import com.example.applicazioneServer.DataManager;
 import com.example.applicazioneServer.SWVar;
-import com.example.applicazioneServer.ServerImpl;
-import com.example.common.CentroVaccinale;
-import com.example.common.Indirizzo;
 
-import javax.xml.transform.Result;
-import java.rmi.RemoteException;
 import java.sql.*;
 
 /**
@@ -119,7 +113,7 @@ public class DBHandler {
             createTableRegistrazione();
             createTableIndirizzi();
             createTableVaccinazioni();
-            createTableVaccinazioniEventiAvversi();
+            createTableEventiAvversi();
             System.out.println("Tabelle create");
         }
         disconnect();
@@ -252,7 +246,7 @@ public class DBHandler {
      *
      * @throws SQLException Se viene sollevata un'eccezione durante la creazione della tabella
      */
-    public void createTableVaccinazioniEventiAvversi() throws SQLException {
+    public void createTableEventiAvversi() throws SQLException {
         PreparedStatement stmt = conn.prepareStatement(
                 "CREATE TABLE " + SWVar.TAB_EVENTIAVVERSI + "( " +
                         " ID_ea SERIAL PRIMARY KEY , " +

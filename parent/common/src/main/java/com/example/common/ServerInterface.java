@@ -93,4 +93,6 @@ public interface ServerInterface extends Remote {
      * @see Cittadino
      */
     boolean accessoCentroVaccinale(String username, String password) throws RemoteException;
+
+    byte[] getInfoCentroVaccinale(String nome) throws RemoteException;
 }

@@ -367,6 +367,22 @@ public class DataManager {
         return listaEventiAvversi;
     }
 
+    public byte[][] getInfoCentroVaccinale(String nome) {
+        final String CALCOLA_MEDIE =
+                "SELECT evento, COUNT(*), AVG(intensita)" +
+                "FROM evento_avverso" +
+                "WHERE IDvacc IN (" +
+                        "SELECT IDvacc" +
+                        "FROM vaccinazione JOIN cittadino ON CfCitt=CF JOIN registrazione USING CF" +
+                        "WHERE centro_vaccinale = '" + nome + "'" +
+                ") GROUP BY evento" +
+                "ORDER BY evento ASC";
+
+
+
+        return null;
+    }
+
     public static void main(String[] args) {
         try {
             DataManager.getInstance().elencoCentriVaccinali("");

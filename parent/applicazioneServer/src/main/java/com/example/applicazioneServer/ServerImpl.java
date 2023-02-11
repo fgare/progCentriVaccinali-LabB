@@ -180,4 +180,14 @@ public class ServerImpl extends Thread implements ServerInterface {
     public synchronized boolean accessoCentroVaccinale(String username, String password) throws RemoteException {
         return false;
     }
+
+    @Override
+    public byte[] getInfoCentroVaccinale(String nome) throws RemoteException {
+        try {
+            return DataManager.getInstance();
+        } catch(SQLException e) {
+            return null;
+        }
+        return null;
+    }
 }
