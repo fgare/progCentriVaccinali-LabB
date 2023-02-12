@@ -2,6 +2,7 @@ package com.example.common;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -94,5 +95,5 @@ public interface ServerInterface extends Remote {
      */
     String accessoCentroVaccinale(String username, String password) throws RemoteException;
 
-    Object[][] getInfoCentroVaccinale(String nome) throws RemoteException;
+    HashMap<String,float[]> getInfoCentroVaccinale(String nome) throws RemoteException;
 }

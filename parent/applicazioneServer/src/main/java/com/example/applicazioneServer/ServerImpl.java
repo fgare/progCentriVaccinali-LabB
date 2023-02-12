@@ -7,6 +7,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -193,7 +194,7 @@ public class ServerImpl extends Thread implements ServerInterface {
     }
 
     @Override
-    public Object[][] getInfoCentroVaccinale(String nomeCentroVaccinale) throws RemoteException {
+    public HashMap<String, float[]> getInfoCentroVaccinale(String nomeCentroVaccinale) throws RemoteException {
         try {
             return DataManager.getInstance().getInfoCentroVaccinale(nomeCentroVaccinale);
         } catch(SQLException e) {

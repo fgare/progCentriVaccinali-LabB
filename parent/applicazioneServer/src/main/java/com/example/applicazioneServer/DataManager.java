@@ -11,6 +11,7 @@ import java.lang.ref.PhantomReference;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -348,7 +349,7 @@ public class DataManager {
         return nome;
     }
 
-    public Object[][] getInfoCentroVaccinale(String nomeCentroVaccinale) throws SQLException {
+    public HashMap<String,float[]> getInfoCentroVaccinale(String nomeCentroVaccinale) throws SQLException {
         final String CALCOLA_MEDIE =
                 "SELECT evento, COUNT(*), AVG(intensita)" +
                 "FROM " + SWVar.TAB_EVENTIAVVERSI +
@@ -359,20 +360,21 @@ public class DataManager {
                 ") GROUP BY evento" +
                 "ORDER BY evento ASC";
 
-        Object[][] valoriCalcolati = new Object[EventoAvverso.QualeEvento.values().length][3];
+        HashMap<String,float[]> medieHM = new HashMap<>(EventoAvverso.QualeEvento.values().length);
 
         DBHandler handler = new DBHandler();
         handler.connectDbCv();
 
         ResultSet rs = handler.select(CALCOLA_MEDIE);
-        for(int i=0; rs.next(); i++) {
-            valoriCalcolati[i][0] = rs.getString(1);
-            valoriCalcolati[i][1] = rs.getShort(2);
-            valoriCalcolati[i][2] = rs.getFloat(3);
+        float[] valori = new float[2];
+        while(rs.next()) {
+            valori[0] = rs.getFloat(2);
+            valori[1] = rs.getFloat(3);
+            medieHM.put(rs.getString(1),valori);
         }
         handler.disconnect();
 
-        return valoriCalcolati;
+        return medieHM;
     }
 
     public static void main(String[] args) {

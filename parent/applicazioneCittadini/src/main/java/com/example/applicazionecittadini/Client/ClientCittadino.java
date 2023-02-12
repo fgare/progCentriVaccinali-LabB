@@ -11,6 +11,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -133,7 +134,7 @@ public class ClientCittadino extends Thread {
         }
     }
 
-    public Object[][] getInfoCentroVaccinale(String nomeCentroVaccinale) {
+    public HashMap<String, float[]> getInfoCentroVaccinale(String nomeCentroVaccinale) {
         try {
             return server.getInfoCentroVaccinale(nomeCentroVaccinale);
         } catch(RemoteException e) {
