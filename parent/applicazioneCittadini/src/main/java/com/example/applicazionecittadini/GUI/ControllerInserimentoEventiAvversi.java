@@ -4,6 +4,7 @@ import com.example.common.EventoAvverso;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 
 import java.io.IOException;
 
@@ -11,6 +12,10 @@ import java.io.IOException;
  *Classe per il controller dell'inserimento degli eventi avversi
  */
 public class ControllerInserimentoEventiAvversi {
+    @FXML
+    private ComboBox cbEventoAvverso;
+    @FXML
+    private ComboBox cbSeveritaEventoAvverso;
     @FXML
     private Button btIndietro;
     @FXML
@@ -22,6 +27,9 @@ public class ControllerInserimentoEventiAvversi {
      * @throws IOException in caso di errore nella lettura del file FXML corrispondente alla finestra da aprire
      */
     public void inserisciEventoAvversoCittadino(ActionEvent event)throws IOException {
+        String ea = cbEventoAvverso.getValue().toString();
+        String sea = cbSeveritaEventoAvverso.getValue().toString();
+
         UniversalMethods.handleCloseButtonAction(event, btInserisciEventoAvverso);
         UniversalMethods.vediFinestra("InserimentoEventiAvversi.fxml", "TATUM VACCINI - Inserimento eventi avversi");
 
