@@ -1,5 +1,6 @@
 package com.example.applicazionecittadini.GUI;
 
+import com.example.applicazionecittadini.Client.ClientCittadino;
 import com.example.common.EventoAvverso;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,9 +35,11 @@ public class ControllerInserimentoEventiAvversi {
         String sea = cbSeveritaEventoAvverso.getValue().toString();
         String note= areaNote.toString();
 
+        EventoAvverso e = new EventoAvverso(0, EventoAvverso.QualeEvento.FEBBRE,Byte.parseByte(sea),note); //TODO
+        ClientCittadino.getInstance().nuovoEventoAvverso(e);
+
         UniversalMethods.handleCloseButtonAction(event, btInserisciEventoAvverso);
         UniversalMethods.vediFinestra("InserimentoEventiAvversi.fxml", "TATUM VACCINI - Inserimento eventi avversi");
-
     }
 
     /**

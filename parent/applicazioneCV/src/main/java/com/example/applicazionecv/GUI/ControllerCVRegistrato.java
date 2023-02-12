@@ -56,22 +56,23 @@ public class ControllerCVRegistrato {
             - l'utente seleziona uno tra i centri visualizzati
             - si salva in ClientMedico il riferimento al centro vaccinale selezionato
          */
-        Alert alert=new Alert(Alert.AlertType.ERROR);
+        Alert alert = new Alert(Alert.AlertType.ERROR);
         if (textFieldIdCv.getText().length() == 0) {
             labelMessage.setText("QUALCOSA E' ANDATO STORTO");
             tornaCvRegistrato(event);
-        } /*else {
-            boolean accessoConfermato = ClientMedico.getInstance().accediACv(textFieldIdCv.getText());
+        }
 
-            if(accessoConfermato) {*/
-                UniversalMethods.handleCloseButtonAction(event, btAccedi);
-                UniversalMethods.vediFinestra("RegistraVaccinato.fxml", "TATUM VACCINI - Registrazione vaccinati");
-           // } else {
-                //TODO: visualizza messaggio di errore ("Centro vaccinale non registrato")
-                //alert.setContentText("OPERAZIONE NON ANDATA A BUON FINE");
-                //alert.showAndWait();
-           // }
-        //}
+        boolean accessoConfermato = ClientMedico.getInstance().accediACv(textFieldIdCv.getText());
+
+        if (accessoConfermato) {
+            UniversalMethods.handleCloseButtonAction(event, btAccedi);
+            UniversalMethods.vediFinestra("RegistraVaccinato.fxml", "TATUM VACCINI - Registrazione vaccinati");
+        } else {
+            //TODO: visualizza messaggio di errore ("Centro vaccinale non registrato")
+            //alert.setContentText("OPERAZIONE NON ANDATA A BUON FINE");
+            //alert.showAndWait();
+        }
+
     }
 
     /**
