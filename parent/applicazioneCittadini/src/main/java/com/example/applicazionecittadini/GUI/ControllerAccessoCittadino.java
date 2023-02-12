@@ -7,6 +7,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
@@ -15,7 +17,10 @@ import java.io.IOException;
  *Classe che gestisce l'interfaccia grafica per l'accesso e la registrazione dei cittadini.
  */
 public class ControllerAccessoCittadino {
-
+    @FXML
+    private PasswordField pswF;
+    @FXML
+    private TextField tfUser;
     @FXML
     private Button btRegistraCittadino;
     @FXML
@@ -42,10 +47,13 @@ public class ControllerAccessoCittadino {
      *@throws IOException in caso di errore nell'apertura della finestra
      */
     public void accessoCittadino(ActionEvent event) throws IOException{
+        String user=tfUser.getText();
+        String psw=pswF.getText();
+
         UniversalMethods.handleCloseButtonAction(event, btAccessoCittadino);
         UniversalMethods.vediFinestra("InserimentoEventiAvversi.fxml", "TATUM VACCINI - Inserimento eventi avversi");
 
-        ClientCittadino.getInstance().login(null,null); //TODO
+        ClientCittadino.getInstance().login(user,psw); //TODO
     }
 
     /**
