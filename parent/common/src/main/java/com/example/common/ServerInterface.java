@@ -64,7 +64,7 @@ public interface ServerInterface extends Remote {
      * @throws RemoteException
      * @see EventoAvverso
      */
-    boolean registraEventoAvverso(EventoAvverso ea) throws RemoteException;
+    boolean registraEventoAvverso(EventoAvverso ea,String username) throws RemoteException;
 
     /**
      *

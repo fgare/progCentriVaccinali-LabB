@@ -96,7 +96,7 @@ public class DBHandler {
      *
      * @throws SQLException
      */
-    public void initDB() throws SQLException {
+public void initDB() throws SQLException {
         connectDBMS();
         String createQuery = "SELECT 1 FROM pg_database WHERE datname = ?";
         PreparedStatement st = conn.prepareStatement(createQuery);
@@ -130,11 +130,8 @@ public class DBHandler {
      * @throws SQLException Se viene sollevata un'eccezione durante l'esecuzione delle query
      */
     public boolean insert(String query) throws SQLException {
-        this.connectDbCv();
         PreparedStatement ps = conn.prepareStatement(query);
         ps.executeUpdate();
-        conn.close();
-
         return true; //se non sono state sollevate eccezioni restituisci TRUE
     }
 
@@ -268,6 +265,7 @@ public class DBHandler {
      * @throws SQLException Se viene sollevata un'eccezione durante l'esecuzione della query
      */
     public ResultSet select(String query) throws SQLException {
+        System.out.println("Eseguo query > " + query);
         Statement stm = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         return stm.executeQuery(query);
     }

@@ -173,16 +173,35 @@ public class DataManager {
      * @return boolean
      * @throws SQLException
      */
-    public boolean registraEventoAvverso(EventoAvverso ea) throws SQLException {
-        final String NUOVO_EVENTOAVVERSO = "INSERT INTO " + SWVar.TAB_EVENTIAVVERSI +
-                " VALUES('" +
-                ea.getIdVaccinazione() + "','" +
-                ea.getQualeEvento() + "','" +
-                ea.getSeverita() + "','" +
-                ea.getNota() + "');";
+    public boolean registraEventoAvverso(EventoAvverso ea, String username) throws SQLException {
+        /* prima verifico che il cittadino si sia vaccinato almeno una volta.
+            Se si è vacchinato più volte considero la vaccinazione più recente.
+         */
+        final String VERIFICA_REGISTRAZIONE =
+                "SELECT id_vaccino " +
+                "FROM " + SWVar.TAB_VACCINAZIONI + " JOIN " + SWVar.TAB_CITTADINI + " ON cf=cf_citt " +
+                "WHERE username='" + username + "' " +
+                "ORDER BY data DESC;";
 
         DBHandler handler = new DBHandler();
-        Connection conn = handler.connectDbCv();
+        handler.connectDbCv();
+
+        ResultSet rs1 = handler.select(VERIFICA_REGISTRAZIONE);
+        if(!rs1.next()) {
+            System.out.println("Il cittadino non si è ancora vaccinato");
+            return false;
+        }
+        int idVac = rs1.getInt(1);
+        System.out.println("IDvaccinazione = " + idVac);
+
+        final String NUOVO_EVENTOAVVERSO =
+                "INSERT INTO " + SWVar.TAB_EVENTIAVVERSI + "(evento,intensita,ID_vaccino,Note)" +
+                        " VALUES('" +
+                        ea.getQualeEvento() + "','" +
+                        ea.getSeverita() + "','" +
+                        idVac + "','" +
+                        ea.getNota() + "');";
+
         boolean esito = handler.insert(NUOVO_EVENTOAVVERSO);
         handler.disconnect();
         return esito;
@@ -334,17 +353,21 @@ public class DataManager {
      */
     public String login(String username, String password) throws SQLException {
         final String ESISTE =
-                "SELECT centro_vaccinale" +
+                "SELECT centro_vaccinale " +
                 "FROM " + SWVar.TAB_REGISTRAZIONE + " NATURAL JOIN " + SWVar.TAB_CITTADINI +
-                "WHERE username = '" + username + "' AND password = '" + password + "';";
+                " WHERE username = '" + username + "' AND password = '" + password + "';";
 
         DBHandler dbh = new DBHandler();
+        dbh.connectDbCv();
 
         ResultSet rs = dbh.select(ESISTE);
+        //System.out.println("ResultSet > " + rs.toString());
+
         String nome;
         if(rs.next()) nome = rs.getString(1);
         else nome = "";
 
+        System.out.println("Nome centro vaccinale -> " + nome);
         dbh.disconnect();
         return nome;
     }

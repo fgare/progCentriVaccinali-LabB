@@ -23,6 +23,7 @@ public class ClientCittadino extends Thread {
     private static ClientCittadino instance = null;
     private final short REGISTRYPORT = 1099;
     private ServerInterface server;
+    private String username;
 
     /**
      * Costruttore del ClientCittadino.
@@ -65,6 +66,14 @@ public class ClientCittadino extends Thread {
      * Questo metodo run viene eseguito quando il thread viene avviato.
      */
     public void run() { }
+
+    public String getUsernamee() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     /**
      * Metodo per registrare un nuovo cittadino presso il server.
@@ -114,7 +123,7 @@ public class ClientCittadino extends Thread {
      */
     public boolean nuovoEventoAvverso(EventoAvverso e) {
         try {
-            return server.registraEventoAvverso(e);
+            return server.registraEventoAvverso(e,username);
         } catch(RemoteException ex) {
             return false;
         }
@@ -128,7 +137,10 @@ public class ClientCittadino extends Thread {
      */
     public String login(String username, String password) {
         try {
-            return server.accessoCentroVaccinale(username,password);
+            String nomeCentro = server.accessoCentroVaccinale(username,password);
+            if(nomeCentro.equals("")) return "";
+            this.username = username;
+            return nomeCentro;
         } catch(RemoteException e) {
             return null;
         }

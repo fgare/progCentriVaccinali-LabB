@@ -25,7 +25,6 @@ public class ControllerInserimentoEventiAvversi {
         UniversalMethods.handleCloseButtonAction(event, btInserisciEventoAvverso);
         UniversalMethods.vediFinestra("InserimentoEventiAvversi.fxml", "TATUM VACCINI - Inserimento eventi avversi");
 
-        //new EventoAvverso(); //TODO
     }
 
     /**

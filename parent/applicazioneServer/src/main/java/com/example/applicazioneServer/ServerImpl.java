@@ -160,15 +160,16 @@ public class ServerImpl extends Thread implements ServerInterface {
      *@throws RemoteException In caso di problemi di connessione remota
      */
     @Override
-    public synchronized boolean registraEventoAvverso(EventoAvverso ea) throws RemoteException {
+    public synchronized boolean registraEventoAvverso(EventoAvverso ea, String username) throws RemoteException {
         try {
-            DataManager.getInstance().registraEventoAvverso(ea);
+            boolean esito = DataManager.getInstance().registraEventoAvverso(ea,username);
+            if(esito) System.out.println("Registrato nuovo evento avverso " + ea.toString());
+            else System.out.println("Evento avverso non registrato");
+            return esito;
         } catch(SQLException e) {
             System.out.printf("registraEventoAvverso(%s, %d) > SQLException\n", ea.getQualeEvento().name(), ea.getSeverita());
             return false;
         }
-        System.out.println("Registrato nuovo evento avverso " + ea.toString());
-        return true;
     }
 
     /**
@@ -185,7 +186,7 @@ public class ServerImpl extends Thread implements ServerInterface {
                 System.out.println("(" + username + "," + password + ") > credenziali errate");
                 return nomeCentro;
             }
-            System.out.println("(" + username + "," + password + ") > CV = " + nomeCentro);
+            System.out.println("(" + username + "," + password + ") > accesso a CV = " + nomeCentro);
             return nomeCentro;
         } catch(SQLException e) {
             System.out.println("SQLException");

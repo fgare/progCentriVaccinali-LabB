@@ -47,13 +47,19 @@ public class ControllerAccessoCittadino {
      *@throws IOException in caso di errore nell'apertura della finestra
      */
     public void accessoCittadino(ActionEvent event) throws IOException{
-        String user=tfUser.getText();
-        String psw=pswF.getText();
+        String user = tfUser.getText();
+        String psw = pswF.getText();
+        //System.out.println("user = " + user + "\npsw = " + psw);
 
-        UniversalMethods.handleCloseButtonAction(event, btAccessoCittadino);
-        UniversalMethods.vediFinestra("InserimentoEventiAvversi.fxml", "TATUM VACCINI - Inserimento eventi avversi");
-
-        ClientCittadino.getInstance().login(user,psw); //TODO
+        String nomeCentro = ClientCittadino.getInstance().login(user,psw);
+        if(nomeCentro == null || nomeCentro.equals("")) {
+            System.out.println("Accesso negato");
+            tfUser.setStyle("-fx-text-fill: red; -fx-border-color: red;");
+            pswF.setStyle("-fx-text-fill: red; -fx-border-color: red;");
+        } else {
+            UniversalMethods.handleCloseButtonAction(event, btAccessoCittadino);
+            UniversalMethods.vediFinestra("InserimentoEventiAvversi.fxml", "TATUM VACCINI - Inserimento eventi avversi");
+        }
     }
 
     /**
