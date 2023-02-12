@@ -45,7 +45,7 @@ public class ControllerAccessoCittadino {
         UniversalMethods.handleCloseButtonAction(event, btAccessoCittadino);
         UniversalMethods.vediFinestra("InserimentoEventiAvversi.fxml", "TATUM VACCINI - Inserimento eventi avversi");
 
-        //boolean accessoConsentito = ClientCittadino.getInstance().login(); //TODO
+        ClientCittadino.getInstance().login(null,null); //TODO
     }
 
     /**

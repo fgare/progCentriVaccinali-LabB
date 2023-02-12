@@ -125,11 +125,19 @@ public class ClientCittadino extends Thread {
      * @param password password del centro vaccinale
      * @return true se il login è avvenuto con successo, false altrimenti
      */
-    public boolean login(String username, String password) {
+    public String login(String username, String password) {
         try {
             return server.accessoCentroVaccinale(username,password);
         } catch(RemoteException e) {
-            return false;
+            return null;
+        }
+    }
+
+    public Object[][] getInfoCentroVaccinale(String nomeCentroVaccinale) {
+        try {
+            return server.getInfoCentroVaccinale(nomeCentroVaccinale);
+        } catch(RemoteException e) {
+            return null;
         }
     }
 

@@ -177,17 +177,27 @@ public class ServerImpl extends Thread implements ServerInterface {
      *@throws RemoteException in caso di problemi di connessione con il server
      */
     @Override
-    public synchronized boolean accessoCentroVaccinale(String username, String password) throws RemoteException {
-        return false;
+    public synchronized String accessoCentroVaccinale(String username, String password) throws RemoteException {
+        try {
+            String nomeCentro = DataManager.getInstance().login(username, password);
+            if(nomeCentro.equals("")) {
+                System.out.println("(" + username + "," + password + ") > credenziali errate");
+                return nomeCentro;
+            }
+            System.out.println("(" + username + "," + password + ") > CV = " + nomeCentro);
+            return nomeCentro;
+        } catch(SQLException e) {
+            System.out.println("SQLException");
+            return null;
+        }
     }
 
     @Override
-    public byte[] getInfoCentroVaccinale(String nome) throws RemoteException {
+    public Object[][] getInfoCentroVaccinale(String nomeCentroVaccinale) throws RemoteException {
         try {
-            return DataManager.getInstance();
+            return DataManager.getInstance().getInfoCentroVaccinale(nomeCentroVaccinale);
         } catch(SQLException e) {
             return null;
         }
-        return null;
     }
 }

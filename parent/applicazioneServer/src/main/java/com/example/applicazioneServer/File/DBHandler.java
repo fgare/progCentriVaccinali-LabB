@@ -268,9 +268,6 @@ public class DBHandler {
      * @throws SQLException Se viene sollevata un'eccezione durante l'esecuzione della query
      */
     public ResultSet select(String query) throws SQLException {
-        //this.connectDbCv();
-        System.out.println("Connessione DB > " + conn.toString());
-
         Statement stm = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         return stm.executeQuery(query);
     }

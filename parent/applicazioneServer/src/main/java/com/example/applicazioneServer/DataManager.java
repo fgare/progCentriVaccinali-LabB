@@ -7,6 +7,7 @@ package com.example.applicazioneServer;
 import com.example.applicazioneServer.File.DBHandler;
 import com.example.common.*;
 
+import java.lang.ref.PhantomReference;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -327,60 +328,51 @@ public class DataManager {
      * Questo metodo verifica se le credenziali inserite corrispondono a quelle di un utente registrato.
      * @param username nome utente inserito
      * @param password password inserita
-     * @return true se le credenziali sono valide, false altrimenti
+     * @return nome del centro vaccinale in cui si è registrato il cittadino, oppure NULL se le credenziali sono errate
      * @throws SQLException in caso di errore di connessione al database
      */
-    public boolean login(String username, String password) throws SQLException {
+    public String login(String username, String password) throws SQLException {
         final String ESISTE =
-                "SELECT 1 FROM " + SWVar.TAB_CITTADINI +
-                        " WHERE username = '" + username + "' AND password = '" + password + "'";
+                "SELECT centro_vaccinale" +
+                "FROM " + SWVar.TAB_REGISTRAZIONE + " NATURAL JOIN " + SWVar.TAB_CITTADINI +
+                "WHERE username = '" + username + "' AND password = '" + password + "';";
+
         DBHandler dbh = new DBHandler();
-        Connection conn = dbh.connectDbCv();
-        ResultSet result = dbh.select(ESISTE);
-        boolean esito = result.next();
+
+        ResultSet rs = dbh.select(ESISTE);
+        String nome;
+        if(rs.next()) nome = rs.getString(1);
+        else nome = "";
+
         dbh.disconnect();
-        return esito;
+        return nome;
     }
 
-    public List<EventoAvverso> calcolaMedia() throws SQLException {
-        final String GET_ELENCO_EVENTI =
-                ("SELECT evento, AVG(intensita) AS media_intensita FROM " + SWVar.TAB_EVENTIAVVERSI + " GROUP BY evento");
-
-        List<EventoAvverso> listaEventiAvversi = new ArrayList<>();
-
-        DBHandler handler = new DBHandler();
-        Connection conn = handler.connectDbCv();
-
-        try (ResultSet result = handler.select(GET_ELENCO_EVENTI)) {
-            while (result.next()) {
-                int id = result.getInt("id");
-                String evento = result.getString("evento");
-                int mediaInt = result.getByte("media_intensita");
-                int id_vacc = result.getInt("ID_vaccino");
-                String note = result.getString("note");
-                //listaEventiAvversi.add(new EventoAvverso(id, id_vacc, evento, mediaInt, note));
-            }
-        }
-
-        handler.disconnect();
-
-        return listaEventiAvversi;
-    }
-
-    public byte[][] getInfoCentroVaccinale(String nome) {
+    public Object[][] getInfoCentroVaccinale(String nomeCentroVaccinale) throws SQLException {
         final String CALCOLA_MEDIE =
                 "SELECT evento, COUNT(*), AVG(intensita)" +
-                "FROM evento_avverso" +
+                "FROM " + SWVar.TAB_EVENTIAVVERSI +
                 "WHERE IDvacc IN (" +
                         "SELECT IDvacc" +
                         "FROM vaccinazione JOIN cittadino ON CfCitt=CF JOIN registrazione USING CF" +
-                        "WHERE centro_vaccinale = '" + nome + "'" +
+                        "WHERE centro_vaccinale = '" + nomeCentroVaccinale + "'" +
                 ") GROUP BY evento" +
                 "ORDER BY evento ASC";
 
+        Object[][] valoriCalcolati = new Object[EventoAvverso.QualeEvento.values().length][3];
 
+        DBHandler handler = new DBHandler();
+        handler.connectDbCv();
 
-        return null;
+        ResultSet rs = handler.select(CALCOLA_MEDIE);
+        for(int i=0; rs.next(); i++) {
+            valoriCalcolati[i][0] = rs.getString(1);
+            valoriCalcolati[i][1] = rs.getShort(2);
+            valoriCalcolati[i][2] = rs.getFloat(3);
+        }
+        handler.disconnect();
+
+        return valoriCalcolati;
     }
 
     public static void main(String[] args) {
