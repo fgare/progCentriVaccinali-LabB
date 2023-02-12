@@ -58,7 +58,7 @@
             <Font name="Georgia Pro" size="16.0" />
         </font>
     </Label>
-    <TextArea layoutX="305.0" layoutY="200.0" prefHeight="57.0" prefWidth="200.0" />
+    <TextArea fx:id="areaNote" layoutX="305.0" layoutY="200.0" prefHeight="57.0" prefWidth="200.0" />
     <Label layoutX="383.0" layoutY="180.0" text="NOTE">
         <font>
             <Font name="Georgia Pro" size="16.0" />
