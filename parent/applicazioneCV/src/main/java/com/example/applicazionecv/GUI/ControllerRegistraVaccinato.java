@@ -48,7 +48,6 @@ public class ControllerRegistraVaccinato {
      * @see UniversalMethods
      */
     public void registraVaccinato(ActionEvent event) throws IOException {
-        //TODO: bisogna sostituire la variabile cfCittadino con codicePrenotazione
         String nomeCittadino, cognomeCittadino, cfCittadino, tipoVaccino;
         Vaccinazione.Vaccino v = null;
         Alert a = new Alert(Alert.AlertType.INFORMATION);
@@ -66,18 +65,9 @@ public class ControllerRegistraVaccinato {
             }
 
             if (!err) {
-                /* invia cittadino e questo cv al server.
-                   server verifica se esiste e se è registato presso questo cv
-                    se si inserisce la vaccinazione
-                    (gestisco tutto lato server, qui invio solo la vaccinazione)
-                 */
-
                 Vaccinazione recvacc = new Vaccinazione(Vaccinazione.Vaccino.parse(tipoVaccino), LocalDate.now(), cfCittadino);
-                /*boolean esito = ClientMedico.getInstance().aggiungiDose(ClientMedico.getInstance().getCentroInUso(), recvacc);
-                //TODO: se esito=FALSE visualizza messaggio di errore*/
+                boolean esito = ClientMedico.getInstance().aggiungiDose(ClientMedico.getInstance().getCentroInUso(), recvacc);
 
-                int id = UniversalMethods.assegnaId();
-                System.out.println(recvacc);
                 UniversalMethods.handleCloseButtonAction(event, btRegistraVaccinato);
                 UniversalMethods.vediFinestra("RegistraVaccinato.fxml", "TATUM VACCINI - Registrazione vaccinato");
             }

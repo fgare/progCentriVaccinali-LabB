@@ -81,7 +81,7 @@ public class DataManager {
         DBHandler handler = new DBHandler();
         Connection conn = handler.connectDbCv();
 
-        boolean esito = handler.insert(NUOVO_CV);
+        boolean esito = handler.insert(NUOVO_CV + "\n" + NUOVO_INDIRIZZO);
 
         handler.disconnect();
 
@@ -125,42 +125,28 @@ public class DataManager {
      * @return boolean
      * @throws SQLException
      */
-
-    //TODO: da finire
-    public boolean registraVaccinazione(CentroVaccinale c, Vaccinazione v) throws SQLException {
-        final String VERIFICA_CITTADINO_REGISTRATO = "SELECT cf, centrovaccinale FROM "+ SWVar.TAB_CITTADINI +
-                " WHERE .cf= " + v.getCfCitt() + " AND centrovaccinale= " + c.getNome();
-        final String NUOVA_VACCINAZIONE = "INSERT INTO " + SWVar.TAB_VACCINAZIONI + "(data, vaccino, CF_citt) " +
+    public boolean registraVaccinazione(String cv, Vaccinazione v) throws SQLException {
+        final String VERIFICA_CITTADINO_REGISTRATO =
+                "SELECT * FROM " + SWVar.TAB_REGISTRAZIONE +
+                " WHERE cf= '" + v.getCfCitt() + "' AND centro_vaccinale= '" + cv + "';";
+        final String NUOVA_VACCINAZIONE =
+                "INSERT INTO " + SWVar.TAB_VACCINAZIONI + "(data, vaccino, CF_citt) " +
                 " VALUES('" +
                 v.getData() + "','" +
-                v.getVaccino() + "','" +
+                v.getVaccino().name() + "','" +
                 v.getCfCitt() + "');";
-        //TODO: controllare query + nomi tabelle
 
         DBHandler handler = new DBHandler();
-        Connection conn = handler.getConnection();
-
-        PreparedStatement verificaCittadino = conn.prepareStatement(VERIFICA_CITTADINO_REGISTRATO);
-        verificaCittadino.setString(1,SWVar.TAB_CITTADINI);
-        verificaCittadino.setString(2,"'" + v.getCfCitt() + "'");
-        verificaCittadino.setString(3,"'" + c.getNome() + "'");
+        handler.connectDbCv();
 
         ResultSet rs = handler.select(VERIFICA_CITTADINO_REGISTRATO);
-
-        //Bisognerebbe controllare che il cv esista, ma lo è per forza perchè il cittadino si è precedentemente registrato
-
-        if(DBHandler.resultSetSize(rs) == 0) return false; //termina segnalando che l'operazione non è riuscita
-
-        //riapro la connessione che viene chiusa nella chiamata al metodo select
-
-        PreparedStatement nuovaVaccinazione = conn.prepareStatement(NUOVA_VACCINAZIONE);
-        nuovaVaccinazione.setString(1,SWVar.TAB_VACCINAZIONI);
-        nuovaVaccinazione.setString(2,v.getCfCitt());
-        LocalDate dataVac = v.getData();
-        nuovaVaccinazione.setDate(3,new Date(dataVac.getYear(),dataVac.getMonthValue(),dataVac.getDayOfMonth()));
-        nuovaVaccinazione.setString(3,v.getVaccino().name());
+        if(!rs.next()) {
+            System.out.println("Il cittadino " + v.getCfCitt() + " non è ancora registrato");
+            return false;
+        }
 
         boolean esito = handler.insert(NUOVA_VACCINAZIONE);
+        System.out.println("Esito inserimento cittadino > " + esito);
         handler.disconnect();
         return esito;
     }
@@ -236,7 +222,7 @@ public class DataManager {
         }
 
         List<CentroVaccinale> lsCV = new ArrayList<>();
-        System.out.println("Inizializzo arraylist lscv");
+        //System.out.println("Inizializzo arraylist lscv");
         //rs.last();
         //System.out.println("Dimensione = " + rs.getRow());
 
@@ -251,7 +237,7 @@ public class DataManager {
                     rs.getString(8),
                     rs.getString(9)
             );
-            System.out.println("Indirizzo letto = " + i.toString());
+            //System.out.println("Indirizzo letto = " + i.toString());
             //costruisco l'oggetto centro vaccinale e lo aggiungo alla lista
             CentroVaccinale c = new CentroVaccinale(
                     rs.getString(1),
@@ -398,6 +384,23 @@ public class DataManager {
         handler.disconnect();
 
         return medieHM;
+    }
+
+    public boolean accessoCvRegistrato(String nome) throws SQLException {
+        final String VERIFICA_CV_ESISTE =
+                "SELECT nome " +
+                "FROM " + SWVar.TAB_CENTRIVACCINALI +
+                " WHERE nome = '" + nome + "'";
+
+        DBHandler handler = new DBHandler();
+        handler.connectDbCv();
+
+        ResultSet rs = handler.select(VERIFICA_CV_ESISTE);
+        if(!rs.next()) {
+            System.out.println("Il centro vaccinale '" + nome + "' non è ancora registrato");
+            return false;
+        }
+        return true;
     }
 
     public static void main(String[] args) {

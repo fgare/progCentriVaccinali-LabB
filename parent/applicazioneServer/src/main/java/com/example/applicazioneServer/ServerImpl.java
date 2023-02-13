@@ -86,15 +86,16 @@ public class ServerImpl extends Thread implements ServerInterface {
     *@return true se la registrazione è andata a buon fine, false altrimenti.
     */
     @Override
-    public synchronized boolean aggiungiDoseAPaziente(CentroVaccinale c, Vaccinazione v) throws RemoteException {
+    public synchronized boolean aggiungiDoseAPaziente(String cv, Vaccinazione v) throws RemoteException {
         try {
-            DataManager.getInstance().registraVaccinazione(c,v);
+            boolean esito = DataManager.getInstance().registraVaccinazione(cv,v);
+            if(esito) System.out.println("Registrata nuova vaccinazione > " + v.toString() + " presso " + cv);
+            else System.out.println("Vaccinazione non registrata");
+            return esito;
         } catch(SQLException e) {
             System.out.printf("aggiungiDoseAPaziente(cf=%s, vaccino=%s) > SQLException\n", v.getCfCitt(), v.getVaccino().name());
             return false;
         }
-        System.out.println("Registrata nuova vaccinazione > " + v.toString() + " presso " + c.getNome());
-        return true;
     }
 
     /**
@@ -200,6 +201,16 @@ public class ServerImpl extends Thread implements ServerInterface {
             return DataManager.getInstance().getInfoCentroVaccinale(nomeCentroVaccinale);
         } catch(SQLException e) {
             return null;
+        }
+    }
+
+    @Override
+    public boolean accessoCvRegistrato(String nome) throws RemoteException {
+        try {
+            return DataManager.getInstance().accessoCvRegistrato(nome);
+        } catch(SQLException e) {
+            System.out.println("SQLException");
+            return false;
         }
     }
 }

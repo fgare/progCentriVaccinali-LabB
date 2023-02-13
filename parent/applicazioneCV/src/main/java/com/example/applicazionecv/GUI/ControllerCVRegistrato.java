@@ -50,12 +50,6 @@ public class ControllerCVRegistrato {
      *
      */
     public void accessoCentriVaccinali(ActionEvent event) throws IOException {
-        /* TODO:
-            - l'utente inserisce il nome del centro vaccinale (o parte del nome).
-            - si riceve dal server una lista con tutti i centri vaccinali che coincidono con il testo inserito.
-            - l'utente seleziona uno tra i centri visualizzati
-            - si salva in ClientMedico il riferimento al centro vaccinale selezionato
-         */
         Alert alert = new Alert(Alert.AlertType.ERROR);
         if (textFieldIdCv.getText().length() == 0) {
             labelMessage.setText("QUALCOSA E' ANDATO STORTO");
@@ -68,11 +62,8 @@ public class ControllerCVRegistrato {
             UniversalMethods.handleCloseButtonAction(event, btAccedi);
             UniversalMethods.vediFinestra("RegistraVaccinato.fxml", "TATUM VACCINI - Registrazione vaccinati");
         } else {
-            //TODO: visualizza messaggio di errore ("Centro vaccinale non registrato")
-            //alert.setContentText("OPERAZIONE NON ANDATA A BUON FINE");
-            //alert.showAndWait();
+            textFieldIdCv.setStyle("-fx-text-fill: red; -fx-border-color: red;");
         }
-
     }
 
     /**
@@ -84,5 +75,4 @@ public class ControllerCVRegistrato {
         UniversalMethods.handleCloseButtonAction(event, btAccedi);
         UniversalMethods.vediFinestra("CVRegistrato.fxml", "TATUM VACCINI - Registrazione vaccinato");
     }
-
 }

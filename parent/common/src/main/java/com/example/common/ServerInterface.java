@@ -44,7 +44,7 @@ public interface ServerInterface extends Remote {
      * @see CentroVaccinale
      * @see Vaccinazione
      */
-    boolean aggiungiDoseAPaziente(CentroVaccinale c, Vaccinazione v) throws RemoteException;
+    boolean aggiungiDoseAPaziente(String cv, Vaccinazione v) throws RemoteException;
 
     //metodi cittadino
 
@@ -96,4 +96,6 @@ public interface ServerInterface extends Remote {
     String accessoCentroVaccinale(String username, String password) throws RemoteException;
 
     HashMap<String,float[]> getInfoCentroVaccinale(String nome) throws RemoteException;
+
+    boolean accessoCvRegistrato(String nome) throws RemoteException;
 }

@@ -21,7 +21,7 @@ public class ClientMedico extends Thread {
     private final short REGISTRYPORT = 1099;
     private final short CLIENTCVPORT = 1101;
     private ServerInterface server;
-    private CentroVaccinale centroInUso;
+    private String centroInUso;
 
     /**
      *Costruttore privato della classe ClientMedico.
@@ -65,11 +65,11 @@ public class ClientMedico extends Thread {
 
     }
 
-    public void setCentroInUso(CentroVaccinale c) {
+    public void setCentroInUso(String c) {
         centroInUso = c;
     }
 
-    public CentroVaccinale getCentroInUso() {
+    public String getCentroInUso() {
         return centroInUso;
     }
 
@@ -87,8 +87,19 @@ public class ClientMedico extends Thread {
         }
     }
 
-    public boolean accediACv(String c) throws RemoteException {
-        return false;
+    public boolean accediACv(String c) {
+        try {
+            boolean esito = server.accessoCvRegistrato(c);
+            if(esito) {
+                System.out.println("Accesso consentito");
+                centroInUso = c;
+                return true;
+            }
+            System.out.println("Accesso non consentito");
+            return false;
+        } catch(RemoteException e) {
+            return false;
+        }
     }
 
     /**
@@ -97,9 +108,9 @@ public class ClientMedico extends Thread {
      *@param v Dose da vaccinare.
      *@return true se l'aggiunta è stata effettuata con successo, false altrimenti.
      */
-    public boolean aggiungiDose(CentroVaccinale c, Vaccinazione v) {
+    public boolean aggiungiDose(String cf, Vaccinazione v) {
         try{
-            return server.aggiungiDoseAPaziente(c,v);
+            return server.aggiungiDoseAPaziente(cf,v);
         } catch(RemoteException e) {
             return false;
         }

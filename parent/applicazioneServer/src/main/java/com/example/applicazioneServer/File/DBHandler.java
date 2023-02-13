@@ -120,22 +120,6 @@ public void initDB() throws SQLException {
     }
 
     /**
-     * Questo metodo esegue una serie di query su una connessione al database,
-     * utilizzando un oggetto PreparedStatement. Le query vengono eseguite
-     * come una transazione, che viene confermata (commit) se non vengono
-     * sollevate eccezioni.
-     *
-     * @param query Una serie di query da eseguire come transazione
-     * @return true se tutte le query sono state eseguite correttamente, false altrimenti
-     * @throws SQLException Se viene sollevata un'eccezione durante l'esecuzione delle query
-     */
-    public boolean insert(String query) throws SQLException {
-        PreparedStatement ps = conn.prepareStatement(query);
-        ps.executeUpdate();
-        return true; //se non sono state sollevate eccezioni restituisci TRUE
-    }
-
-    /**
      * Questo metodo crea la tabella "TAB_CENTRIVACCINALI" nel database databaseCV.
      *
      * @throws SQLException Se viene sollevata un'eccezione durante la creazione della tabella
@@ -268,6 +252,23 @@ public void initDB() throws SQLException {
         System.out.println("Eseguo query > " + query);
         Statement stm = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         return stm.executeQuery(query);
+    }
+
+    /**
+     * Questo metodo esegue una serie di query su una connessione al database,
+     * utilizzando un oggetto PreparedStatement. Le query vengono eseguite
+     * come una transazione, che viene confermata (commit) se non vengono
+     * sollevate eccezioni.
+     *
+     * @param query Una serie di query da eseguire come transazione
+     * @return true se tutte le query sono state eseguite correttamente, false altrimenti
+     * @throws SQLException Se viene sollevata un'eccezione durante l'esecuzione delle query
+     */
+    public boolean insert(String query) throws SQLException {
+        System.out.println("Eseguo query > " + query);
+        Statement ps = conn.createStatement();
+        ps.executeUpdate(query);
+        return true; //se non sono state sollevate eccezioni restituisci TRUE
     }
 
     /**
