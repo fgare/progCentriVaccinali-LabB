@@ -131,6 +131,7 @@ public class ServerImpl extends Thread implements ServerInterface {
         try {
             ls = DataManager.getInstance().elencoCentriVaccinaliPerComune(comune,tipologia);
         } catch(SQLException e) {
+            System.out.println("SQLException > getListaCvComuneTipolgia");
             return null;
         }
         System.out.println("Restituita lista di " + ls.size() + " centri vaccinali");

@@ -267,19 +267,16 @@ public class DataManager {
     //TODO
     public List<CentroVaccinale> elencoCentriVaccinaliPerComune(String comune, String tipologia) throws SQLException {
         final String GET_ELENCO_TIPOLOGIA =
-                "SELECT * FROM " + SWVar.TAB_CENTRIVACCINALI + " JOIN  " + SWVar.TAB_INDIRIZZI +
-                        " ON " + SWVar.TAB_CENTRIVACCINALI + ".nome = " + SWVar.TAB_INDIRIZZI + ".centro_vaccinale" +
-                        " WHERE " + SWVar.TAB_INDIRIZZI + ".comune = '" + comune + "' AND " +
-                        SWVar.TAB_CENTRIVACCINALI + ".tipologia = '" + tipologia + "'";
+                "SELECT * " +
+                "FROM " + SWVar.TAB_CENTRIVACCINALI + " JOIN " + SWVar.TAB_INDIRIZZI + " ON nome = centro_vaccinale " +
+                "WHERE comune LIKE '%" + comune + "%' AND tipologia = '" + tipologia + "';";
 
         DBHandler handler = new DBHandler();
-        Connection conn = handler.getConnection();
-
-        PreparedStatement chiediLista = conn.prepareStatement(GET_ELENCO_TIPOLOGIA);
+        handler.connectDbCv();
 
         ResultSet rs = handler.select(GET_ELENCO_TIPOLOGIA);
 
-        List<CentroVaccinale> lsCV = new ArrayList<>(DBHandler.resultSetSize(rs));
+        List<CentroVaccinale> lsCV = new ArrayList<>();
         while(rs.next()) {
             //costruisco prima l'indirizzo
             Indirizzo i = new Indirizzo(
@@ -302,6 +299,7 @@ public class DataManager {
             );
         }
 
+        System.out.println("Ritorno lista di " + lsCV.size() + " elementi");
         handler.disconnect();
         return lsCV;
     }
