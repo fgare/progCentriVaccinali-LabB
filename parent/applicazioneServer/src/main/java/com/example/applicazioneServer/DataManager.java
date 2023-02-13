@@ -363,10 +363,10 @@ public class DataManager {
                 "SELECT evento, COUNT(*), AVG(intensita)" +
                 "FROM " + SWVar.TAB_EVENTIAVVERSI +
                 "WHERE IDvacc IN (" +
-                        "SELECT IDvacc" +
-                        "FROM vaccinazione JOIN cittadino ON CfCitt=CF JOIN registrazione USING CF" +
+                        "SELECT IDvacc " +
+                        "FROM vaccinazione JOIN cittadino ON CfCitt=CF JOIN registrazione USING CF " +
                         "WHERE centro_vaccinale = '" + nomeCentroVaccinale + "'" +
-                ") GROUP BY evento" +
+                ") GROUP BY evento " +
                 "ORDER BY evento ASC";
 
         HashMap<String,float[]> medieHM = new HashMap<>(EventoAvverso.QualeEvento.values().length);
@@ -382,6 +382,7 @@ public class DataManager {
             medieHM.put(rs.getString(1),valori);
         }
         handler.disconnect();
+        System.out.println("Ritorno hashmap " + medieHM.toString());
 
         return medieHM;
     }

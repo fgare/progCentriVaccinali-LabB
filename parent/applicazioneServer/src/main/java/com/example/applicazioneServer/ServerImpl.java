@@ -2,6 +2,7 @@ package com.example.applicazioneServer;
 
 import com.example.common.*;
 
+import java.rmi.RMISecurityManager;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -16,7 +17,7 @@ import java.util.List;
  */
 public class ServerImpl extends Thread implements ServerInterface {
     private final short REGISTRYPORT = 1099;
-    private final short SERVERPORT = 1100;
+    private final short SERVERPORT = 1099;
 
     /**
      * Costruttore della classe
@@ -29,9 +30,10 @@ public class ServerImpl extends Thread implements ServerInterface {
      * @throws RemoteException se si verifica un errore durante la pubblicazione dell'oggetto.
      */
     private void pubblica() throws RemoteException {
-        ServerInterface stub = (ServerInterface) UnicastRemoteObject.exportObject(this, SERVERPORT);
+        ServerImpl server = new ServerImpl();
+        ServerInterface stub = (ServerInterface) UnicastRemoteObject.exportObject(server, SERVERPORT);
         Registry registro = LocateRegistry.createRegistry(REGISTRYPORT);
-        registro.rebind("com.example.applicazioneServer.Server-appCV", stub);
+        registro.rebind("server", stub); //com.example.applicazioneServer.Server-appCV
         System.out.println("com.example.applicazioneServer.Server pronto");
     }
 
@@ -81,7 +83,6 @@ public class ServerImpl extends Thread implements ServerInterface {
 
     /**
     *Questo metodo sincronizzato registra una vaccinazione per un paziente in un determinato centro vaccinale.
-    *@param c Il centro vaccinale in cui è stata effettuata la vaccinazione.
     *@param v La vaccinazione da registrare.
     *@return true se la registrazione è andata a buon fine, false altrimenti.
     */

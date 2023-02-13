@@ -33,7 +33,7 @@ public class UniversalMethods {
         } else if (res.equals("AccessoCittadino.fxml"))
             scene = new Scene(loader.load(), 600, 300);
         else if (res.equals("RegistraCittadino.fxml"))
-            scene = new Scene(loader.load(), 630, 370);
+            scene = new Scene(loader.load(), 630, 400);
         else if (res.equals("VisualizzaCVperNome.fxml") || res.equals("VisualizzaCVperComuneTipologia.fxml"))
             scene = new Scene(loader.load(), 800, 600);
         else if(res.equals("selezionaCV.fxml"))
